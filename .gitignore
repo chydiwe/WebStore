@@ -1,0 +1,9 @@
+### frontend ###
+node_modules
+build
+
+### backend ###
+.idea
+*.iws
+*.iml
+*.ipr
