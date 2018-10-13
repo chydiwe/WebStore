@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS confirmation_token (
             ON DELETE CASCADE
 );
 
-
 //Scrip for clearing users
 CREATE EVENT delete_event
 ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 14 DAY
@@ -30,3 +29,6 @@ ON COMPLETION PRESERVE
 DO BEGIN
       DELETE FROM user WHERE user_id = (SELECT user_id FROM confirmation_token);
 END;
+
+//add admin for tests
+INSERT INTO user VALUES(NULL, 'admin@mail.ru', 'qwerty', 'admin', 'admin', 'admin', true);

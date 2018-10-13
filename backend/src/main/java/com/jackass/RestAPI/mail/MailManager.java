@@ -1,8 +1,6 @@
 package com.jackass.RestAPI.mail;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
@@ -15,13 +13,15 @@ import java.util.Properties;
 @PropertySource("mail.properties")
 public class MailManager {
 
-    @Autowired
-    private EmailAuthenticator authenticator;
-
     @Value("${mail.host}")
     private String host;
     @Value("${mail.port}")
     private String port;
+
+    @Value("${mail.email}")
+    private String email;
+    @Value("${mail.password}")
+    private String password;
 
     private Session session;
 
@@ -34,13 +34,19 @@ public class MailManager {
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-        session = Session.getDefaultInstance(properties, authenticator);
+        session = Session.getDefaultInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(email, password);
+            }
+        });
+
         session.setDebug(false);
     }
 
     public void sendToken(String to, String token){
         try{
-            InternetAddress emailFrom = new InternetAddress(authenticator.getEmail());
+            InternetAddress emailFrom = new InternetAddress(email);
             InternetAddress emailTo   = new InternetAddress(to);
             Message message = new MimeMessage(session);
             message.setFrom(emailFrom);
