@@ -6,7 +6,7 @@ Base url for all api requests: ~/api/ .
 
 #### Authentication
 
-GET /users?email=admin@mail.ru
+GET /users?email=admin@mail.ru&password=qwerty
 
 ```
     {
