@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import logo from './logo_side.png'
 
-export class PanelSite extends React.Component {
+export class   PanelSite extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -22,7 +23,7 @@ export class PanelSite extends React.Component {
         e.preventDefault();
         const name = ReactDOM.findDOMNode(this._loginEl).value,
             pass = ReactDOM.findDOMNode(this._passEl).value;
-        this.props.logIn({name,pass})
+        this.props.logIn({name, pass})
     }
 
     render() {
@@ -30,26 +31,26 @@ export class PanelSite extends React.Component {
         return (<div className='panelSite'>
             <div className='MainPart'>panelSite</div>
             <div className='UserPart'>
-                <button onClick={this.sideMenu}>USER</button>
+                <img src={logo} onClick={this.sideMenu} className='side_icon'/>
 
-               <div className={this.state.dropMenu ? 'dropMenuOn' : 'dropMenuOff'}>  {user.isLogin === true ?
-                        <ul>
-                            <li>{user.name}</li>
-                            <li>{user.message}</li>
-                            <li><input type="submit" onClick={logOut} value='выход'/></li>
-                        </ul>
-                     :
+                <div className={this.state.dropMenu ? 'dropMenuOn' : 'dropMenuOff'}>  {user.isLogin === true ?
+                    <ul>
+                        <li>Имя:{user.name}</li>
+                        <li>Корзина:{user.message}</li>
+                        <li><input type="submit" onClick={logOut} value='выход'/></li>
+                    </ul>
+                    :
                     <form action="">
                         <input ref={(node) => {
                             this._loginEl = node
                         }} type="text"/><br/>
                         <input ref={(node) => {
                             this._passEl = node
-                        }} type="password"/>
-                        <input type="submit" onClick={this.handelClick}/>
+                        }} type="password"/><br/>
+                        <input type="submit" onClick={this.handelClick} value='Вход'/>
                     </form>
-               }
-                   </div>
+                }
+                </div>
             </div>
         </div>)
     }

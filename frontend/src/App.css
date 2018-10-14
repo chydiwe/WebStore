@@ -1,73 +1,85 @@
 .App {
-  text-align: center;
+    text-align: center;
     display: flex;
     flex-direction: column;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
 }
 
+.side_icon {
+    width: 37px;
+    height:37px;
+    color:white;
+}
+.UserPart{
+    font-size: calc(10px + 1vmin);
+    max-height:20vh ;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .panelSite {
-  background-color: #282c34;
-  min-height: 20vh;
-  display: flex;
-  align-items: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 15vh;
+    display: flex;
+    align-items: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
-.MainPart{
-  width:90vw;
+
+.MainPart {
+    min-width: 85vw;
 }
-.MainBody{
+
+.MainBody {
     display: flex;
     align-items: stretch;
     height: 50vh;
 }
 
+
+
+
+
 .dropMenuOn{
-    display: block;
-
+    margin-left:5%;
 }
-.dropMenuOn ul{
-    padding: 0;
-}
-
-img{
-    background: #61dafb;
-    width: 5vw;
-    height: 5vh;
-}
-
-.dropMenuOff{
-    display:none;
+.dropMenuOff {
+    display: none;
 
 }
 
-.MainContent{
+.MainContent {
+
+    margin-top: 1%;
     width: 90vw;
+    align-items: center;
 }
-.leftBar{
+
+.leftBar {
     align-items: flex-start;
     width: 10vw;
-    height: 60vh;
+    max-height: 79vh;
     border: #282c34 2px solid;
 
 }
 
-li{
+li {
     list-style-type: none;
 }
+
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

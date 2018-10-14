@@ -1,7 +1,9 @@
+import fetch from 'cross-fetch'
+
 export const GET_USER_INFO_FAILED = 'GET_USER_INFO_FAILED',
     GET_USER_INFO_SUCCES = 'GET_USER_INFO_SUCCES',
     GET_USER_INFO = 'GET_USER_INFO',
-    LOGOUT_USER='LOGOUT_USER'
+    LOGOUT_USER = 'LOGOUT_USER'
 
 export function userLogIn(user) {
     return dispatch => {
@@ -10,20 +12,31 @@ export function userLogIn(user) {
             payload: 'LOADING'
 
         })
-        setTimeout(() => {
-            dispatch({
-                type: GET_USER_INFO_SUCCES,
-                payload:{name:user.name,
-                message:user.message,
-                isLogin:true}
+        return fetch(`api/users?email=${user.name}&password=${user.pass}`, {method: 'GET'})
+            .then(response => Promise.all([response, response.json()]))
+            .then(([response, json]) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: GET_USER_INFO_SUCCES,
+                        payload: {...json,isLogin:true}
+                    })
+                }
+                else {//ERROR RETURN
+                    dispatch({
+                        type: GET_USER_INFO_FAILED,
+                        payload: "ERROR"
+                    })
+                }
             })
-        }, 1000)
     }
 }
 
-        export function logOut() {
-            return dispatch=> {
-               dispatch({ type: LOGOUT_USER,
-                   payload:{}})
-            }
+
+    export function logOut() {
+        return dispatch => {
+            dispatch({
+                type: LOGOUT_USER,
+                payload: {}
+            })
         }
+    }
