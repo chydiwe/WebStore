@@ -14,9 +14,10 @@ CREATE TABLE IF NOT EXISTS user (
 );
 
 CREATE TABLE IF NOT EXISTS confirmation_token (
-    token_id INT NOT NULL,
+    confirmation_id INT AUTO_INCREMENT,
+    token VARCHAR(36) NOT NULL,
     user_id INT NOT NULL,
-    PRIMARY KEY (token_id),
+    PRIMARY KEY (confirmation_id),
     FOREIGN KEY (user_id)
             REFERENCES user(user_id)
             ON DELETE CASCADE
