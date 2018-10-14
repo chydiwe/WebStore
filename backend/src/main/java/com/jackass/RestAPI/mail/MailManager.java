@@ -10,14 +10,12 @@ import javax.mail.internet.*;
 import java.util.Properties;
 
 @Component
-@PropertySource("mail.properties")
 public class MailManager {
 
     @Value("${mail.host}")
     private String host;
     @Value("${mail.port}")
     private String port;
-
     @Value("${mail.email}")
     private String email;
     @Value("${mail.password}")
