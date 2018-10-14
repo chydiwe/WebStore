@@ -48,7 +48,7 @@ public class UserController {
         mailManager.sendToken(user.getEmail(), token.getToken());
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/confirm")
+    @RequestMapping(method = RequestMethod.POST)
     public void confirm(@RequestParam String token){
         tokenRepository.deleteByToken(token);
     }
