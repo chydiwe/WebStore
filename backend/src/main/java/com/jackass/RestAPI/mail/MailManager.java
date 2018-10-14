@@ -49,11 +49,11 @@ public class MailManager {
             Message message = new MimeMessage(session);
             message.setFrom(emailFrom);
             message.setRecipient(Message.RecipientType.TO, emailTo);
-            message.setSubject("Magic Stationery confirming.");
+            message.setSubject("Magic Stationery.");
 
             Multipart mmp = new MimeMultipart();
             MimeBodyPart bodyPart = new MimeBodyPart();
-            bodyPart.setContent("http://localhost:8080?token=" + token, "text/plain; charset=utf-8");
+            bodyPart.setContent("http://localhost:3000/confirming?token=" + token, "text/plain; charset=utf-8");
             mmp.addBodyPart(bodyPart);
             message.setContent(mmp);
             Transport.send(message);
