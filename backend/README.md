@@ -29,17 +29,15 @@ Base url for all api requests: ~/api/ .
 
 * PUT /users
 
-    Request body:
-    
-    ```
-        {
-            "email": "admin@mail.ru",
-            "password": "qwerty",
-            "name": "admin",
-            "surname": "admin",
-            "patronymic": "admin"
-        }
-    ```
+    Params:
+        ```
+            email,
+            password,
+            name,
+            surname,
+            patronymic
+        ```
+        
     If such user already exits then you will get response with status 409 (CONFLICT).
 
 * PUT /users

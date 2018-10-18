@@ -7,8 +7,6 @@ import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.mail.MailManager;
 import com.jackass.RestAPI.repository.ConfirmationTokenRepository;
 import com.jackass.RestAPI.repository.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +18,6 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
-    private Logger LOG = LoggerFactory.getLogger(UserController.class);
-
     @Autowired
     private MailManager mailManager;
     @Autowired
@@ -30,10 +26,22 @@ public class UserController {
     private ConfirmationTokenRepository tokenRepository;
 
     @RequestMapping(method = RequestMethod.POST)
-    public void register(@RequestBody User user){
+    public void register(@RequestParam String email,
+                         @RequestParam String password,
+                         @RequestParam String name,
+                         @RequestParam String surname,
+                         @RequestParam String patronymic) {
+
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setName(name);
+        user.setSurname(surname);
+        user.setPatronymic(patronymic);
+
         User u = userRepository.getUserByEmail(user.getEmail());
 
-        if(u != null){
+        if (u != null) {
             throw new AlreadyExistsException("User with such email already registered.");
         }
 
@@ -49,15 +57,15 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "token")
-    public void confirm(@RequestParam String token){
+    public void confirm(@RequestParam String token) {
         tokenRepository.deleteByToken(token);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<User> authenticate(@RequestParam String email, @RequestParam String password){
+    public ResponseEntity<User> authenticate(@RequestParam String email, @RequestParam String password) {
         User user = userRepository.getUserByEmailAndPassword(email, password);
 
-        if(user == null){
+        if (user == null) {
             throw new NotFoundException("Wrong email or password.");
         }
 
