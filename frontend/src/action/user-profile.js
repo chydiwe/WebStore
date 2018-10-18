@@ -25,7 +25,7 @@ export function userLogIn(user) {
                 else {//ERROR RETURN
                     dispatch({
                         type: GET_USER_INFO_FAILED,
-                        payload: `Error:${response.status}`
+                        payload: response.status
                     })
                 }
             })

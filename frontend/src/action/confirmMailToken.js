@@ -12,7 +12,7 @@ export function confirmToken(token) {
 
         });
         return fetch(`http://localhost:8080/api/users?token=${token}`, {method: 'POST'})
-            .then(response => Promise.all([response, response.json()]))
+            .then(response => Promise.all([response,]))
             .then(([response, json]) => {
                 console.log(response);
                 if (response.status === 200) {
