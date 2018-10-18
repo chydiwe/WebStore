@@ -2,7 +2,7 @@ package com.jackass.RestAPI.entity;
 
 import javax.persistence.*;
 
-@Table(catalog = "confirmation_token")
+@Table(name = "confirmation_token")
 @Entity
 public class ConfirmationToken {
 
