@@ -42,10 +42,9 @@ Base url for all api requests: ~/api/ .
     ```
     If such user already exits then you will get response with status 409 (CONFLICT).
 
-* POST /users
+* PUT /users
 
     Params:
-    
-    ```
-    token
-    ```
+        ```
+            token
+        ```

@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     private ConfirmationTokenRepository tokenRepository;
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.POST)
     public void register(@RequestBody User user){
         User u = userRepository.getUserByEmail(user.getEmail());
 
@@ -48,7 +48,7 @@ public class UserController {
         mailManager.sendToken(user.getEmail(), token.getToken());
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, params = "token")
     public void confirm(@RequestParam String token){
         tokenRepository.deleteByToken(token);
     }
