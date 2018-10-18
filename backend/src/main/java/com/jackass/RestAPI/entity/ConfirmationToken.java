@@ -7,21 +7,10 @@ import javax.persistence.*;
 public class ConfirmationToken {
 
     @Id
-    @GeneratedValue
-    @Column(name = "confirmation_id")
-    private int confirmationId;
-    @Column
-    private String token;
     @Column(name = "user_id")
     private int userId;
-
-    public int getConfirmationId() {
-        return confirmationId;
-    }
-
-    public void setConfirmationId(int confirmationId) {
-        this.confirmationId = confirmationId;
-    }
+    @Column
+    private String token;
 
     public String getToken() {
         return token;

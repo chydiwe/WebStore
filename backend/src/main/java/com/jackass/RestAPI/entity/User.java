@@ -23,8 +23,8 @@ public class User implements Serializable {
     private String surname;
     @Column
     private String patronymic;
-    @Column
-    private boolean privileges;
+    @Column(name = "user_group")
+    private int userGroup;
 
     public int getId() {
         return id;
@@ -76,12 +76,12 @@ public class User implements Serializable {
         this.patronymic = patronymic;
     }
 
-    public boolean isPrivileges() {
-        return privileges;
+    public int getUserGroup() {
+        return userGroup;
     }
 
     @JsonIgnore
-    public void setPrivileges(boolean privileges) {
-        this.privileges = privileges;
+    public void setUserGroup(int userGroup) {
+        this.userGroup = userGroup;
     }
 }
