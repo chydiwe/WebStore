@@ -4,23 +4,21 @@
     flex-direction: column;
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 40vmin;
-}
 
 .side_icon {
     width: 37px;
-    height:37px;
-    color:white;
+    height: 37px;
+    color: white;
 }
-.UserPart{
+
+.UserPart {
     font-size: calc(10px + 1vmin);
-    max-height:20vh ;
+    max-height: 20vh;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
+
 .panelSite {
     background-color: #282c34;
     min-height: 15vh;
@@ -40,16 +38,19 @@
     height: 50vh;
 }
 
-
-
-
-
-.dropMenuOn{
-    margin-left:5%;
+.dropMenuOn {
+    margin-left: 5%;
 }
+
 .dropMenuOff {
     display: none;
 
+}
+
+
+.errorMessage{
+    margin:0;
+   font-size: 0.8em;
 }
 
 .MainContent {

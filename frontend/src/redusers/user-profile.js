@@ -7,20 +7,20 @@ const
             message: 'none',
             isLogin: false
         }
-    }
+    };
 
 export function userProf(state = initialState, action) {
     switch (action.type) {
         case GET_USER_INFO:
-            return {...state}
+            return {...state};
 
         case GET_USER_INFO_SUCCES:
-            return {...state, ...action.payload}
+            return {...state, ...action.payload};
         case GET_USER_INFO_FAILED: {
-            return {...state, message: action.payload}
+            return {...state,message: action.payload}
         }
         case LOGOUT_USER:
-            return {...action.payload}
+            return {...action.payload};
         default:
             return state
     }

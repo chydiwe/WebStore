@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import '../App.css';
 import {MainBody} from "../components/MainBody";
 import {PanelSite} from "../components/PanelSite";
-import {connect} from'react-redux'
-import {userLogIn,logOut} from "../action/user-profile";
+import {connect} from 'react-redux'
+import {logOut, userLogIn} from "../action/user-profile";
+
 class Main extends Component {
     render() {
         return (
@@ -20,14 +21,16 @@ class Main extends Component {
 
 
 const mapStateToProps = store => {
-    return {user: store.user,
-        catalog:store.catalog}
-}
+    return {
+        user: store.user,
+        catalog: store.catalog
+    }
+};
 const mapDispatchToProps = dispatch => {
     return {
         userLogin: (user) => dispatch(userLogIn(user)),
-        userLogout:()=>dispatch(logOut())
+        userLogout: () => dispatch(logOut())
     }
-}
+};
 
-    export default	connect(mapStateToProps,mapDispatchToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
