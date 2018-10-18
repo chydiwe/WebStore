@@ -4,6 +4,7 @@ import {MainBody} from "../components/MainBody";
 import {PanelSite} from "../components/PanelSite";
 import {connect} from 'react-redux'
 import {logOut, userLogIn} from "../action/user-profile";
+import {Catalog} from "../components/itemcatalog";
 
 class Main extends Component {
     render() {
@@ -12,7 +13,7 @@ class Main extends Component {
                 <header className="App-header">
                     <PanelSite user={this.props.user} logIn={this.props.userLogin} logOut={this.props.userLogout}/>
                 </header>
-
+                <Catalog/>
                 <MainBody/>
             </div>
         );
