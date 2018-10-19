@@ -7,12 +7,12 @@ class ConfirmMail extends Component {
         super(props)
     }
     componentDidMount(){
-      this.props.confirmToken(this.props.match.params.tokenUser)
+      this.props.confirmToken(this.props.location.search)
     }
     render() {
         return <div className="App">
             <header className="App-header">
-                {this.props.isConfirm?<p>MAIL CONFIRMED {this.props.match.params.tokenUser}<Redirect to='/'/></p>:<p>IS FRONG TOKEN</p>}
+                {this.props.isConfirm?<p>MAIL CONFIRMED  <Redirect to='/'/></p>:<p>IS FRONG TOKEN  </p>}
 
              </header>
 

@@ -11,7 +11,7 @@ export function confirmToken(token) {
             payload: 'LOADING'
 
         });
-        return fetch(`http://localhost:8080/api/users?token=${token}`, {method: 'POST'})
+        return fetch(`http://localhost:8080/api/users${token}`, {method: 'POST'})
             .then(response => Promise.all([response,]))
             .then(([response, json]) => {
                 console.log(response);

@@ -13,7 +13,7 @@ ReactDOM.render(
         <ConnectedRouter history={history}>
             <Switch>
                 <Route exact path='/' component={Main}/>
-                <Route path='/confirming:token=:tokenUser' component={ConfirmMail}/>
+                <Route path='/confirming' component={ConfirmMail}/>
                 <Route path='/register' component={FormRegister}/>
             </Switch>
         </ConnectedRouter>
