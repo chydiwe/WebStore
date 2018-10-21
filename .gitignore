@@ -3,5 +3,6 @@
 *.iml
 *.ipr
 
+node
 node_modules
 build

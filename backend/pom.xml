@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jackass</groupId>
-    <artifactId>WebStore</artifactId>
+    <artifactId>web-store-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>WebStore</name>
+    <name>backend</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
