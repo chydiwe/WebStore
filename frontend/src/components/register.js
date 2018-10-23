@@ -31,7 +31,7 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        regUser: (user) => dispatch(registration(user)),
+        regUser: (url) => dispatch(registration(url)),
     }
 };
 
