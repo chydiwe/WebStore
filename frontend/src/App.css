@@ -1,3 +1,7 @@
+/*  fonts  */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+
 .App {
     text-align: center;
     display: flex;
@@ -84,3 +88,53 @@ li {
         transform: rotate(360deg);
     }
 }
+
+/*  Styles for registerForm.js  */
+.registrationForm{
+    width: 60%;
+    margin: 0 auto;
+    font-family: "Ubuntu", serif;
+}
+
+.registrationForm label::before{
+    content: "";
+    display: block;
+    height: 6px;
+}
+
+.registrationForm button{
+    width: 150px;
+    padding: 5px;
+    margin: 25px;
+    margin-left: 0;
+    font-size: 1.2em;
+    color: aliceblue;
+    border: 2px solid forestgreen;
+    background: darkolivegreen;
+}
+
+.registrationForm button:hover {
+    color: aliceblue;
+    border: 2px solid forestgreen;
+    background-color: mediumseagreen;
+}
+
+.registrationForm input[type="text"],
+.registrationForm input[type="password"],
+.registrationForm input[type="email"]{
+
+    padding: 5px 10px;
+    font-size: 1.2em;
+    color: darkslateblue;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.badFieldValue{
+    border-color: red;
+}
+
+.validFieldValue{
+    border-color: green;
+}
+

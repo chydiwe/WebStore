@@ -8,13 +8,13 @@ USE web_store;
 DROP TABLE IF EXISTS user;
 CREATE TABLE IF NOT EXISTS user (
     user_id INT AUTO_INCREMENT,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL, //
+    password VARCHAR(255) NOT NULL, //
     user_group INT NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    surname VARCHAR(255) NOT NULL,
-    patronymic VARCHAR(255),
-    phone_number INT,
+    name VARCHAR(255) NOT NULL, //
+    surname VARCHAR(255) NOT NULL, //
+    patronymic VARCHAR(255), //
+    phone_number INT, //
     PRIMARY KEY (user_id)
 );
 
