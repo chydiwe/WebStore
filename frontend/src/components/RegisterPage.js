@@ -87,7 +87,7 @@ class Register extends Component {
 
     handlePassConfChange(event) {
         this.setState({passConf: event.target.value.trim()});
-        let checkResult = (this.state.pass == event.target.value.trim());
+        let checkResult = (this.state.pass === event.target.value.trim());
         this.toggleClass(event.target, checkResult);
         this.setState({
             valids: {
@@ -109,8 +109,9 @@ class Register extends Component {
             case "userPatronymic":
                 this.setState({patronymic: event.target.value.trim()});
                 break;
+            default: break;
         }
-        (event.target.value.trim() != "") ? this.toggleClass(event.target, true) :
+        (event.target.value.trim() !== "") ? this.toggleClass(event.target, true) :
             this.toggleClass(event.target, false)
     }
 

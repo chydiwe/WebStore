@@ -4,7 +4,7 @@ import {MainBody} from "../components/MainBody";
 import {PanelSite} from "../components/PanelSite";
 import {connect} from 'react-redux'
 import {logOut, userLogIn} from "../action/user-profile";
-import {Route, Link, Switch} from "react-router-dom";
+//import {Route, Link, Switch} from "react-router-dom";
 
 class Main extends Component {
     render() {
@@ -14,9 +14,9 @@ class Main extends Component {
                     <PanelSite user={this.props.user} logIn={this.props.userLogin} logOut={this.props.userLogout}/>
                 </header>
 
+                <MainBody/>
 
-         <MainBody/>
-                <Link to='/register'>TEST REGISTR</Link>
+
             </div>
         );
     }

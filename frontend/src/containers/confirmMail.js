@@ -12,8 +12,7 @@ class ConfirmMail extends Component {
     render() {
         return <div className="App">
             <header className="App-header">
-                {this.props.isConfirm?<p>MAIL CONFIRMED  <Redirect to='/'/></p>:<p>IS FRONG TOKEN  </p>}
-
+                {this.props.isConfirm?<p>MAIL CONFIRMED  <Redirect to='/'/></p>:<p>IS WRONG TOKEN  </p>}
              </header>
 
         </div>

@@ -7,7 +7,9 @@ import {history, store} from './store/configureStore'
 import {Route, Switch} from 'react-router-dom'
 import {ConnectedRouter,} from 'react-router-redux'
 import ConfirmMail from "./containers/confirmMail";
-import Register from "./components/registerForm";
+import Register from "./components/RegisterPage";
+import OrderPage from './components/OrderPage'
+
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
@@ -15,6 +17,7 @@ ReactDOM.render(
                 <Route exact path='/' component={Main}/>
                 <Route path='/confirming' component={ConfirmMail}/>
                 <Route path='/register' component={Register}/>
+                <Route path='/order' component={OrderPage}/>
             </Switch>
         </ConnectedRouter>
     </Provider>,
