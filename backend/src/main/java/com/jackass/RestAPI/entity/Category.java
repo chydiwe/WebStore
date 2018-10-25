@@ -7,11 +7,12 @@ import javax.persistence.*;
 public class Category {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private int categoryId;
-    @Column
+    @Column(name = "category_name")
     private String categoryName;
-    @Column
+    @Column(name = "sub_category")
     private String subCategory;
 
     public String getCategoryName() {

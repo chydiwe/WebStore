@@ -9,7 +9,7 @@ public class Group {
     @Id
     @Column(name = "user_group")
     private int userGroup;
-    @Column
+    @Column(name = "group_name")
     private String groupName;
 
     public String getGroupName() {

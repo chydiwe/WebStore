@@ -7,13 +7,14 @@ import javax.persistence.*;
 public class Manufacturer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "manufacturer_id")
     private int manufacturerId;
-    @Column
+    @Column(name = "manufacture_name")
     private String manufacturerName;
-    @Column
+    @Column(name = "manufacture_logo")
     private String manufacturerLogo;
-    @Column
+    @Column(name = "manufacture_info")
     private String manufacturerInfo;
 
     public String getManufacturerName() {

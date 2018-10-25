@@ -18,6 +18,7 @@ Base url for all api requests: ~/api/ .
     
     ```
         {
+            "id": "1",
             "email": "admin@mail.ru",
             "name": "admin",
             "surname": "admin",
