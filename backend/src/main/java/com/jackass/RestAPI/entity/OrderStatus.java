@@ -7,17 +7,17 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Table(name = "group")
+@Table(name = "order_status")
 @Entity
-public class Group implements Serializable {
+public class OrderStatus implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter(onMethod_=@JsonIgnore)
-    @Column(name = "user_group")
-    private int userGroup;
+    @Column(name = "order_status_id")
+    private int orderStatusId;
     @Getter @Setter
-    @Column(name = "group_name")
-    private String groupName;
+    @Column(name = "order_status_name")
+    private String orderStatusName;
 
 }

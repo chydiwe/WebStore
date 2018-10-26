@@ -8,16 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "confirmation_token")
+@Table(name = "product_image")
 @Entity
-public class ConfirmationToken {
+public class ProductImage {
 
     @Id
     @Getter @Setter
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "product_id")
+    private int productId;
     @Getter @Setter
-    @Column(name = "token")
-    private String token;
+    @Column(name = "product_image")
+    private String productImage;
 
 }

@@ -1,6 +1,8 @@
 package com.jackass.RestAPI.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,77 +13,30 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter @Setter
     @Column(name = "user_id")
-    private int id;
-    @Column
+    private int userId;
+    @Getter @Setter
+    @Column(name = "email")
     private String email;
-    @Column
+    @Getter @Setter(onMethod_=@JsonIgnore)
+    @Column(name = "password")
     private String password;
-    @Column
+    @Getter @Setter
+    @Column(name = "name")
     private String name;
-    @Column
+    @Getter @Setter
+    @Column(name = "surname")
     private String surname;
-    @Column
+    @Getter @Setter
+    @Column(name = "patronymic")
     private String patronymic;
-    @Column(name = "user_group")
-    private int userGroup;
+    @Getter @Setter(onMethod_=@JsonIgnore)
+    @OneToOne
+    @JoinColumn(name = "user_group")
+    private Group group;
+    @Getter @Setter
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-    public int getId() {
-        return id;
-    }
-
-    @JsonIgnore
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    @JsonIgnore
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public int getUserGroup() {
-        return userGroup;
-    }
-
-    @JsonIgnore
-    public void setUserGroup(int userGroup) {
-        this.userGroup = userGroup;
-    }
 }
