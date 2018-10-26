@@ -13,10 +13,12 @@ public class Delivery implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter(onMethod_=@JsonIgnore)
+    @Getter
+    @Setter(onMethod_=@JsonIgnore)
     @Column(name = "delivery_id")
     private int deliveryId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "delivery_name")
     private String deliveryName;
 

@@ -13,13 +13,16 @@ public class Category implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter(onMethod_=@JsonIgnore)
+    @Getter
+    @Setter(onMethod_=@JsonIgnore)
     @Column(name = "category_id")
     private int categoryId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "category_name")
     private String categoryName;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "sub_category")
     private String subCategory;
 

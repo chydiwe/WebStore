@@ -13,10 +13,12 @@ public class Group implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter(onMethod_=@JsonIgnore)
+    @Getter
+    @Setter(onMethod_=@JsonIgnore)
     @Column(name = "user_group")
     private int userGroup;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "group_name")
     private String groupName;
 

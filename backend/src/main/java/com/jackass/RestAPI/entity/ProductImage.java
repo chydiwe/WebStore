@@ -13,10 +13,12 @@ import javax.persistence.Table;
 public class ProductImage {
 
     @Id
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "product_id")
     private int productId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "product_image")
     private String productImage;
 

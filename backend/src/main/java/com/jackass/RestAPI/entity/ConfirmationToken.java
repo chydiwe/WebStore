@@ -13,10 +13,12 @@ import javax.persistence.Table;
 public class ConfirmationToken {
 
     @Id
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "user_id")
     private int userId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "token")
     private String token;
 

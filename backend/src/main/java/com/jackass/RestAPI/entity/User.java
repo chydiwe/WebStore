@@ -13,29 +13,37 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "user_id")
     private int userId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "email")
     private String email;
-    @Getter @Setter(onMethod_=@JsonIgnore)
+    @Getter
+    @Setter(onMethod_=@JsonIgnore)
     @Column(name = "password")
     private String password;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "name")
     private String name;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "surname")
     private String surname;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "patronymic")
     private String patronymic;
-    @Getter @Setter(onMethod_=@JsonIgnore)
+    @Getter
+    @Setter(onMethod_=@JsonIgnore)
     @OneToOne
     @JoinColumn(name = "user_group")
     private Group group;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "phone_number")
     private String phoneNumber;
 

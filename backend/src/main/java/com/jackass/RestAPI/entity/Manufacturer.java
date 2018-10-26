@@ -13,16 +13,20 @@ public class Manufacturer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter(onMethod_=@JsonIgnore)
+    @Getter
+    @Setter(onMethod_=@JsonIgnore)
     @Column(name = "manufacturer_id")
     private int manufacturerId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "manufacturer_name")
     private String manufacturerName;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "manufacturer_logo")
     private String manufacturerLogo;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "manufacturer_info")
     private String manufacturerInfo;
 

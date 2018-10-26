@@ -13,10 +13,12 @@ public class Payment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter(onMethod_=@JsonIgnore)
+    @Getter
+    @Setter(onMethod_=@JsonIgnore)
     @Column(name = "payment_id")
     private int paymentId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "payment_name")
     private String paymentName;
 

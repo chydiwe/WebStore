@@ -14,13 +14,16 @@ import javax.persistence.Table;
 public class Bucket {
 
     @Id
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "user_id")
     private int userId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "product_id")
     private int productId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "amount")
     private int amount;
 

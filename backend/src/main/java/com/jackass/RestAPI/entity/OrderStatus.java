@@ -13,10 +13,12 @@ public class OrderStatus implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter(onMethod_=@JsonIgnore)
+    @Getter
+    @Setter(onMethod_=@JsonIgnore)
     @Column(name = "order_status_id")
     private int orderStatusId;
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "order_status_name")
     private String orderStatusName;
 
