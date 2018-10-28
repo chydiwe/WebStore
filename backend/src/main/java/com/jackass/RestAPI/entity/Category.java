@@ -17,10 +17,12 @@ public class Category implements Serializable {
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "category_id")
     private int categoryId;
+
     @Getter
     @Setter
     @Column(name = "category_name")
     private String categoryName;
+
     @Getter
     @Setter
     @Column(name = "sub_category")

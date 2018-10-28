@@ -17,6 +17,7 @@ public class Payment implements Serializable {
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "payment_id")
     private int paymentId;
+
     @Getter
     @Setter
     @Column(name = "payment_name")

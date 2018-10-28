@@ -17,6 +17,7 @@ public class ProductImage {
     @Setter
     @Column(name = "product_id")
     private int productId;
+
     @Getter
     @Setter
     @Column(name = "product_image")

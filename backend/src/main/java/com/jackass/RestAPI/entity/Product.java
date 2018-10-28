@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "product")
 @Entity
@@ -42,5 +44,17 @@ public class Product implements Serializable {
     @Setter
     @Column(name = "quantity")
     private int quantity;
+
+    @Getter
+    @Setter
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private List<ProductComment> comments = new ArrayList<>();
+
+    @Getter
+    @Setter
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private List<ProductImage> images = new ArrayList<>();
 
 }

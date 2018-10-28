@@ -17,6 +17,7 @@ public class Delivery implements Serializable {
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "delivery_id")
     private int deliveryId;
+
     @Getter
     @Setter
     @Column(name = "delivery_name")

@@ -17,6 +17,7 @@ public class Group implements Serializable {
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "user_group")
     private int userGroup;
+
     @Getter
     @Setter
     @Column(name = "group_name")

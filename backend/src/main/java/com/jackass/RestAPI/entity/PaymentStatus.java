@@ -17,6 +17,7 @@ public class PaymentStatus implements Serializable {
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "payment_status_id")
     private int paymentStatusId;
+
     @Getter
     @Setter
     @Column(name = "payment_status_name")

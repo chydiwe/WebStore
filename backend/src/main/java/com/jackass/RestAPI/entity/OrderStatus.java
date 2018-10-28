@@ -17,6 +17,7 @@ public class OrderStatus implements Serializable {
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "order_status_id")
     private int orderStatusId;
+
     @Getter
     @Setter
     @Column(name = "order_status_name")

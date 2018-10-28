@@ -18,14 +18,17 @@ public class ProductComment {
     @Setter
     @Column(name = "user_id")
     private int userId;
+
     @Getter
     @Setter
     @Column(name = "product_id")
     private int productId;
+
     @Getter
     @Setter
     @Column(name = "product_comment")
     private String productComment;
+
     @Getter
     @Setter
     @Column(name = "comment_date")

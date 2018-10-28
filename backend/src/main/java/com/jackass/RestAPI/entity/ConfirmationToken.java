@@ -17,6 +17,7 @@ public class ConfirmationToken {
     @Setter
     @Column(name = "user_id")
     private int userId;
+
     @Getter
     @Setter
     @Column(name = "token")

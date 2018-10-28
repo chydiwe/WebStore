@@ -18,10 +18,12 @@ public class Bucket {
     @Setter
     @Column(name = "user_id")
     private int userId;
+
     @Getter
     @Setter
     @Column(name = "product_id")
     private int productId;
+
     @Getter
     @Setter
     @Column(name = "amount")

@@ -17,14 +17,17 @@ public class Manufacturer implements Serializable {
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "manufacturer_id")
     private int manufacturerId;
+
     @Getter
     @Setter
     @Column(name = "manufacturer_name")
     private String manufacturerName;
+
     @Getter
     @Setter
     @Column(name = "manufacturer_logo")
     private String manufacturerLogo;
+
     @Getter
     @Setter
     @Column(name = "manufacturer_info")

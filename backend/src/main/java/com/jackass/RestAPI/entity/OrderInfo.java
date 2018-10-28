@@ -18,10 +18,12 @@ public class OrderInfo {
     @Setter
     @Column(name = "order_id")
     private int orderId;
+
     @Getter
     @Setter
     @Column(name = "product_id")
     private int productId;
+
     @Getter
     @Setter
     @Column(name = "amount")
