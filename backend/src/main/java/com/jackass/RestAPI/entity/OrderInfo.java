@@ -1,5 +1,6 @@
 package com.jackass.RestAPI.entity;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,19 +9,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "confirmation_token")
+@Table(name = "order_info")
 @Entity
-public class ConfirmationToken {
+public class OrderInfo {
 
     @Id
     @Getter
     @Setter
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "order_id")
+    private int orderId;
 
     @Getter
     @Setter
-    @Column(name = "token")
-    private String token;
+    @Column(name = "product_id")
+    private int productId;
+
+    @Getter
+    @Setter
+    @Column(name = "amount")
+    private int amount;
 
 }

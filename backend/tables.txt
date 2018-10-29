@@ -8,15 +8,14 @@ CREATE TABLE IF NOT EXISTS user (
     user_id INT AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    user_group INT NOT NULL,
+    user_group INT,
     name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
     patronymic VARCHAR(255),
-    phone_number INT,
+    phone_number VARCHAR(255),
     PRIMARY KEY (user_id),
     FOREIGN KEY (user_group)
         REFERENCES group(user_group)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
@@ -27,12 +26,11 @@ CREATE TABLE IF NOT EXISTS confirmation_token (
     FOREIGN KEY (user_id)
             REFERENCES user(user_id)
             ON DELETE CASCADE
-            ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS group;
 CREATE TABLE IF NOT EXISTS group (
-    user_group INT NOT NULL,
+    user_group INT AUTO_INCREMENT,
     group_name VARCHAR(36) NOT NULL,
     PRIMARY KEY (user_group)
 );
@@ -41,20 +39,18 @@ DROP TABLE IF EXISTS product;
 CREATE TABLE IF NOT EXISTS product (
     product_id INT AUTO_INCREMENT,
     product_name VARCHAR(255) NOT NULL,
-    category_id INT NOT NULL,
-    manufacturer_id INT NOT NULL,
+    category_id INT,
+    manufacturer_id INT,
     short_info VARCHAR(255) NOT NULL,
     cost INT NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (product_id),
     FOREIGN KEY (category_id)
         REFERENCES category(category_id)
-        ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (manufacturer_id)
         REFERENCES manufacturer(manufacturer_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS category;
@@ -72,6 +68,117 @@ CREATE TABLE IF EXISTS manufacturer (
     manufacturer_info VARCHAR(255),
     manufacturer_logo VARCHAR(255),
     PRIMARY KEY (category_id)
+);
+
+DROP TABLE IF EXISTS bucket;
+CREATE TABLE IF NOT EXISTS bucket (
+    user_id INT,
+    product_id INT,
+    amount INT NOT NULL,
+    FOREIGN KEY (user_id)
+        REFERENCES user(user_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (product_id)
+        REFERENCES product(product_id)
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS product_image;
+CREATE TABLE IF NOT EXISTS product_image (
+    product_id INT,
+    image VARCHAR(255),
+    FOREIGN KEY (product_id)
+        REFERENCES product(product_id)
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS product_comment;
+CREATE TABLE IF NOT EXISTS product_comment (
+    product_id INT,
+    user_id INT,
+    product_comment VARCHAR(255) NOT NULL,
+    comment_date DATE NOT NULL,
+    FOREIGN KEY (product_id)
+        REFERENCES product(product_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (user_id)
+        REFERENCES user(user_id)
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS order_status;
+CREATE TABLE IF NOT EXISTS order_status (
+    order_status_id INT,
+    order_status_name VARCHAR(36),
+    PRIMARY KEY (order_status_id)
+);
+
+DROP TABLE IF EXISTS delivery;
+CREATE TABLE IF NOT EXISTS delivery (
+    delivery_id INT,
+    delivery_name VARCHAR(36),
+    PRIMARY KEY (delivery_id)
+);
+
+DROP TABLE IF EXISTS payment;
+CREATE TABLE IF NOT EXISTS payment (
+    payment_id INT,
+    payment_name VARCHAR(36),
+    PRIMARY KEY (payment_id)
+);
+
+DROP TABLE IF EXISTS payment_status;
+CREATE TABLE IF NOT EXISTS payment_status (
+    payment_status_id INT,
+    payment_status_name VARCHAR(36),
+    PRIMARY KEY (payment_status_id)
+);
+
+DROP TABLE IF EXISTS order;
+CREATE TABLE IF NOT EXISTS order (
+    order_id INT AUTO_INCREMENT,
+    user_id_customer INT,
+    user_id_manager INT,
+    order_status_id INT,
+    delivery_id INT,
+    payment_id INT,
+    payment_status_id INT,
+    date_opened DATE NOT NULL,
+    date_finished DATE,
+    user_comment VARCHAR(255),
+    total_cost INT NOT NULL,
+    PRIMARY KEY (order_id),
+    FOREIGN KEY (user_id_customer)
+        REFERENCES user(user_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (user_id_manager)
+        REFERENCES user(user_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (order_status_id)
+        REFERENCES order_status(order_status_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (delivery_id)
+        REFERENCES delivery(delivery_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (payment_id)
+        REFERENCES payment(payment_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (payment_status_id)
+        REFERENCES payment_status(payment_status_id)
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS order_info;
+CREATE TABLE IF NOT EXISTS order_info (
+    order_id INT,
+    product_id INT,
+    amount INT NOT NULL,
+    FOREIGN KEY (order_id)
+        REFERENCES order(order_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (product_id)
+        REFERENCES product(product_id)
+        ON DELETE CASCADE
 );
 
 --Scrip for clearing users

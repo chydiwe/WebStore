@@ -45,7 +45,7 @@ public class UserController {
             throw new AlreadyExistsException("User with such email already registered.");
         }
 
-        int userId = userRepository.save(user).getId();
+        int userId = userRepository.save(user).getUserId();
 
         ConfirmationToken token = new ConfirmationToken();
         token.setToken(UUID.randomUUID().toString());

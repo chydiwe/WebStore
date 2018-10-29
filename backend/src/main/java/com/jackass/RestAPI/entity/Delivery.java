@@ -7,25 +7,20 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Table(name = "category")
+@Table(name = "delivery")
 @Entity
-public class Category implements Serializable {
+public class Delivery implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter(onMethod_=@JsonIgnore)
-    @Column(name = "category_id")
-    private int categoryId;
+    @Column(name = "delivery_id")
+    private int deliveryId;
 
     @Getter
     @Setter
-    @Column(name = "category_name")
-    private String categoryName;
-
-    @Getter
-    @Setter
-    @Column(name = "sub_category")
-    private String subCategory;
+    @Column(name = "delivery_name")
+    private String deliveryName;
 
 }

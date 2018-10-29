@@ -1,80 +1,60 @@
 package com.jackass.RestAPI.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "product")
 @Entity
-public class Product {
+public class Product implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     @Column(name = "product_id")
     private int productId;
-    @Column
+    @Getter
+    @Setter
+    @Column(name = "product_name")
     private String productName;
-    @Column(name = "category_id")
-    private int categoryId;
-    @Column(name = "manufacturer_id")
-    private int manufacturerId;
-    @Column
+    @Getter
+    @Setter
+    @OneToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+    @Getter
+    @Setter
+    @OneToOne
+    @JoinColumn(name = "manufacturer_id")
+    private Manufacturer manufacturer;
+    @Getter
+    @Setter
+    @Column(name = "short_info")
     private String shortInfo;
-    @Column
+    @Getter
+    @Setter
+    @Column(name = "cost")
     private int cost;
-    @Column
+    @Getter
+    @Setter
+    @Column(name = "quantity")
     private int quantity;
 
-    public int getProductId() {
-        return productId;
-    }
+    @Getter
+    @Setter
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private List<ProductComment> comments = new ArrayList<>();
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
+    @Getter
+    @Setter
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private List<ProductImage> images = new ArrayList<>();
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public int getManufacturerId() {
-        return manufacturerId;
-    }
-
-    public void setManufacturerId(int manufacturerId) {
-        this.manufacturerId = manufacturerId;
-    }
-
-    public String getShortInfo() {
-        return shortInfo;
-    }
-
-    public void setShortInfo(String shortInfo) {
-        this.shortInfo = shortInfo;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }
