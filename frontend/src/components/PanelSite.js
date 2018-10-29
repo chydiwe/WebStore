@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import logo from './logo_side.png'
-import fetch from "cross-fetch";
-
+import profileIcon from './logo_side.png'
+import iconFind from './search.png'
+import logo from './logo.png'
+import burgerIcon from './menu-icon-png-3-lines-6.png'
+import trashIcon from './trash.png'
+import {Link} from "react-router-dom";
 export class PanelSite extends React.Component {
     constructor(props) {
         super(props);
@@ -34,32 +37,38 @@ export class PanelSite extends React.Component {
     render() {
         const {user, logOut} = this.props;
         return (<div className='panelSite'>
-            <div className='MainPart'>Название компании?Или меню</div>
-            <div className='UserPart'>
-                <img src={logo} onClick={this.sideMenu} className='side_icon'/>
-                <div ref={(node) => {
-                    this._dropMenu = node
-                }} className='dropMenuOff'>  {user.isLogin === true ?
-                    <ul>
-                        <li>Имя:{user.name}</li>
-                        <li>Корзина:{user.message}</li>
-                        <li><input type="submit" onClick={logOut} value='выход'/></li>
-                    </ul>
-                    :
-                    <form action="">
-                        <input ref={(node) => {
-                            this._loginEl = node
-                        }} type="text"/><br/>
-                        <input ref={(node) => {
-                            this._passEl = node
-                        }} type='password'/><br/>
-                         <input type='submit' onClick={this.handelClick} value='Вход'/>
 
+            <div className='MainPart'>
+                <div className='burgerMenu'><img src={burgerIcon} alt=""/></div>
+                <div className='nameFirm'>LOGO</div>
+                <div className='searchMenu'><input type="text" placeholder='Найти'/><button><img src={iconFind} alt=""/></button></div>
+                <div className="RightMenu"><div className='dropdown'onClick={this.sideMenu}>
+                    <img src={profileIcon}  className='dropbtn'/><p >Войти</p>
+                    <div ref={(node) => {
+                        this._dropMenu = node
+                    }} className='dropMenuOff'>  {user.isLogin === true ?
+                        <ul>
+                            <li>Имя:{user.name}</li>
+                            <li><input type="submit" onClick={logOut} value='выход'/></li>
+                        </ul>
+                        :
+                        <form action="">
+                            <input ref={(node) => {
+                                this._loginEl = node
+                            }} type="text"/><br/>
+                            <input ref={(node) => {
+                                this._passEl = node
+                            }} type='password'/><br/>
+                            <input type='submit' onClick={this.handelClick} value='Вход'/>
+                            <Link to='/register'><button>регистрация</button></Link>
 
-                    </form>
-                }
-                </div>
+                        </form>
+                    }
+                    </div>
+                </div><div className="trash"><img src={trashIcon} alt=""/><p>Корзина</p></div></div>
             </div>
+
+
         </div>)
     }
 }

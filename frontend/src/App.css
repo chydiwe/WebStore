@@ -1,18 +1,62 @@
 /*  fonts  */
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
-
 .App {
     text-align: center;
     display: flex;
     flex-direction: column;
 }
 
-
-.side_icon {
-    width: 37px;
-    height: 37px;
+/*  Styles for main page*/
+/* Styles for header*/
+.dropbtn {
     color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 64px;
+}
+
+.dropdown {
+    font-size: 0.8em;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropMenuOn {
+    display: block;
+    position: absolute;
+    top: 90%;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropMenuOff {
+    display: none;
+
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropbtn {
+}
+
+.RightMenu {
+    display: flex;
+    flex-direction: row;
 }
 
 .UserPart {
@@ -24,16 +68,31 @@
 }
 
 .panelSite {
-    background-color: #282c34;
-    min-height: 15vh;
+    background-color: #e23e3c;
+    min-height: 10vh;
     display: flex;
+    justify-content: flex-start;
     align-items: center;
     font-size: calc(10px + 2vmin);
     color: white;
 }
 
 .MainPart {
-    min-width: 85vw;
+    display: flex;
+    min-width: 99vw;
+    align-items: center;
+
+}
+
+.burgerMenu {
+    width: 10%;
+}
+
+
+.burgerMenu img {
+    width: 64px;
+    height: 64px;
+
 }
 
 .MainBody {
@@ -42,19 +101,55 @@
     height: 50vh;
 }
 
-.dropMenuOn {
-    margin-left: 5%;
+.nameFirm {
 }
 
-.dropMenuOff {
-    display: none;
-
+.MainLogo {
+    width: 50px;
 }
 
+.searchMenu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+}
 
-.errorMessage{
-    margin:0;
-   font-size: 0.8em;
+.searchMenu input {
+    width: 45%;
+    height: 50%;
+    outline: none;
+    border-radius: 20px 0 0 20px;
+    border: none;
+    padding: 0 20px;
+}
+
+.searchMenu button {
+    height: 50%;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    background: white;
+}
+
+button img {
+    width: 25px;
+}
+.trash{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.8em;
+    margin-left: 24px;
+}
+.trash img{
+    width: 42px;
+    height: 42px;
+}
+/*end stylef for header*/
+.errorMessage {
+    margin: 0;
+    font-size: 0.8em;
 }
 
 .MainContent {
@@ -90,19 +185,19 @@ li {
 }
 
 /*  Styles for registerForm.js  */
-.registrationForm{
+.registrationForm {
     width: 60%;
     margin: 0 auto;
     font-family: "Ubuntu", serif;
 }
 
-.registrationForm label::before{
+.registrationForm label::before {
     content: "";
     display: block;
     height: 6px;
 }
 
-.registrationForm button{
+.registrationForm button {
     width: 150px;
     padding: 5px;
     margin: 25px;
@@ -121,7 +216,7 @@ li {
 
 .registrationForm input[type="text"],
 .registrationForm input[type="password"],
-.registrationForm input[type="email"]{
+.registrationForm input[type="email"] {
 
     padding: 5px 10px;
     font-size: 1.2em;
@@ -130,11 +225,11 @@ li {
     border-style: solid;
 }
 
-.badFieldValue{
+.badFieldValue {
     border-color: red;
 }
 
-.validFieldValue{
+.validFieldValue {
     border-color: green;
 }
 

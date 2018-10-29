@@ -16,7 +16,7 @@ class Main extends Component {
 
 
          <MainBody/>
-                <Link to='/register'>TEST REGISTR</Link>
+
             </div>
         );
     }
