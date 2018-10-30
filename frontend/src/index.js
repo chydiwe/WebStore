@@ -8,15 +8,30 @@ import {Route, Switch} from 'react-router-dom'
 import {ConnectedRouter,} from 'react-router-redux'
 import ConfirmMail from "./containers/confirmMail";
 import Register from "./components/registerForm";
+import PanelSite from "./components/PanelSite";
+
+class Pages extends React.Component {
+    render() {
+        return <header className="App-header">
+            <PanelSite/>
+            <Route exact path='/' component={Main}/>
+            <Route path='/confirming' component={ConfirmMail}/>
+            <Route path='/register' component={Register}/>
+        </header>
+    }
+}
+
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <Switch>
-                <Route exact path='/' component={Main}/>
-                <Route path='/confirming' component={ConfirmMail}/>
-                <Route path='/register' component={Register}/>
-            </Switch>
-        </ConnectedRouter>
+        <div>
+            <ConnectedRouter history={history}>
+                <Switch>
+                    <Pages/>
+                </Switch>
+            </ConnectedRouter>
+        </div>
+
     </Provider>,
     document.getElementById('root')
 );
+

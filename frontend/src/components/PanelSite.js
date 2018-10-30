@@ -2,11 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import profileIcon from './logo_side.png'
 import iconFind from './search.png'
-import logo from './logo.png'
-import burgerIcon from './menu-icon-png-3-lines-6.png'
+import burgerIcon from './icon.png'
 import trashIcon from './trash.png'
 import {Link} from "react-router-dom";
-export class PanelSite extends React.Component {
+import {logOut, userLogIn} from "../action/user-profile";
+import connect from "react-redux/es/connect/connect";
+
+
+class PanelSite extends React.Component {
     constructor(props) {
         super(props);
         this.sideMenu = this.sideMenu.bind(this);
@@ -26,46 +29,58 @@ export class PanelSite extends React.Component {
         }
     }
 
+    componentWillMount() {
+        console.log(this.props)
+    }
+
     handelClick(e) {
         e.preventDefault();
         const name = ReactDOM.findDOMNode(this._loginEl).value,
             pass = ReactDOM.findDOMNode(this._passEl).value;
-        this.props.logIn({name, pass})
+        this.props.userLogin({name, pass})
 
     }
 
     render() {
-        const {user, logOut} = this.props;
-        return (<div className='panelSite'>
+        const {userLogout,user} = this.props;
+        return (
+            <div className='panelSite'>
 
             <div className='MainPart'>
                 <div className='burgerMenu'><img src={burgerIcon} alt=""/></div>
                 <div className='nameFirm'>LOGO</div>
-                <div className='searchMenu'><input type="text" placeholder='Найти'/><button><img src={iconFind} alt=""/></button></div>
-                <div className="RightMenu"><div className='dropdown'onClick={this.sideMenu}>
-                    <img src={profileIcon}  className='dropbtn'/><p >Войти</p>
-                    <div ref={(node) => {
-                        this._dropMenu = node
-                    }} className='dropMenuOff'>  {user.isLogin === true ?
-                        <ul>
-                            <li>Имя:{user.name}</li>
-                            <li><input type="submit" onClick={logOut} value='выход'/></li>
-                        </ul>
-                        :
-                        <form action="">
-                            <input ref={(node) => {
-                                this._loginEl = node
-                            }} type="text"/><br/>
-                            <input ref={(node) => {
-                                this._passEl = node
-                            }} type='password'/><br/>
-                            <input type='submit' onClick={this.handelClick} value='Вход'/>
-                            <Link to='/register'><button>регистрация</button></Link>
+                <div className='searchMenu'><input type="text" placeholder='Найти'/>
+                    <button><img src={iconFind} alt=""/></button>
+                </div>
+                <div className="RightMenu">
+                    <div className='dropdown' onClick={this.sideMenu}>
+                        <img src={profileIcon} className='dropbtn'/><p>Войти</p>
+                        <div ref={(node) => {
+                            this._dropMenu = node
+                        }} className='dropMenuOff'>  {user.isLogin === true ?
+                            <ul>
+                                <li>Имя:{user.name}</li>
+                                <li><input type="submit" onClick={userLogout} value='выход'/></li>
+                            </ul>
+                            :
+                            <form action="">
+                                <input ref={(node) => {
+                                    this._loginEl = node
+                                }} type="text"/><br/>
+                                <input ref={(node) => {
+                                    this._passEl = node
+                                }} type='password'/><br/>
+                                <input type='submit' onClick={this.handelClick} value='Вход'/>
+                                <Link to='/register'>
+                                    <button>регистрация</button>
+                                </Link>
 
-                        </form>
-                    }
+                            </form>
+                        }
+                        </div>
                     </div>
-                </div><div className="trash"><img src={trashIcon} alt=""/><p>Корзина</p></div></div>
+                    <div className="trash"><img src={trashIcon} alt=""/><p>Корзина</p></div>
+                </div>
             </div>
 
 
@@ -73,3 +88,17 @@ export class PanelSite extends React.Component {
     }
 }
 
+const mapStateToProps = store => {
+    return {
+        user: store.user,
+        catalog: store.catalog
+    }
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        userLogin: (user) => dispatch(userLogIn(user)),
+        userLogout: () => dispatch(logOut())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PanelSite)
