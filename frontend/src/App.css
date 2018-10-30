@@ -1,10 +1,16 @@
 /*  fonts  */
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+/* */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: rgba(230, 230, 230, 0.48);
+}
 
 .App {
     text-align: center;
     display: flex;
     flex-direction: column;
+
 }
 
 /*  Styles for main page*/
@@ -57,6 +63,7 @@
 .RightMenu {
     display: flex;
     flex-direction: row;
+    margin-right: 2vw;
 }
 
 .UserPart {
@@ -75,11 +82,12 @@
     align-items: center;
     font-size: calc(10px + 2vmin);
     color: white;
+    position: fixed;
 }
 
 .MainPart {
     display: flex;
-    min-width: 99vw;
+    min-width: 100vw;
     align-items: center;
 
 }
@@ -87,7 +95,6 @@
 .burgerMenu {
     width: 10%;
 }
-
 
 .burgerMenu img {
     width: 64px;
@@ -135,21 +142,84 @@
 button img {
     width: 25px;
 }
-.trash{
+
+.trash {
     display: flex;
     flex-direction: row;
     align-items: center;
     font-size: 0.8em;
     margin-left: 24px;
 }
-.trash img{
+
+.trash img {
     width: 42px;
     height: 42px;
 }
+
 /*end stylef for header*/
+/*Main Page*/
 .errorMessage {
     margin: 0;
     font-size: 0.8em;
+}
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-start;
+    margin-top: 2%;
+    padding: 5% 5% 0 5%;
+}
+
+.item_catalog {
+
+
+}
+
+
+.item_add {
+    font-size: 1vw;
+    width: 5vw;
+    height: 30px;
+    background: rgba(214, 52, 101, 0.67);
+    border: none;
+    border-radius: 20px 20px 20px 20px;
+     margin-top: auto;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.card_catalog {
+    background: white;
+    box-shadow: 2px 2px 5px 2px #bfbfbf;
+    height: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: center;
+    width: 20vw;
+    margin: 1%;
+
+}
+
+.item_name {
+    font-size: 1vw;
+    height: 2vw;
+}
+
+.item_img {
+    width: 5vw;
+    height: 5vw;
+}
+
+.item_price {
+    font-size: 1vw;
+}
+
+.item_discr {
+
 }
 
 .MainContent {
@@ -157,14 +227,6 @@ button img {
     margin-top: 1%;
     width: 90vw;
     align-items: center;
-}
-
-.leftBar {
-    align-items: flex-start;
-    width: 10vw;
-    max-height: 79vh;
-    border: #282c34 2px solid;
-
 }
 
 li {

@@ -6,7 +6,7 @@ export default class Main extends Component {
     render() {
         return (
             <div className="App">
-         <MainBody/>
+                <MainBody/>
 
             </div>
         );
