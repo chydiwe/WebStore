@@ -72,4 +72,15 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
+    @RequestMapping(method = RequestMethod.GET, params = "id")
+    public ResponseEntity<?> getBucket(@RequestParam int id) {
+        User user = userRepository.getUserByUserId(id);
+
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
+        }
+
+        return ResponseEntity.ok().body(user.getProducts());
+    }
+
 }

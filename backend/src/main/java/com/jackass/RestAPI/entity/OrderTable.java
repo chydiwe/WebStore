@@ -10,9 +10,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(name = "order")
+@Table(name = "order_table")
 @Entity
-public class Order implements Serializable {
+public class OrderTable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

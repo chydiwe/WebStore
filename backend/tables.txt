@@ -1,11 +1,28 @@
 DROP DATABASE IF EXISTS web_store;
-CREATE DATABASE web_store;
+CREATE DATABASE IF NOT EXISTS web_store;
 
 USE web_store;
 
-DROP TABLE IF EXISTS user;
+CREATE TABLE IF NOT EXISTS group_table (
+    user_group INT AUTO_INCREMENT PRIMARY KEY,
+    group_name VARCHAR(36) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS category (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(36) NOT NULL,
+    sub_category VARCHAR(36)
+);
+
+CREATE TABLE IF NOT EXISTS manufacturer (
+    manufacturer_id INT AUTO_INCREMENT PRIMARY KEY,
+    manufacturer_name VARCHAR(36) NOT NULL,
+    manufacturer_info VARCHAR(255),
+    manufacturer_logo VARCHAR(255)
+);
+
 CREATE TABLE IF NOT EXISTS user (
-    user_id INT AUTO_INCREMENT,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     user_group INT,
@@ -13,38 +30,19 @@ CREATE TABLE IF NOT EXISTS user (
     surname VARCHAR(255) NOT NULL,
     patronymic VARCHAR(255),
     phone_number VARCHAR(255),
-    PRIMARY KEY (user_id),
     FOREIGN KEY (user_group)
-        REFERENCES group(user_group)
+        REFERENCES group_table(user_group)
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS confirmation_token;
-CREATE TABLE IF NOT EXISTS confirmation_token (
-    user_id INT,
-    token VARCHAR(36) NOT NULL,
-    FOREIGN KEY (user_id)
-            REFERENCES user(user_id)
-            ON DELETE CASCADE
-);
-
-DROP TABLE IF EXISTS group;
-CREATE TABLE IF NOT EXISTS group (
-    user_group INT AUTO_INCREMENT,
-    group_name VARCHAR(36) NOT NULL,
-    PRIMARY KEY (user_group)
-);
-
-DROP TABLE IF EXISTS product;
 CREATE TABLE IF NOT EXISTS product (
-    product_id INT AUTO_INCREMENT,
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(255) NOT NULL,
     category_id INT,
     manufacturer_id INT,
-    short_info VARCHAR(255) NOT NULL,
+    short_info VARCHAR(255),
     cost INT NOT NULL,
     quantity INT NOT NULL,
-    PRIMARY KEY (product_id),
     FOREIGN KEY (category_id)
         REFERENCES category(category_id)
         ON DELETE CASCADE,
@@ -53,90 +51,36 @@ CREATE TABLE IF NOT EXISTS product (
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS category;
-CREATE TABLE IF EXISTS category (
-    category_id INT AUTO_INCREMENT,
-    category_name VARCHAR(36) NOT NULL,
-    sub_category VARCHAR(36),
-    PRIMARY KEY (category_id)
-);
-
-DROP TABLE IF EXISTS manufacturer;
-CREATE TABLE IF EXISTS manufacturer (
-    manufacturer_id INT AUTO_INCREMENT,
-    manufacturer_name VARCHAR(36) NOT NULL,
-    manufacturer_info VARCHAR(255),
-    manufacturer_logo VARCHAR(255),
-    PRIMARY KEY (category_id)
-);
-
-DROP TABLE IF EXISTS bucket;
-CREATE TABLE IF NOT EXISTS bucket (
-    user_id INT,
-    product_id INT,
-    amount INT NOT NULL,
-    FOREIGN KEY (user_id)
-        REFERENCES user(user_id)
-        ON DELETE CASCADE,
-    FOREIGN KEY (product_id)
-        REFERENCES product(product_id)
-        ON DELETE CASCADE
-);
-
-DROP TABLE IF EXISTS product_image;
 CREATE TABLE IF NOT EXISTS product_image (
     product_id INT,
-    image VARCHAR(255),
+    product_image VARCHAR(255),
     FOREIGN KEY (product_id)
         REFERENCES product(product_id)
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS product_comment;
-CREATE TABLE IF NOT EXISTS product_comment (
-    product_id INT,
-    user_id INT,
-    product_comment VARCHAR(255) NOT NULL,
-    comment_date DATE NOT NULL,
-    FOREIGN KEY (product_id)
-        REFERENCES product(product_id)
-        ON DELETE CASCADE,
-    FOREIGN KEY (user_id)
-        REFERENCES user(user_id)
-        ON DELETE CASCADE
-);
-
-DROP TABLE IF EXISTS order_status;
 CREATE TABLE IF NOT EXISTS order_status (
-    order_status_id INT,
-    order_status_name VARCHAR(36),
-    PRIMARY KEY (order_status_id)
+    order_status_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_status_name VARCHAR(36)
 );
 
-DROP TABLE IF EXISTS delivery;
 CREATE TABLE IF NOT EXISTS delivery (
-    delivery_id INT,
-    delivery_name VARCHAR(36),
-    PRIMARY KEY (delivery_id)
+    delivery_id INT AUTO_INCREMENT PRIMARY KEY,
+    delivery_name VARCHAR(36)
 );
 
-DROP TABLE IF EXISTS payment;
 CREATE TABLE IF NOT EXISTS payment (
-    payment_id INT,
-    payment_name VARCHAR(36),
-    PRIMARY KEY (payment_id)
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    payment_name VARCHAR(36)
 );
 
-DROP TABLE IF EXISTS payment_status;
 CREATE TABLE IF NOT EXISTS payment_status (
-    payment_status_id INT,
-    payment_status_name VARCHAR(36),
-    PRIMARY KEY (payment_status_id)
+    payment_status_id INT AUTO_INCREMENT PRIMARY KEY,
+    payment_status_name VARCHAR(36)
 );
 
-DROP TABLE IF EXISTS order;
-CREATE TABLE IF NOT EXISTS order (
-    order_id INT AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS order_table (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id_customer INT,
     user_id_manager INT,
     order_status_id INT,
@@ -147,7 +91,6 @@ CREATE TABLE IF NOT EXISTS order (
     date_finished DATE,
     user_comment VARCHAR(255),
     total_cost INT NOT NULL,
-    PRIMARY KEY (order_id),
     FOREIGN KEY (user_id_customer)
         REFERENCES user(user_id)
         ON DELETE CASCADE,
@@ -168,31 +111,56 @@ CREATE TABLE IF NOT EXISTS order (
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS order_info;
 CREATE TABLE IF NOT EXISTS order_info (
     order_id INT,
     product_id INT,
     amount INT NOT NULL,
     FOREIGN KEY (order_id)
-        REFERENCES order(order_id)
+        REFERENCES order_table(order_id)
         ON DELETE CASCADE,
     FOREIGN KEY (product_id)
         REFERENCES product(product_id)
         ON DELETE CASCADE
 );
 
---Scrip for clearing users
---Temporarily not needed
---CREATE EVENT delete_event
---ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 14 DAY
---ON COMPLETION PRESERVE
---DO BEGIN
---      DELETE FROM user WHERE user_id = (SELECT user_id FROM confirmation_token);
---END;
+CREATE TABLE IF NOT EXISTS bucket (
+    user_id INT,
+    product_id INT,
+    amount INT NOT NULL,
+    FOREIGN KEY (user_id)
+        REFERENCES user(user_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (product_id)
+        REFERENCES product(product_id)
+        ON DELETE CASCADE
+);
 
---for tests
-INSERT INTO user VALUES(NULL, 'admin@mail.ru', 'qwerty', 1, 'admin', 'admin', NULL, NULL);
-INSERT INTO group VALUES(NULL, 'Admin');
-INSERT INTO product VALUES(NULL, 'Pen', 1, NULL, 'For writing', 50, quantity);
+CREATE TABLE IF NOT EXISTS product_comment (
+    product_id INT,
+    user_id INT,
+    product_comment VARCHAR(255) NOT NULL,
+    comment_date DATE NOT NULL,
+    FOREIGN KEY (product_id)
+        REFERENCES product(product_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (user_id)
+        REFERENCES user(user_id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS confirmation_token (
+    user_id INT,
+    token VARCHAR(36) NOT NULL,
+    FOREIGN KEY (user_id)
+            REFERENCES user(user_id)
+            ON DELETE CASCADE
+);
+
+INSERT INTO group_table VALUES(NULL, 'Admin');
 INSERT INTO category VALUES(NULL, 'Writing tools', NULL);
-INSERT INTO manufacturer VALUES(NULL, 'RusTools', NULL, NULL)
+INSERT INTO manufacturer VALUES(NULL, 'RusTools', NULL, NULL);
+INSERT INTO user VALUES(NULL, 'admin@mail.ru', 'qwerty', 1, 'admin', 'admin', NULL, NULL);
+INSERT INTO user VALUES(NULL, 'admin2@mail.ru', 'qwerty', 1, 'admin', 'admin', NULL, NULL);
+INSERT INTO product VALUES(NULL, 'Pen', 1, 1, NULL, 50, 10);
+INSERT INTO bucket VALUES(1, 1, 2);
+INSERT INTO bucket VALUES(2, 1, 2);

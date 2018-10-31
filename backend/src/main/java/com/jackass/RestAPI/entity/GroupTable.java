@@ -7,9 +7,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Table(name = "group")
+@Table(name = "group_table")
 @Entity
-public class Group implements Serializable {
+public class GroupTable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

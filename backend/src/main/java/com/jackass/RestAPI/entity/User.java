@@ -26,7 +26,7 @@ public class User implements Serializable {
     private String email;
 
     @Getter
-    @Setter(onMethod_=@JsonIgnore)
+    @Setter(onMethod_={@JsonIgnore})
     @Column(name = "password")
     private String password;
 
@@ -49,7 +49,7 @@ public class User implements Serializable {
     @Setter(onMethod_=@JsonIgnore)
     @OneToOne
     @JoinColumn(name = "user_group")
-    private Group group;
+    private GroupTable group;
 
     @Getter
     @Setter
