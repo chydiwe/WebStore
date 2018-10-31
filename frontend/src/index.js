@@ -9,7 +9,7 @@ import {ConnectedRouter,} from 'react-router-redux'
 import ConfirmMail from "./containers/confirmMail";
 import Register from "./components/registerForm";
 import PanelSite from "./components/PanelSite";
-
+import adminPanel from "./components/AdminPanel"
 class Pages extends React.Component {
     render() {
         return <header className="App-header">
@@ -17,6 +17,7 @@ class Pages extends React.Component {
             <Route exact path='/' component={Main}/>
             <Route path='/confirming' component={ConfirmMail}/>
             <Route path='/register' component={Register}/>
+            <Route path='/adminpanel' component={adminPanel}/>
         </header>
     }
 }
