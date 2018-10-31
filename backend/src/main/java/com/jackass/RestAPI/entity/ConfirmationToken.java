@@ -1,30 +1,26 @@
 package com.jackass.RestAPI.entity;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Table(name = "confirmation_token")
 @Entity
 public class ConfirmationToken {
 
     @Id
+    @Getter
+    @Setter
     @Column(name = "user_id")
     private int userId;
-    @Column
+
+    @Getter
+    @Setter
+    @Column(name = "token")
     private String token;
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }

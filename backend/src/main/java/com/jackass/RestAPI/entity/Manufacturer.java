@@ -1,51 +1,36 @@
 package com.jackass.RestAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "manufacturer")
 @Entity
-public class Manufacturer {
+public class Manufacturer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter(onMethod_=@JsonIgnore)
     @Column(name = "manufacturer_id")
     private int manufacturerId;
-    @Column(name = "manufacture_name")
+
+    @Getter
+    @Setter
+    @Column(name = "manufacturer_name")
     private String manufacturerName;
-    @Column(name = "manufacture_logo")
+
+    @Getter
+    @Setter
+    @Column(name = "manufacturer_logo")
     private String manufacturerLogo;
-    @Column(name = "manufacture_info")
+
+    @Getter
+    @Setter
+    @Column(name = "manufacturer_info")
     private String manufacturerInfo;
 
-    public String getManufacturerName() {
-        return manufacturerName;
-    }
-
-    public void setManufacturerName(String manufacturerName) {
-        this.manufacturerName = manufacturerName;
-    }
-
-    public String getManufacturerInfo() {
-        return manufacturerInfo;
-    }
-
-    public void setManufacturerInfo(String manufacturerInfo) {
-        this.manufacturerInfo = manufacturerInfo;
-    }
-
-    public String getManufacturerLogo() {
-        return manufacturerLogo;
-    }
-
-    public void setManufacturerLogo(String manufacturerLogo) {
-        this.manufacturerLogo = manufacturerLogo;
-    }
-
-    public int getManufacturerId() {
-        return manufacturerId;
-    }
-
-    public void setManufacturerId(int manufacturerId) {
-        this.manufacturerId = manufacturerId;
-    }
 }

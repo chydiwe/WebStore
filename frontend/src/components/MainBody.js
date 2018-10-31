@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
-
+import {Catalog} from "../components/itemcatalog";
 export class MainBody extends Component{
     render(){
-        return (
-            <div className='MainBody'>
+        return <div className='MainBody'>
 
-                {/*<aside className='leftBar'>
-                    <p>left bar</p>
-                </aside>*/}
-
-                <div className='MainContent'>
-
-                </div>
+            <div className='MainContent'>
+                <Catalog/>
             </div>
-        );
+        </div>
     }
 }

@@ -45,7 +45,7 @@ public class UserController {
             throw new AlreadyExistsException("User with such email already registered.");
         }
 
-        int userId = userRepository.save(user).getId();
+        int userId = userRepository.save(user).getUserId();
 
         ConfirmationToken token = new ConfirmationToken();
         token.setToken(UUID.randomUUID().toString());
@@ -70,6 +70,17 @@ public class UserController {
         }
 
         return ResponseEntity.ok().body(user);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = "id")
+    public ResponseEntity<?> getBucket(@RequestParam int id) {
+        User user = userRepository.getUserByUserId(id);
+
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
+        }
+
+        return ResponseEntity.ok().body(user.getProducts());
     }
 
 }

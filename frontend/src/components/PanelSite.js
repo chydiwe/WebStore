@@ -1,14 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import SearchForm from './searchForm.js'
-import profileIcon from '../appImages/defaultProfileIcon.png'
-import logo from '../appImages/logo.png'
-import IconShoppingCart from '../appImages/SVGIcons/InterfaceIcons'
-//import fetch from "cross-fetch";
-//import {Route, Link, Switch} from "react-router-dom";
+import profileIcon from './img/logo_side.png'
+import iconFind from './img/search.png'
+import burgerIcon from './img/icon.png'
+import trashIcon from './img/trash.png'
 import {Link} from "react-router-dom";
+import {logOut, userLogIn} from "../action/user-profile";
+import connect from "react-redux/es/connect/connect";
 
-export class PanelSite extends React.Component {
+
+class PanelSite extends React.Component {
     constructor(props) {
         super(props);
         this.sideMenu = this.sideMenu.bind(this);
@@ -28,78 +29,77 @@ export class PanelSite extends React.Component {
         }
     }
 
+    componentWillMount() {
+        console.log(this.props)
+    }
+
     handelClick(e) {
         e.preventDefault();
         const name = ReactDOM.findDOMNode(this._loginEl).value,
             pass = ReactDOM.findDOMNode(this._passEl).value;
-        this.props.logIn({name, pass})
+        this.props.userLogin({name, pass})
 
     }
 
     render() {
-        const {user, logOut} = this.props;
+        const {userLogout, user} = this.props;
         return (
             <div className='panelSite'>
 
-                <img src={logo} className="logo" alt="Logo"/>
-                <SearchForm />
-                <div className="orderPlace">
-                    <Link to='/order'>
-                        <IconShoppingCart />
-                    </Link>
-                </div>
+                <div className='MainPart'>
+                    <div className='burgerMenu'><img src={burgerIcon} alt=""/>
+                    </div>
+                    <div className='nameFirm'>LOGO</div>
+                    <div className='searchMenu'><input type="text" placeholder='Найти'/>
+                        <button><img src={iconFind} alt=""/></button>
+                    </div>
+                    <div className="RightMenu">
+                        <div className='dropdown' onClick={this.sideMenu}>
+                            <img src={profileIcon} className='dropbtn'/><p>Войти</p>
+                            <div ref={(node) => {
+                                this._dropMenu = node
+                            }} className='dropMenuOff'>  {user.isLogin === true ?
+                                <ul>
+                                    <li>Имя:{user.name}</li>
+                                    <li><input type="submit" onClick={userLogout} value='выход'/></li>
+                                </ul>
+                                :
+                                <form action="">
+                                    <input ref={(node) => {
+                                        this._loginEl = node
+                                    }} type="text"/><br/>
+                                    <input ref={(node) => {
+                                        this._passEl = node
+                                    }} type='password'/><br/>
+                                    <input type='submit' onClick={this.handelClick} value='Вход'/>
+                                    <Link to='/register'>
+                                        <button>регистрация</button>
+                                    </Link>
 
-
-                <div className='userPart'>
-                    <img src={profileIcon} onClick={this.sideMenu} className='side_icon' alt="profile-img"/>
-                    <div ref={(node) => {
-                        this._dropMenu = node
-                    }} className='dropMenuOff'>  {user.isLogin === true ?
-                        <ul>
-                            <li>Имя:{user.name}</li>
-                            <li>Корзина:{user.message}</li>
-                            <li><input type="submit" onClick={logOut} value='выход'/></li>
-                        </ul>
-                        :
-                        <form action="">
-
-                            <table>
-                                <tr>
-                                    <td>
-                                        <label htmlFor="emailLogInField">E-mail</label>
-                                    </td>
-                                    <td>
-                                        <input id="emailLogInField" className="logInField" ref={(node) => {
-                                            this._loginEl = node
-                                        }} type="text"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label htmlFor="passLogInField">Password</label>
-                                    </td>
-                                    <td>
-                                        <input id="passLogInField" className="logInField" ref={(node) => {
-                                            this._passEl = node
-                                        }} type='password'/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="2">
-                                        <Link to='/register' className="link">Register</Link><br/>
-                                        <Link to='' className="link">Recover password</Link>
-                                        <input type='submit' onClick={this.handelClick} value='LogIn'/>
-                                    </td>
-                                </tr>
-                            </table>
-
-
-                    </form>
-                    }
+                                </form>
+                            }
+                            </div>
+                        </div>
+                        <div className="trash"><img src={trashIcon} alt=""/><p>Корзина</p></div>
                     </div>
                 </div>
-            </div>
-        );
+
+
+            </div>)
     }
 }
 
+const mapStateToProps = store => {
+    return {
+        user: store.user,
+        catalog: store.catalog
+    }
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        userLogin: (user) => dispatch(userLogIn(user)),
+        userLogout: () => dispatch(logOut())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PanelSite)
