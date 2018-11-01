@@ -1,0 +1,8 @@
+.adminAddItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 25vw;
+    height: 100vh;
+}
