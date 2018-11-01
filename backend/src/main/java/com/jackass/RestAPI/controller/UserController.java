@@ -1,10 +1,12 @@
 package com.jackass.RestAPI.controller;
 
+import com.jackass.RestAPI.entity.Bucket;
 import com.jackass.RestAPI.entity.ConfirmationToken;
 import com.jackass.RestAPI.entity.User;
 import com.jackass.RestAPI.exception.AlreadyExistsException;
 import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.mail.MailManager;
+import com.jackass.RestAPI.repository.BucketRepository;
 import com.jackass.RestAPI.repository.ConfirmationTokenRepository;
 import com.jackass.RestAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private ConfirmationTokenRepository tokenRepository;
+    @Autowired
+    private BucketRepository bucketRepository;
 
     @RequestMapping(method = RequestMethod.POST)
     public void register(@RequestParam String email,
@@ -72,7 +76,7 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "id")
+    @RequestMapping(value = "/bucket", method = RequestMethod.GET, params = "id")
     public ResponseEntity<?> getBucket(@RequestParam int id) {
         User user = userRepository.getUserByUserId(id);
 
@@ -81,6 +85,29 @@ public class UserController {
         }
 
         return ResponseEntity.ok().body(user.getProducts());
+    }
+
+    @RequestMapping(value = "/bucket", method = RequestMethod.POST)
+    public void addToBucket(@RequestParam int userId,
+                            @RequestParam int productId,
+                            @RequestParam int amount) {
+        Bucket bucket = bucketRepository.getBucketByUserIdAndProductId(userId, productId);
+
+        if (bucket == null) {
+            bucket = new Bucket();
+
+            bucket.setUserId(userId);
+            bucket.setProductId(productId);
+            bucket.setAmount(amount);
+
+            bucketRepository.save(bucket);
+        } else {
+            bucketRepository.delete(bucket);
+
+            bucket.setAmount(bucket.getAmount() + amount);
+
+            bucketRepository.save(bucket);
+        }
     }
 
 }

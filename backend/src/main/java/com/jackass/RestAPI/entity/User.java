@@ -1,6 +1,7 @@
 package com.jackass.RestAPI.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,8 +59,9 @@ public class User implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Bucket> products = new ArrayList<>();
 
 }

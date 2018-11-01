@@ -10,4 +10,6 @@ public interface CategoryRepository {
 
     Category save(Category category);
 
+    void delete(Category category);
+
 }
