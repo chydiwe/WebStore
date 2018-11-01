@@ -17,7 +17,7 @@ public class OrderInfo {
     @Getter
     @Setter
     @Column(name = "order_id")
-    private int orderId;
+    private int id;
 
     @Getter
     @Setter

@@ -50,7 +50,7 @@ public class ProductController {
 
         product = new Product();
 
-        product.setProductName(name);
+        product.setName(name);
         product.setCategory(categoryObj);
         product.setManufacturer(manufacturerObj);
         product.setCost(cost);

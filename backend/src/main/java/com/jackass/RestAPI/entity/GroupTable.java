@@ -16,11 +16,11 @@ public class GroupTable implements Serializable {
     @Getter
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "user_group")
-    private int userGroup;
+    private int id;
 
     @Getter
     @Setter
     @Column(name = "group_name")
-    private String groupName;
+    private String name;
 
 }

@@ -12,14 +12,14 @@ import java.util.List;
 
 @Table(name = "order_table")
 @Entity
-public class OrderTable implements Serializable {
+public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "order_id")
-    private int orderId;
+    private int id;
 
     @Getter
     @Setter

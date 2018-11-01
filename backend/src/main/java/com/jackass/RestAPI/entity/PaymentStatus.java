@@ -16,11 +16,11 @@ public class PaymentStatus implements Serializable {
     @Getter
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "payment_status_id")
-    private int paymentStatusId;
+    private int id;
 
     @Getter
     @Setter
     @Column(name = "payment_status_name")
-    private String paymentStatusName;
+    private String status;
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 @Table(name = "bucket")
 @Entity
@@ -17,12 +18,12 @@ public class Bucket {
     @Getter
     @Setter
     @Column(name = "user_id")
-    private int userId;
+    private User user;
 
     @Getter
     @Setter
     @Column(name = "product_id")
-    private int productId;
+    private List<Product> products;
 
     @Getter
     @Setter

@@ -27,11 +27,11 @@ public class ProductComment {
     @Getter
     @Setter
     @Column(name = "product_comment")
-    private String productComment;
+    private String comment;
 
     @Getter
     @Setter
     @Column(name = "comment_date")
-    private LocalDate commentDate;
+    private LocalDate date;
 
 }

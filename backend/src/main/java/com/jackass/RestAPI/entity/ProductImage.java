@@ -21,6 +21,6 @@ public class ProductImage {
     @Getter
     @Setter
     @Column(name = "product_image")
-    private String productImage;
+    private String image;
 
 }

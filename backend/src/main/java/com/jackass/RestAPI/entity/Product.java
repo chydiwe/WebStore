@@ -17,11 +17,11 @@ public class Product implements Serializable {
     @Getter
     @Setter
     @Column(name = "product_id")
-    private int productId;
+    private int id;
     @Getter
     @Setter
     @Column(name = "product_name")
-    private String productName;
+    private String name;
     @Getter
     @Setter
     @OneToOne
@@ -47,13 +47,13 @@ public class Product implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private List<ProductComment> comments = new ArrayList<>();
 
     @Getter
     @Setter
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private List<ProductImage> images = new ArrayList<>();
 

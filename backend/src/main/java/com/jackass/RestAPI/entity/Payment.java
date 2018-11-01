@@ -16,11 +16,16 @@ public class Payment implements Serializable {
     @Getter
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "payment_id")
-    private int paymentId;
+    private int id;
 
     @Getter
     @Setter
     @Column(name = "payment_name")
-    private String paymentName;
+    @Enumerated(EnumType.STRING)
+    private PaymentType name;
+
+    private enum PaymentType {
+        CASH
+    }
 
 }

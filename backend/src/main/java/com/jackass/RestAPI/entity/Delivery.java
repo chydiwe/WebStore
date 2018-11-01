@@ -16,11 +16,18 @@ public class Delivery implements Serializable {
     @Getter
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "delivery_id")
-    private int deliveryId;
+    private int id;
 
     @Getter
     @Setter
     @Column(name = "delivery_name")
-    private String deliveryName;
+    @Enumerated(EnumType.STRING)
+    private DeliveryType name;
+
+    private enum DeliveryType {
+
+        SELF_DELIVERY
+
+    }
 
 }

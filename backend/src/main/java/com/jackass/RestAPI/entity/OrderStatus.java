@@ -16,11 +16,16 @@ public class OrderStatus implements Serializable {
     @Getter
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "order_status_id")
-    private int orderStatusId;
+    private int id;
 
     @Getter
     @Setter
     @Column(name = "order_status_name")
-    private String orderStatusName;
+    @Enumerated(EnumType.STRING)
+    private OrderStatusType name;
+
+    private enum OrderStatusType {
+        IN_PROGRESS
+    }
 
 }

@@ -16,21 +16,21 @@ public class Manufacturer implements Serializable {
     @Getter
     @Setter(onMethod_=@JsonIgnore)
     @Column(name = "manufacturer_id")
-    private int manufacturerId;
+    private int id;
 
     @Getter
     @Setter
     @Column(name = "manufacturer_name")
-    private String manufacturerName;
+    private String name;
 
     @Getter
     @Setter
     @Column(name = "manufacturer_logo")
-    private String manufacturerLogo;
+    private String logo;
 
     @Getter
     @Setter
     @Column(name = "manufacturer_info")
-    private String manufacturerInfo;
+    private String info;
 
 }
