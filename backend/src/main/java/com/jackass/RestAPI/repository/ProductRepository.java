@@ -12,4 +12,6 @@ public interface ProductRepository {
 
     Product save(Product product);
 
+    Product delete(Product product);
+
 }

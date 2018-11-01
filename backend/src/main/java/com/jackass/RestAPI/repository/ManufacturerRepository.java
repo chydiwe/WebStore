@@ -10,4 +10,6 @@ public interface ManufacturerRepository {
 
     Manufacturer save(Manufacturer manufacturer);
 
+    Manufacturer delete(Manufacturer manufacturer);
+
 }
