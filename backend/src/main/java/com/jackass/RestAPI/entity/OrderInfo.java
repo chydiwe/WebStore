@@ -14,13 +14,11 @@ public class OrderInfo {
     @Getter
     @Setter
     @Column(name = "order_id")
-    private int id;
+    private int orderId;
 
     @Getter
     @Setter
-    @OneToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    private int productId;
 
     @Getter
     @Setter

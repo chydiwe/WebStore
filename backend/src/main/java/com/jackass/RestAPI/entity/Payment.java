@@ -21,11 +21,6 @@ public class Payment implements Serializable {
     @Getter
     @Setter
     @Column(name = "payment_name")
-    @Enumerated(EnumType.STRING)
-    private PaymentType name;
-
-    private enum PaymentType {
-        CASH
-    }
+    private String name;
 
 }

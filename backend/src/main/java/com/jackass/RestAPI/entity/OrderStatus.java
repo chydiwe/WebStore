@@ -21,11 +21,6 @@ public class OrderStatus implements Serializable {
     @Getter
     @Setter
     @Column(name = "order_status_name")
-    @Enumerated(EnumType.STRING)
-    private OrderStatusType name;
-
-    private enum OrderStatusType {
-        IN_PROGRESS
-    }
+    private String name;
 
 }

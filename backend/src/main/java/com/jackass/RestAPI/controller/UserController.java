@@ -78,7 +78,7 @@ public class UserController {
 
     @RequestMapping(value = "/bucket", method = RequestMethod.GET, params = "id")
     public ResponseEntity<?> getBucket(@RequestParam int id) {
-        User user = userRepository.getUserByUserId(id);
+        User user = userRepository.getUserById(id);
 
         if (user == null) {
             throw new NotFoundException("Wrong user ID.");

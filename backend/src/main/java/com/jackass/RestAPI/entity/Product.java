@@ -29,14 +29,12 @@ public class Product implements Serializable {
     @Setter
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Category category;
 
     @Getter
     @Setter
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manufacturer_id")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Manufacturer manufacturer;
 
     @Getter
@@ -63,6 +61,7 @@ public class Product implements Serializable {
 
     @Getter
     @Setter
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private List<ProductImage> images = new ArrayList<>();
 

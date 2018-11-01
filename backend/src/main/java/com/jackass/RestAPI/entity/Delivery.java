@@ -21,13 +21,6 @@ public class Delivery implements Serializable {
     @Getter
     @Setter
     @Column(name = "delivery_name")
-    @Enumerated(EnumType.STRING)
-    private DeliveryType name;
-
-    private enum DeliveryType {
-
-        SELF_DELIVERY
-
-    }
+    private String name;
 
 }

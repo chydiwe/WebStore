@@ -30,19 +30,19 @@ public class ProductController {
                             @RequestParam int cost,
                             @RequestParam int quantity) {
 
-        Product product = productRepository.getProductByProductName(name);
+        Product product = productRepository.getProductByName(name);
 
         if (product != null ) {
             throw new AlreadyExistsException("Product with such name already exists.");
         }
 
-        Category categoryObj = categoryRepository.getCategoryByCategoryId(category);
+        Category categoryObj = categoryRepository.getCategoryById(category);
 
         if (categoryObj == null) {
             throw new NotFoundException("Category with such id does not exists.");
         }
 
-        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerByManufacturerId(manufacturer);
+        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturer);
 
         if (manufacturerObj == null) {
             throw new NotFoundException("Manufacturer with such id does not exists.");
@@ -60,11 +60,22 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "id")
-    public ResponseEntity<Product> getProduct(@RequestParam int id) {
-        Product product = productRepository.getProductByProductId(id);
+    public ResponseEntity<Product> getProductById(@RequestParam int id) {
+        Product product = productRepository.getProductById(id);
 
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");
+        }
+
+        return ResponseEntity.ok().body(product);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = "name")
+    public ResponseEntity<Product> getProductByName(@RequestParam String name) {
+        Product product = productRepository.getProductByName(name);
+
+        if (product == null) {
+            throw new NotFoundException("Wrong product name.");
         }
 
         return ResponseEntity.ok().body(product);

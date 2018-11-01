@@ -6,7 +6,7 @@ import org.springframework.data.repository.RepositoryDefinition;
 @RepositoryDefinition(domainClass = Category.class, idClass = Integer.class)
 public interface CategoryRepository {
 
-    Category getCategoryByCategoryId(int id);
+    Category getCategoryById(int id);
 
     Category save(Category category);
 

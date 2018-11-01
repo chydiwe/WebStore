@@ -45,6 +45,7 @@ public class Order implements Serializable {
     @OneToOne
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
+
     @Getter
     @Setter
     @OneToOne
