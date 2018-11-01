@@ -19,28 +19,36 @@ public class Product implements Serializable {
     @Setter
     @Column(name = "product_id")
     private int id;
+
     @Getter
     @Setter
     @Column(name = "product_name")
     private String name;
+
     @Getter
     @Setter
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Category category;
+
     @Getter
     @Setter
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manufacturer_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Manufacturer manufacturer;
+
     @Getter
     @Setter
     @Column(name = "short_info")
     private String shortInfo;
+
     @Getter
     @Setter
     @Column(name = "cost")
     private int cost;
+
     @Getter
     @Setter
     @Column(name = "quantity")
@@ -55,9 +63,7 @@ public class Product implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ProductImage> images = new ArrayList<>();
 
 }
