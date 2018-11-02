@@ -7,7 +7,6 @@ import org.springframework.data.repository.RepositoryDefinition;
 
 import java.util.List;
 
-@RepositoryDefinition(domainClass = Product.class, idClass = Integer.class)
 public interface ProductRepository {
 
     Product getProductById(int id);

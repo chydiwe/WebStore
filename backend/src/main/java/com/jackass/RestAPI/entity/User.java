@@ -50,7 +50,7 @@ public class User implements Serializable {
     @Setter(onMethod_=@JsonIgnore)
     @OneToOne
     @JoinColumn(name = "user_group")
-    private GroupTable group;
+    private Group group;
 
     @Getter
     @Setter

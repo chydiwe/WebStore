@@ -7,6 +7,7 @@ import com.jackass.RestAPI.entity.Product;
 import com.jackass.RestAPI.exception.AlreadyExistsException;
 import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.mail.MailManager;
+import com.jackass.RestAPI.mail.production.ProductionMailManager;
 import com.jackass.RestAPI.repository.BucketRepository;
 import com.jackass.RestAPI.repository.ConfirmationTokenRepository;
 import com.jackass.RestAPI.repository.ProductRepository;
