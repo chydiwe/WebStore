@@ -80,7 +80,7 @@ public class Order implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name = "order_id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<OrderInfo> products = new ArrayList<>();

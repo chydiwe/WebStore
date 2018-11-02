@@ -5,22 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
-@Table(name = "group_table")
+@Table(name = "sub_category")
 @Entity
-public class GroupTable implements Serializable {
+public class SubCategory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter(onMethod_=@JsonIgnore)
-    @Column(name = "user_group")
-    private int id;
+    @Column(name = "category_id")
+    private int categoryId;
 
     @Getter
     @Setter
-    @Column(name = "group_name")
+    @Column(name = "sub_category_name")
     private String name;
 
 }

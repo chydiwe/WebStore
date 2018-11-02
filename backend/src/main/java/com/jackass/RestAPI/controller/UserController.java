@@ -3,16 +3,20 @@ package com.jackass.RestAPI.controller;
 import com.jackass.RestAPI.entity.Bucket;
 import com.jackass.RestAPI.entity.ConfirmationToken;
 import com.jackass.RestAPI.entity.User;
+import com.jackass.RestAPI.entity.Product;
 import com.jackass.RestAPI.exception.AlreadyExistsException;
 import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.mail.MailManager;
 import com.jackass.RestAPI.repository.BucketRepository;
 import com.jackass.RestAPI.repository.ConfirmationTokenRepository;
+import com.jackass.RestAPI.repository.ProductRepository;
 import com.jackass.RestAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -28,6 +32,8 @@ public class UserController {
     private ConfirmationTokenRepository tokenRepository;
     @Autowired
     private BucketRepository bucketRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     @RequestMapping(method = RequestMethod.POST)
     public void register(@RequestParam String email,
@@ -89,16 +95,25 @@ public class UserController {
 
     @RequestMapping(value = "/bucket", method = RequestMethod.POST)
     public void addToBucket(@RequestParam int userId,
-                            @RequestParam int productId,
+                            @RequestParam String productName,
                             @RequestParam int amount) {
-        Bucket bucket = bucketRepository.getBucketByUserIdAndProductId(userId, productId);
+        Bucket bucket = bucketRepository.getBucketByUserId(userId);
 
         if (bucket == null) {
             bucket = new Bucket();
 
+            Product product = productRepository.getProductByName(productName);
+
+            if (product == null) {
+                throw new NotFoundException("Wrong product name.");
+            }
+
             bucket.setUserId(userId);
-            bucket.setProductId(productId);
             bucket.setAmount(amount);
+
+            List<Product> products = new ArrayList<>();
+            products.add(product);
+            bucket.setProducts(products);
 
             bucketRepository.save(bucket);
         } else {

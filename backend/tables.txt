@@ -10,8 +10,15 @@ CREATE TABLE IF NOT EXISTS group_table (
 
 CREATE TABLE IF NOT EXISTS category (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
-    category_name VARCHAR(36) NOT NULL,
-    sub_category VARCHAR(36)
+    category_name VARCHAR(36) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS sub_category (
+    category_id INT,
+    sub_category_name VARCHAR(36) NOT NULL,
+    FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS manufacturer (
@@ -156,11 +163,16 @@ CREATE TABLE IF NOT EXISTS confirmation_token (
             ON DELETE CASCADE
 );
 
-INSERT INTO group_table VALUES(NULL, 'Admin');
-INSERT INTO category VALUES(NULL, 'Writing tools', NULL);
-INSERT INTO manufacturer VALUES(NULL, 'RusTools', NULL, NULL);
+INSERT INTO group_table VALUES(NULL, 'Admin'), (NULL, 'Manager'), (NULL, 'User');
+INSERT INTO category VALUES(NULL, 'Writing tools'), (NULL, 'Paper'), (NULL, 'Books');
+INSERT INTO sub_category VALUES(1, 'Pens'), (1, 'Pensils'), (2, 'A4'), (2, 'A5'), (3, 'Learning'), (3, 'Entertaining');
+INSERT INTO manufacturer VALUES(NULL, 'RusTools', NULL, NULL), (NULL, 'EngTools', NULL, NULL);
 INSERT INTO user VALUES(NULL, 'admin@mail.ru', 'qwerty', 1, 'admin', 'admin', NULL, NULL);
-INSERT INTO user VALUES(NULL, 'admin2@mail.ru', 'qwerty', 1, 'admin', 'admin', NULL, NULL);
-INSERT INTO product VALUES(NULL, 'Pen', 1, 1, NULL, 50, 10);
-INSERT INTO bucket VALUES(1, 1, 2);
-INSERT INTO bucket VALUES(2, 1, 2);
+INSERT INTO user VALUES(NULL, 'manager@mail.ru', 'qwerty', 2, 'manager', 'manager', NULL, NULL);
+INSERT INTO user VALUES(NULL, 'user@mail.ru', 'qwerty', 3, 'user', 'user', NULL, NULL);
+INSERT INTO product VALUES(NULL, 'Good Pen', 1, 1, NULL, 1, 2);
+INSERT INTO product VALUES(NULL, 'Good Pensil', 1, 2, NULL, 3, 4);
+INSERT INTO product VALUES(NULL, 'Nice A4', 2, 1, NULL, 5, 6);
+INSERT INTO product VALUES(NULL, 'Nice A5', 2, 2, NULL, 7, 8);
+INSERT INTO product VALUES(NULL, 'Tight Book', 3, 1, NULL, 9, 10);
+INSERT INTO product VALUES(NULL, 'Big Book', 3, 2, NULL, 11, 12);

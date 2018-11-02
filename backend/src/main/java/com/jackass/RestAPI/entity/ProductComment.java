@@ -13,12 +13,12 @@ import java.time.LocalDate;
 @Entity
 public class ProductComment {
 
-    @Id
     @Getter
     @Setter
     @Column(name = "user_id")
     private int userId;
 
+    @Id
     @Getter
     @Setter
     @Column(name = "product_id")

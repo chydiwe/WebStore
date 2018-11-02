@@ -6,7 +6,7 @@ import org.springframework.data.repository.RepositoryDefinition;
 @RepositoryDefinition(domainClass = Manufacturer.class, idClass = Integer.class)
 public interface ManufacturerRepository {
 
-    Manufacturer getManufacturerById(int id);
+    Manufacturer getManufacturerByName(String name);
 
     Manufacturer save(Manufacturer manufacturer);
 

@@ -1,6 +1,8 @@
 package com.jackass.RestAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,13 +29,13 @@ public class Product implements Serializable {
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
@@ -54,14 +56,14 @@ public class Product implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name = "product_id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ProductComment> comments = new ArrayList<>();
 
     @Getter
     @Setter
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name = "product_id")
     private List<ProductImage> images = new ArrayList<>();
 

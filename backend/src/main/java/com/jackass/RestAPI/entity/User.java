@@ -59,7 +59,7 @@ public class User implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name = "user_id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Bucket> products = new ArrayList<>();

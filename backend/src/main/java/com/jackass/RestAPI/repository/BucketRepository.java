@@ -6,7 +6,7 @@ import org.springframework.data.repository.RepositoryDefinition;
 @RepositoryDefinition(domainClass = Bucket.class, idClass = Integer.class)
 public interface BucketRepository {
 
-    Bucket getBucketByUserIdAndProductId(int userId, int productId);
+    Bucket getBucketByUserId(int userId);
 
     void delete(Bucket bucket);
 
