@@ -23,10 +23,10 @@ Base url for all api requests: ~/api/ .
             "patronymic": "admin"
         }
     ```
-    If such user does not exits then you will get response with status 404 (NOT FOUND).
+    If such user does not exist then you will get response with status 404 (NOT FOUND).
 
 
-* PUT /users
+* POST /users
 
     Params:
         ```
@@ -37,9 +37,9 @@ Base url for all api requests: ~/api/ .
             patronymic
         ```
         
-    If such user already exits then you will get response with status 409 (CONFLICT).
+    If such user already exist then you will get response with status 409 (CONFLICT).
 
-* PUT /users
+* POST /users
 
     Params:
         ```
@@ -54,13 +54,12 @@ Base url for all api requests: ~/api/ .
         ```
             name,
             category,
-            subCategory,
-            manufacture,
+            manufacturer,
             cost,
             quantity
         ```
 
-    If such user does not exits then you will get response with status 404 (NOT FOUND).
+    If such category and\or manufacturer does not exist then you will get response with status 404 (NOT FOUND).
 
 * GET /products
 
@@ -107,7 +106,7 @@ Base url for all api requests: ~/api/ .
                          
             }
     ```
-    If such user does not exits then you will get response with status 404 (NOT FOUND).
+    If such product does not exist then you will get response with status 404 (NOT FOUND).
     
 * GET /products
 
@@ -138,7 +137,7 @@ Base url for all api requests: ~/api/ .
             }
         }
     ```
-    If such user does not exits then you will get response with status 404 (NOT FOUND).
+    If one or all of optional parameters do not exit then you will get response with status 404 (NOT FOUND).
     
 ## Orders
 
@@ -250,24 +249,10 @@ Base url for all api requests: ~/api/ .
                                              "cost": "10",
                                              "quantity": "5000"
                                            },
-                                           {
-                                             "id": "2",
-                                             "name": "Good pen",
-                                             "shortInfo": "Pen for writing.",
-                                             "cost": "20",
-                                             "quantity": "3000"
-                                            },
-                                "amount": "200"
+                                           "amount": "100"
                               },
                               {
-                                "product":
-                                          {
-                                             "id": "2",
-                                             "name": "Simple pen",
-                                             "shortInfo": "Pen for writing.",
-                                             "cost": "10",
-                                             "quantity": "5000"
-                                           },
+                                "product":                                 
                                            {
                                              "id": "2",
                                              "name": "Good pen",
@@ -275,7 +260,7 @@ Base url for all api requests: ~/api/ .
                                              "cost": "20",
                                              "quantity": "3000"
                                             },
-                                "amount": "200"
+                                            "amount": "200"
                               }
                         }
         }
