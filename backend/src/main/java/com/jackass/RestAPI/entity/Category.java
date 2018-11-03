@@ -1,12 +1,12 @@
 package com.jackass.RestAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "category")
@@ -16,7 +16,7 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    @Setter
+    @Setter(onMethod_=@JsonIgnore)
     @Column(name = "category_id")
     private int id;
 
@@ -29,6 +29,7 @@ public class Category implements Serializable {
     @Setter
     @OneToMany
     @JoinColumn(name = "category_id")
-    private List<SubCategory> subCategories = new ArrayList<>();
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<SubCategory> subCategories;
 
 }
