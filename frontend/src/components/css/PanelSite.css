@@ -85,7 +85,7 @@
 .MainBody {
     display: flex;
     align-items: stretch;
-    height: 50vh;
+    height: 100%; /* 50vh */
 }
 .logo{
     width: 2em;
