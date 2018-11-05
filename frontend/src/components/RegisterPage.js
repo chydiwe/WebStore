@@ -35,10 +35,7 @@ class Register extends Component {
     }
 
     submitInf() {
-        const url = `email=${this.state.email}&password=${this.state.pass}&name=${this.state.name}&surname=${this.state.surname}&patronymic=${this.state.patronymic}${(this.state.phoneNumber !== '') ? `&phonenumber=${this.state.phoneNumber}` : ''}` //
-
-
-
+        const url = `email=${this.state.email}&password=${this.state.pass}&name=${this.state.name}&surname=${this.state.surname}&patronymic=${this.state.patronymic}${(this.state.phoneNumber !== '') ? `&phonenumber=${this.state.phoneNumber}` : ''}`;
 
         this.state.formValid ?  this.props.regUser(url) :
             console.log("Some field have bad value!")
