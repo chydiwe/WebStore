@@ -23,6 +23,7 @@ footer h5{
     font-size: 1.1em;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
+    color: var(--font-color, #4a4a4a);
 }
 
 footer table ul{
@@ -31,13 +32,13 @@ footer table ul{
 }
 
 footer table a {
-    color: #4a4a4a;
+    color: var(--font-color, #4a4a4a);
     line-height: 1.5em;
     outline: none;
     text-decoration: none;
 }
 
 footer table a:hover {
-    color: #d63465;
+    color: var(--link-hover-color, #d63465);
     text-decoration: underline;
 }
