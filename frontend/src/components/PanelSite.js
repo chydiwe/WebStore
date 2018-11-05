@@ -100,9 +100,8 @@ class PanelSite extends React.Component {
                     </div>
                     <div className="trash"><img src={trashIcon} alt=""/><p>Корзина</p></div>
                 </div>
-
-
-            </div>)
+            </div>
+        )
     }
 }
 

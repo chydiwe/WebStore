@@ -7,7 +7,7 @@ import {history, store} from './store/configureStore'
 import {Route, Switch} from 'react-router-dom'
 import {ConnectedRouter,} from 'react-router-redux'
 import ConfirmMail from "./containers/confirmMail";
-import Register from "./components/registerForm";
+import Register from "./components/RegisterPage";
 import PanelSite from "./components/PanelSite";
 import adminPanel from "./components/AdminPanel"
 class Pages extends React.Component {

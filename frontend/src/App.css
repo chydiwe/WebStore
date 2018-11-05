@@ -1,6 +1,7 @@
 /*  fonts  */
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-/* */
+
+/* Common styles */
 body {
     font-family: 'Roboto', sans-serif;
     background: rgba(230, 230, 230, 0.48);
@@ -10,9 +11,7 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
-
 }
-
 
 /*Main Page*/
 .errorMessage {
@@ -27,12 +26,9 @@ body {
     width: 100%;
     align-items: flex-start;
     margin-top: 2%;
-    padding: 5% 5% 0 5%;
 }
 
-.item_catalog {
-
-}
+.item_catalog {}
 
 .item_add {
     font-size: 1vw;
@@ -56,7 +52,6 @@ body {
     align-items: center;
     width: 20vw;
     margin: 1%;
-
 }
 
 .item_name {
@@ -73,15 +68,12 @@ body {
     font-size: 1vw;
 }
 
-.item_discr {
-
-}
+.item_discr {}
 
 .MainContent {
-
-    margin-top: 1%;
+    margin: 5% auto;
     width: 90vw;
-    align-items: center;
+    /*align-items: center;*/
 }
 
 li {
@@ -101,7 +93,7 @@ li {
     }
 }
 
-/*  Styles for registerForm.js  */
+/*  Styles for RegisterPage.js  */
 .registrationForm {
     width: 60%;
     margin: 0 auto;
@@ -134,7 +126,6 @@ li {
 .registrationForm input[type="text"],
 .registrationForm input[type="password"],
 .registrationForm input[type="email"] {
-
     padding: 5px 10px;
     font-size: 1.2em;
     color: darkslateblue;

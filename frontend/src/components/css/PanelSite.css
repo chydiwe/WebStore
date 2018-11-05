@@ -73,7 +73,6 @@
     position: fixed;
 }
 
-
 .burgerMenu {
     width: 10%;
 }
@@ -81,7 +80,6 @@
 .burgerMenu img {
     width: 64px;
     height: 64px;
-
 }
 
 .MainBody {
@@ -146,7 +144,7 @@
 }
 .searchMenu input {
     width: 65%;
-    height: 50%;
+    height: 2em;
     outline: none;
     border-radius: 20px 0 0 20px;
     border: none;
@@ -154,7 +152,7 @@
 }
 
 .searchMenu button {
-    height: 50%;
+    height: 2em;
     border: none;
     border-radius: 0 20px 20px 0;
     background: white;
