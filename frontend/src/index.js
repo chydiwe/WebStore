@@ -14,14 +14,16 @@ import FooterSite from "./components/FooterSite";
 
 class Pages extends React.Component {
     render() {
-        return <header className="App-header">
-            <PanelSite/>
-            <Route exact path='/' component={Main}/>
-            <Route path='/confirming' component={ConfirmMail}/>
-            <Route path='/register' component={Register}/>
-            <Route path='/adminpanel' component={adminPanel}/>
-            <FooterSite/>
-        </header>
+        return(
+            <div className="App-header">
+                <PanelSite/>
+                <Route exact path='/' component={Main}/>
+                <Route path='/confirming' component={ConfirmMail}/>
+                <Route path='/register' component={Register}/>
+                <Route path='/adminpanel' component={adminPanel}/>
+                <FooterSite/>
+            </div>
+        )
     }
 }
 
