@@ -10,7 +10,7 @@ import "./css/PanelSite.css"
 import logo from './img/logo.png'
 
 function blurMain() {
-    let app = document.querySelector('.App')
+    let app = document.querySelector('.panelSite + div')
     if (app.classList.contains('AppBlur')) app.classList.remove('AppBlur')
     else app.classList.add('AppBlur')
 }
