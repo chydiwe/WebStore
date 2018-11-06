@@ -1,11 +1,14 @@
 package com.jackass.RestAPI.repository;
 
 import com.jackass.RestAPI.entity.Category;
-import org.springframework.data.repository.RepositoryDefinition;
+
+import java.util.Set;
 
 public interface CategoryRepository {
 
-    Category getCategoryByName(String name);
+    Category getCategoryById(int id);
+
+    Set<Category> findAll();
 
     Category save(Category category);
 

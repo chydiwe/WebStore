@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Table(name = "category")
 @Entity
@@ -30,6 +30,6 @@ public class Category implements Serializable {
     @OneToMany
     @JoinColumn(name = "category_id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<SubCategory> subCategories;
+    private Set<SubCategory> subCategories;
 
 }

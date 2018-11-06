@@ -3,11 +3,9 @@ package com.jackass.RestAPI.controller;
 import com.jackass.RestAPI.entity.Bucket;
 import com.jackass.RestAPI.entity.ConfirmationToken;
 import com.jackass.RestAPI.entity.User;
-import com.jackass.RestAPI.entity.Product;
 import com.jackass.RestAPI.exception.AlreadyExistsException;
 import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.mail.MailManager;
-import com.jackass.RestAPI.mail.production.ProductionMailManager;
 import com.jackass.RestAPI.repository.BucketRepository;
 import com.jackass.RestAPI.repository.ConfirmationTokenRepository;
 import com.jackass.RestAPI.repository.ProductRepository;
@@ -16,8 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -98,32 +95,8 @@ public class UserController {
     public void addToBucket(@RequestParam int userId,
                             @RequestParam String productName,
                             @RequestParam int amount) {
-        Bucket bucket = bucketRepository.getBucketByUserId(userId);
+        Set<Bucket> products = bucketRepository.findAllByUserId(userId);
 
-        if (bucket == null) {
-            bucket = new Bucket();
-
-            Product product = productRepository.getProductByName(productName);
-
-            if (product == null) {
-                throw new NotFoundException("Wrong product name.");
-            }
-
-            bucket.setUserId(userId);
-            bucket.setAmount(amount);
-
-            List<Product> products = new ArrayList<>();
-            products.add(product);
-            bucket.setProducts(products);
-
-            bucketRepository.save(bucket);
-        } else {
-            bucketRepository.delete(bucket);
-
-            bucket.setAmount(bucket.getAmount() + amount);
-
-            bucketRepository.save(bucket);
-        }
     }
 
 }

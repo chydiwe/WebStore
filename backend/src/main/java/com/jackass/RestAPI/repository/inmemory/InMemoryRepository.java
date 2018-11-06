@@ -11,6 +11,7 @@ import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -19,10 +20,10 @@ public abstract class InMemoryRepository<T> {
     private static Map<Class, List> database = new ConcurrentHashMap<>();
 
     protected int id = 0;
-    protected List<T> table;
+    protected Set<T> table;
 
     public InMemoryRepository() {
-        this.table = (List<T>) Proxy.newProxyInstance(this.getClass().getClassLoader(),
+        this.table = (Set<T>) Proxy.newProxyInstance(this.getClass().getClassLoader(),
                 new Class[]{Table.class}, new TableInvocationHandler(new InMemoryTable<T>()));
     }
 

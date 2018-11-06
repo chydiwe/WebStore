@@ -7,10 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table(name = "product_image")
 @Entity
-public class ProductImage {
+public class ProductImage implements Serializable {
 
     @Id
     @Getter
@@ -18,6 +19,7 @@ public class ProductImage {
     @Column(name = "product_id")
     private int productId;
 
+    @Id
     @Getter
     @Setter
     @Column(name = "product_image")

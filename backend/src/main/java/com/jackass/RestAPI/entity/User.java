@@ -7,8 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Table(name = "user")
 @Entity
@@ -62,6 +61,6 @@ public class User implements Serializable {
     @OneToMany
     @JoinColumn(name = "user_id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Bucket> products = new ArrayList<>();
+    private Set<Bucket> products;
 
 }

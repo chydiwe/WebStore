@@ -1,15 +1,13 @@
 package com.jackass.RestAPI.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Table(name = "order_table")
 @Entity
@@ -82,6 +80,6 @@ public class Order implements Serializable {
     @Setter
     @OneToMany
     @JoinColumn(name = "order_id")
-    private List<OrderInfo> products = new ArrayList<>();
+    private Set<OrderInfo> products;
 
 }

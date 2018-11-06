@@ -1,11 +1,12 @@
 package com.jackass.RestAPI.repository;
 
 import com.jackass.RestAPI.entity.Bucket;
-import org.springframework.data.repository.RepositoryDefinition;
+
+import java.util.Set;
 
 public interface BucketRepository {
 
-    Bucket getBucketByUserId(int userId);
+    Set<Bucket> findAllByUserId(int userId);
 
     void delete(Bucket bucket);
 

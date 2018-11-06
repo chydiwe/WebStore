@@ -1,7 +1,6 @@
 package com.jackass.RestAPI.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -64,6 +63,7 @@ public class Product implements Serializable {
     @Setter
     @OneToMany
     @JoinColumn(name = "product_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ProductImage> images = new ArrayList<>();
 
 }

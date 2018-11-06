@@ -33,8 +33,7 @@ public class InMemoryUserRepository extends InMemoryRepository<User> implements 
     }
 
     @Override
-    public User delete(User user) {
+    public void delete(User user) {
         table.remove(user);
-        return user;
     }
 }

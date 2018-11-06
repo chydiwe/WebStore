@@ -1,14 +1,17 @@
 package com.jackass.RestAPI.repository;
 
 import com.jackass.RestAPI.entity.Manufacturer;
-import org.springframework.data.repository.RepositoryDefinition;
+
+import java.util.Set;
 
 public interface ManufacturerRepository {
 
-    Manufacturer getManufacturerByName(String name);
+    Manufacturer getManufacturerById(int id);
+
+    Set<Manufacturer> findAll();
 
     Manufacturer save(Manufacturer manufacturer);
 
-    Manufacturer delete(Manufacturer manufacturer);
+    void delete(Manufacturer manufacturer);
 
 }

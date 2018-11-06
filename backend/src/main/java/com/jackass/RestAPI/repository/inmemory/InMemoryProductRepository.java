@@ -8,7 +8,7 @@ import com.jackass.RestAPI.repository.ProductRepository;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -26,13 +26,13 @@ public class InMemoryProductRepository extends InMemoryRepository<Product> imple
     }
 
     @Override
-    public List<Product> findAllByCategory(Category category) {
-        return table.stream().filter(product -> product.getCategory().equals(category)).collect(Collectors.toList());
+    public Set<Product> findAllByCategory(Category category) {
+        return table.stream().filter(product -> product.getCategory().equals(category)).collect(Collectors.toSet());
     }
 
     @Override
-    public List<Product> findAllByManufacturer(Manufacturer manufacturer) {
-        return table.stream().filter(product -> product.getManufacturer().equals(manufacturer)).collect(Collectors.toList());
+    public Set<Product> findAllByManufacturer(Manufacturer manufacturer) {
+        return table.stream().filter(product -> product.getManufacturer().equals(manufacturer)).collect(Collectors.toSet());
     }
 
     @Override
@@ -43,8 +43,7 @@ public class InMemoryProductRepository extends InMemoryRepository<Product> imple
     }
 
     @Override
-    public Product delete(Product product) {
+    public void delete(Product product) {
         table.remove(product);
-        return product;
     }
 }

@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/products")
@@ -28,8 +27,8 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void addProduct (@RequestParam String name,
-                            @RequestParam String category,
-                            @RequestParam String manufacturer,
+                            @RequestParam int category,
+                            @RequestParam int manufacturer,
                             @RequestParam int cost,
                             @RequestParam int quantity) {
 
@@ -39,13 +38,13 @@ public class ProductController {
             throw new AlreadyExistsException("Product with such name already exists.");
         }
 
-        Category categoryObj = categoryRepository.getCategoryByName(category);
+        Category categoryObj = categoryRepository.getCategoryById(category);
 
         if (categoryObj == null) {
             throw new NotFoundException("Category with such id does not exists.");
         }
 
-        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerByName(manufacturer);
+        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturer);
 
         if (manufacturerObj == null) {
             throw new NotFoundException("Manufacturer with such id does not exists.");
@@ -85,27 +84,27 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "category")
-    public ResponseEntity<List<Product>> getProductByCategory(@RequestParam String category) {
-        Category categoryObj = categoryRepository.getCategoryByName(category);
+    public ResponseEntity<Set<Product>> getProductByCategory(@RequestParam int category) {
+        Category categoryObj = categoryRepository.getCategoryById(category);
 
         if (categoryObj == null) {
-            throw new NotFoundException("Wrong category name.");
+            throw new NotFoundException("Wrong category.");
         }
 
-        List<Product> products = productRepository.findAllByCategory(categoryObj);
+        Set<Product> products = productRepository.findAllByCategory(categoryObj);
 
         return ResponseEntity.ok().body(products);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "manufacturer")
-    public ResponseEntity<List<Product>> getProductByManufacturer(@RequestParam String manufacturer) {
-        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerByName(manufacturer);
+    public ResponseEntity<Set<Product>> getProductByManufacturer(@RequestParam int manufacturer) {
+        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturer);
 
         if (manufacturerObj == null) {
-            throw new NotFoundException("Wrong manufacturer name.");
+            throw new NotFoundException("Wrong manufacturer.");
         }
 
-        List<Product> products = productRepository.findAllByManufacturer(manufacturerObj);
+        Set<Product> products = productRepository.findAllByManufacturer(manufacturerObj);
 
         return ResponseEntity.ok().body(products);
     }

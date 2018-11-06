@@ -1,7 +1,6 @@
 package com.jackass.RestAPI.repository;
 
 import com.jackass.RestAPI.entity.User;
-import org.springframework.data.repository.RepositoryDefinition;
 
 public interface UserRepository {
 
@@ -13,6 +12,6 @@ public interface UserRepository {
 
     User save(User user);
 
-    User delete(User user);
+    void delete(User user);
 
 }

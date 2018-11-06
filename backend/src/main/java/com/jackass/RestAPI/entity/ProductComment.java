@@ -7,12 +7,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Table(name = "product_comment")
 @Entity
-public class ProductComment {
+public class ProductComment implements Serializable {
 
+    @Id
     @Getter
     @Setter
     @Column(name = "user_id")

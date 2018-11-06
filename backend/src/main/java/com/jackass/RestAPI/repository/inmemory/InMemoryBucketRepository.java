@@ -6,12 +6,15 @@ import com.jackass.RestAPI.repository.BucketRepository;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 @Conditional(ConditionsConfig.InMemoryCondition.class)
 public class InMemoryBucketRepository extends InMemoryRepository<Bucket> implements BucketRepository {
     @Override
-    public Bucket getBucketByUserId(int userId) {
-        return table.stream().filter(bucket -> bucket.getUserId() == id).findFirst().orElse(null);
+    public Set<Bucket> findAllByUserId(int userId) {
+        return table.stream().filter(bucket -> bucket.getUserId() == userId).collect(Collectors.toSet());
     }
 
     @Override

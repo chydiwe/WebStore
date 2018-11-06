@@ -6,13 +6,20 @@ import com.jackass.RestAPI.repository.ManufacturerRepository;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 @Conditional(ConditionsConfig.InMemoryCondition.class)
 public class InMemoryManufacturerRepository extends InMemoryRepository<Manufacturer> implements ManufacturerRepository {
 
     @Override
-    public Manufacturer getManufacturerByName(String name) {
-        return table.stream().filter(manufacturer -> manufacturer.getName().equals(name)).findFirst().orElse(null);
+    public Manufacturer getManufacturerById(int id) {
+        return table.stream().filter(manufacturer -> manufacturer.getId() == id).findFirst().orElse(null);
+    }
+
+    @Override
+    public Set<Manufacturer> findAll() {
+        return null;
     }
 
     @Override
@@ -23,8 +30,7 @@ public class InMemoryManufacturerRepository extends InMemoryRepository<Manufactu
     }
 
     @Override
-    public Manufacturer delete(Manufacturer manufacturer) {
+    public void delete(Manufacturer manufacturer) {
         table.remove(manufacturer);
-        return manufacturer;
     }
 }
