@@ -1,10 +1,12 @@
 package com.jackass.RestAPI.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Table(name = "sub_category")
@@ -13,7 +15,7 @@ public class SubCategory implements Serializable{
 
     @Id
     @Getter
-    @Setter(onMethod_=@JsonIgnore)
+    @Setter
     @Column(name = "category_id")
     private int categoryId;
 

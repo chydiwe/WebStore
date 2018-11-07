@@ -1,6 +1,5 @@
 package com.jackass.RestAPI.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,7 @@ public class Delivery implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    @Setter(onMethod_=@JsonIgnore)
+    @Setter
     @Column(name = "delivery_id")
     private int id;
 

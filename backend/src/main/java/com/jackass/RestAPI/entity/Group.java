@@ -1,6 +1,5 @@
 package com.jackass.RestAPI.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,7 @@ public class Group implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    @Setter(onMethod_=@JsonIgnore)
+    @Setter
     @Column(name = "user_group")
     private int id;
 

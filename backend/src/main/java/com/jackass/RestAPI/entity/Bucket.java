@@ -20,7 +20,7 @@ public class Bucket {
     @Setter
     @OneToOne
     @JoinColumn(name = "product_id")
-    private Product products;
+    private Product product;
 
     @Getter
     @Setter
