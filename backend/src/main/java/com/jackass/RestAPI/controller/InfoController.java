@@ -209,7 +209,18 @@ public class InfoController {
 
     @RequestMapping(value = "sub_category", method = RequestMethod.DELETE)
     public void deleteSubCategory(@RequestParam String name) {
-
+        Set<SubCategory> subCategories = subCategoryRepository.findAll();
+        SubCategory subCategory = null;
+        for (SubCategory sc : subCategories) {
+            if (sc.getName() == name) {
+                subCategory = sc;
+                break;
+            }
+        }
+        if (subCategory == null) {
+            throw new NotFoundException("Wrong subcategory name.");
+        }
+        subCategoryRepository.delete(subCategory);
     }
 
     @RequestMapping(value = "group", method = RequestMethod.DELETE)
