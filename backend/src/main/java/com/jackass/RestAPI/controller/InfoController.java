@@ -204,6 +204,10 @@ public class InfoController {
         if (category == null) {
             throw new NotFoundException("Wrong category ID.");
         }
+        Set<SubCategory> subCategories = subCategoryRepository.findAllByCategoryId(id);
+        for (SubCategory sc : subCategories) {
+            subCategoryRepository.delete(sc);
+        }
         categoryRepository.delete(category);
     }
 
