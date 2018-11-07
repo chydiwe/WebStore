@@ -265,3 +265,99 @@ Base url for all api requests: ~/api/ .
                         }
         }
     ```
+
+
+## All info tables /info
+
+* GET /category
+* GET /sub_category
+* GET /manufacturer
+* GET /payment
+* GET /delivery
+* GET /payment
+* GET /payment_status
+* GET /order_status
+
+Response body: list of items of that group
+
+* POST /category
+    params:
+    ```
+        name
+    ```
+* POST /sub_category
+    params:
+    ```
+        id
+        name
+    ```
+* POST /manufacturer
+    params:
+    ```
+        name
+    ```
+* POST /payment
+    params:
+    ```
+        name
+    ```
+* POST /delivery
+    params:
+    ```
+        name
+    ```
+* POST /category
+    params:
+    ```
+        name
+    ```
+* POST /category
+    params:
+    ```
+        name
+    ```
+* POST /category
+    params:
+    ```
+        name
+    ```
+* DELETE /category
+    params:
+    ```
+        id
+    ```
+* DELETE /sub_category
+    params:
+    ```
+        name
+    ```
+* DELETE /manufacturer
+    params:
+    ```
+        name
+    ```
+* DELETE /group
+    params:
+    ```
+        name
+    ```
+* DELETE /payment
+    params:
+    ```
+        name
+    ```
+* DELETE /payment_status
+    params:
+    ```
+        name
+    ```
+* DELETE /payment
+    params:
+    ```
+        name
+    ```
+* DELETE /order_status
+    params:
+    ```
+        name
+    ```
