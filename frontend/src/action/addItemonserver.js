@@ -7,10 +7,8 @@ export const POST_ADDITEM='POST_ADDITEM',
 export function addItemOnServer(item) {
     return dispatch => {
         dispatch({
-            type: POST_ADDITEM,
-            payload: 'LOADING'
-
-        });
+            type:POST_ADDITEM
+        })
         return fetch(`http://localhost:8080/api/products?${item}`, {method: 'POST'})
             .then(response => Promise.all([response,]))
             .then(([response, json]) => {
@@ -30,4 +28,5 @@ export function addItemOnServer(item) {
             })
     }
 }
+
 

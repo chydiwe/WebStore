@@ -63,11 +63,12 @@ body {
 .item_name {
     font-size: 1vw;
     height: 2vw;
+    margin: 0;
 }
 
 .item_img {
-    width: 5vw;
-    height: 5vw;
+    width: 8vw;
+    height: 8vw;
 }
 
 .item_price {

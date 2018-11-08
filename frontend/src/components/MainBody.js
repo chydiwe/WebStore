@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Catalog} from "../components/itemcatalog";
+import Catalog from "../components/itemcatalog";
 export class MainBody extends Component{
     render(){
         return(

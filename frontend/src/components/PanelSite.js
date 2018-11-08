@@ -54,17 +54,17 @@ class PanelSite extends React.Component {
         const {userLogout, user} = this.props;
         return (
             <div className='panelSite'>
-                <div className='nameFirm'><img className='logo' src={logo} alt=""/>MAGIC STATIOARY</div>
+                <div className='nameFirm'><img className='logo' src={logo} alt=""/>MAGIC STATIONARY</div>
                 <div className='category'
                      onClick={(node, classOn, classOff, isBlur) => this.sideMenu(this._categoryMenu, 'category_menuOn', 'category_menuOff', true)}>Категории
                     <div ref={(node) => this._categoryMenu = node} className='category_menuOff'>
-                        <ul>
-                            <li>Бумажная продукция</li>
-                            <li>Письменные принадлежности</li>
-                            <li>Офисные принадлежности</li>
-                            <li>Школьные принадлежности</li>
-                            <li>Подарочная упаковка</li>
-                        </ul>
+                        <div className='category'>
+                            <div>Бумажная продукция</div>
+                            <div>Письменные принадлежности</div>
+                            <div>Офисные принадлежности</div>
+                            <div>Школьные принадлежности</div>
+                            <div>Подарочная упаковка</div>
+                        </div>
                     </div></div>
                 <div className='searchMenu'><input type="text" placeholder='Найти'/>
                     <button><img src={iconFind} alt=""/></button>
@@ -108,7 +108,6 @@ class PanelSite extends React.Component {
 const mapStateToProps = store => {
     return {
         user: store.user,
-        catalog: store.catalog
     }
 };
 const mapDispatchToProps = dispatch => {
