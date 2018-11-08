@@ -1,6 +1,5 @@
 package com.jackass.RestAPI.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,7 +27,6 @@ public class Category implements Serializable {
     @Setter
     @OneToMany
     @JoinColumn(name = "category_id")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Set<SubCategory> subCategories;
 
 }

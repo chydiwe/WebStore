@@ -1,6 +1,7 @@
 package com.jackass.RestAPI.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ public class OrderInfo {
 
     @Id
     @Getter
-    @Setter
+    @Setter(onMethod_ = @JsonIgnore)
     @Column(name = "order_id")
     private int orderId;
 
