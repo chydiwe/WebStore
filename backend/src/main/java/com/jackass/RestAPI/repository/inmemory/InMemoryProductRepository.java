@@ -26,13 +26,18 @@ public class InMemoryProductRepository extends InMemoryRepository<Product> imple
     }
 
     @Override
-    public Set<Product> findAllByCategory(Category category) {
+    public Set<Product> findAllByCategory(Category category/*, Pageable pageable*/) {
         return table.stream().filter(product -> product.getCategory().equals(category)).collect(Collectors.toSet());
     }
 
     @Override
-    public Set<Product> findAllByManufacturer(Manufacturer manufacturer) {
+    public Set<Product> findAllByManufacturer(Manufacturer manufacturer/*, Pageable pageable*/) {
         return table.stream().filter(product -> product.getManufacturer().equals(manufacturer)).collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<Product> findAll(/*Pageable pageable*/) {
+        return table;
     }
 
     @Override

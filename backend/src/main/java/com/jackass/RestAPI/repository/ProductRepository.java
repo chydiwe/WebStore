@@ -12,9 +12,11 @@ public interface ProductRepository {
 
     Product getProductByName(String name);
 
-    Set<Product> findAllByCategory(Category category);
+    Set<Product> findAllByCategory(Category category/*, Pageable pageable*/);
 
-    Set<Product> findAllByManufacturer(Manufacturer manufacturer);
+    Set<Product> findAllByManufacturer(Manufacturer manufacturer/*, Pageable pageable*/);
+
+    Set<Product> findAll(/*Pageable pageable*/);
 
     Product save(Product product);
 

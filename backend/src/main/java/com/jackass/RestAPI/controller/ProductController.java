@@ -25,6 +25,8 @@ public class ProductController {
     @Autowired
     private ManufacturerRepository manufacturerRepository;
 
+    private static final int PAGE_SIZE = 20;
+
     @RequestMapping(method = RequestMethod.POST)
     public void addProduct (@RequestParam String name,
                             @RequestParam int category,
@@ -83,29 +85,39 @@ public class ProductController {
         return ResponseEntity.ok().body(product);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "category")
-    public ResponseEntity<Set<Product>> getProductByCategory(@RequestParam int category) {
+    @RequestMapping(value = "/page", method = RequestMethod.GET, params = "category")
+    public ResponseEntity<Set<Product>> getProductByCategory(@RequestParam int category,
+                                                             @RequestParam int num) {
         Category categoryObj = categoryRepository.getCategoryById(category);
 
         if (categoryObj == null) {
             throw new NotFoundException("Wrong category.");
         }
 
-        Set<Product> products = productRepository.findAllByCategory(categoryObj);
+        Set<Product> products = productRepository
+                .findAllByCategory(categoryObj/*, PageRequest.of(num-1, PAGE_SIZE)*/);
 
         return ResponseEntity.ok().body(products);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "manufacturer")
-    public ResponseEntity<Set<Product>> getProductByManufacturer(@RequestParam int manufacturer) {
+    @RequestMapping(value = "/page", method = RequestMethod.GET, params = "manufacturer")
+    public ResponseEntity<Set<Product>> getProductByManufacturer(@RequestParam int manufacturer,
+                                                                 @RequestParam int num) {
         Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturer);
 
         if (manufacturerObj == null) {
             throw new NotFoundException("Wrong manufacturer.");
         }
 
-        Set<Product> products = productRepository.findAllByManufacturer(manufacturerObj);
+        Set<Product> products = productRepository
+                .findAllByManufacturer(manufacturerObj/*, PageRequest.of(num-1, PAGE_SIZE)*/);
 
+        return ResponseEntity.ok().body(products);
+    }
+
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public ResponseEntity<Set<Product>> getPage(@RequestParam int num) {
+        Set<Product> products = productRepository.findAll(/*PageRequest.of(num-1, PAGE_SIZE)*/);
         return ResponseEntity.ok().body(products);
     }
 

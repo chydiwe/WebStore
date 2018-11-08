@@ -83,7 +83,7 @@ public class InfoController {
     public void addManufacturer(@RequestParam String name) {
         Set<Manufacturer> manufacturers = manufacturerRepository.findAll();
         for (Manufacturer m : manufacturers) {
-            if (m.getName() == name) {
+            if (m.getName().equals(name)) {
                 throw new AlreadyExistsException("Such manufacturer name already exists.");
             }
         }
@@ -96,7 +96,7 @@ public class InfoController {
     public void addCategory(@RequestParam String name) {
         Set<Category> categories = categoryRepository.findAll();
         for (Category c : categories) {
-            if (c.getName() == name) {
+            if (c.getName().equals(name)) {
                 throw new AlreadyExistsException("Such category name already exists.");
             }
         }
@@ -110,7 +110,7 @@ public class InfoController {
                                @RequestParam String name) {
         Set<SubCategory> subCategories = subCategoryRepository.findAll();
         for (SubCategory sc : subCategories) {
-            if (sc.getName() == name) {
+            if (sc.getName().equals(name)) {
                 throw new AlreadyExistsException("Such subcategory name already exists.");
             }
         }
@@ -128,7 +128,7 @@ public class InfoController {
     public void addGroup(@RequestParam String name) {
         Set<Group> groups = groupRepository.findAll();
         for (Group g : groups) {
-            if (g.getName() == name) {
+            if (g.getName().equals(name)) {
                 throw new AlreadyExistsException("Such group name already exists.");
             }
         }
@@ -141,7 +141,7 @@ public class InfoController {
     public void addDelivery(@RequestParam String name) {
         Set<Delivery> deliveries = deliveryRepository.findAll();
         for (Delivery d : deliveries) {
-            if (d.getName() == name) {
+            if (d.getName().equals(name)) {
                 throw new AlreadyExistsException("Such delivery name already exist.");
             }
         }
@@ -154,7 +154,7 @@ public class InfoController {
     public void addOrderStatus(@RequestParam String name) {
         Set<OrderStatus> statuses = orderStatusRepository.findAll();
         for (OrderStatus os : statuses) {
-            if (os.getName() == name) {
+            if (os.getName().equals(name)) {
                 throw new AlreadyExistsException("Such order status already exists.");
             }
         }
@@ -167,7 +167,7 @@ public class InfoController {
     public void addPayment(@RequestParam String name) {
         Set<Payment> payments = paymentRepository.findAll();
         for (Payment p : payments) {
-            if (p.getName() == name) {
+            if (p.getName().equals(name)) {
                 throw new AlreadyExistsException("Such payment name already exists.");
             }
         }
@@ -180,7 +180,7 @@ public class InfoController {
     public void addPaymentStatus(@RequestParam String name) {
         Set<PaymentStatus> statuses = paymentStatusRepository.findAll();
         for (PaymentStatus ps : statuses) {
-            if (ps.getStatus() == name) {
+            if (ps.getStatus().equals(name)) {
                 throw new AlreadyExistsException("Such payment status name already exists.");
             }
         }
@@ -216,7 +216,7 @@ public class InfoController {
         Set<SubCategory> subCategories = subCategoryRepository.findAll();
         SubCategory subCategory = null;
         for (SubCategory sc : subCategories) {
-            if (sc.getName() == name) {
+            if (sc.getName().equals(name)) {
                 subCategory = sc;
                 break;
             }
