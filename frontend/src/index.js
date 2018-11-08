@@ -11,12 +11,14 @@ import Register from "./components/RegisterPage";
 import PanelSite from "./components/PanelSite";
 import adminPanel from "./components/AdminPanel"
 import FooterSite from "./components/FooterSite";
+import OrderPage from "./components/OrderPage";
 
 class Pages extends React.Component {
     render() {
         return(
             <div className="App-header">
                 <PanelSite/>
+                <Route path='/order-page' component={OrderPage}/>
                 <Route exact path='/' component={Main}/>
                 <Route path='/confirming' component={ConfirmMail}/>
                 <Route path='/register' component={Register}/>
