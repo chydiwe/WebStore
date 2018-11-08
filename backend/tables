@@ -13,14 +13,6 @@ CREATE TABLE IF NOT EXISTS category (
     category_name VARCHAR(36) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS sub_category (
-    category_id INT,
-    sub_category_name VARCHAR(36) NOT NULL,
-    FOREIGN KEY (category_id)
-        REFERENCES category(category_id)
-        ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS manufacturer (
     manufacturer_id INT AUTO_INCREMENT PRIMARY KEY,
     manufacturer_name VARCHAR(36) NOT NULL,
@@ -46,7 +38,6 @@ CREATE TABLE IF NOT EXISTS product (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(255) NOT NULL,
     category_id INT,
-    sub_category_name VARCHAR(36),
     manufacturer_id INT,
     short_info VARCHAR(255),
     cost INT NOT NULL,
@@ -165,10 +156,10 @@ CREATE TABLE IF NOT EXISTS confirmation_token (
 );
 
 INSERT INTO group_table VALUES(NULL, 'Admin');
-INSERT INTO category VALUES(NULL, 'Writing tools');
-INSERT INTO manufacturer VALUES(NULL, 'RusTools', NULL, NULL);
+INSERT INTO category VALUES(NULL, 'Writing tools'), (NULL, 'Paper');
+INSERT INTO manufacturer VALUES(NULL, 'RusTools', NULL, NULL), (NULL, 'EngTools', NULL, NULL);
 INSERT INTO user VALUES(NULL, 'admin@mail.ru', 'qwerty', 1, 'admin', 'admin', NULL, NULL);
 INSERT INTO user VALUES(NULL, 'admin2@mail.ru', 'qwerty', 1, 'admin', 'admin', NULL, NULL);
-INSERT INTO product VALUES(NULL, 'Pen', 1, NULL, 1, NULL, 50, 10);
-INSERT INTO bucket VALUES(1, 1, 2);
-INSERT INTO bucket VALUES(2, 1, 2);
+INSERT INTO product VALUES(NULL, 'Pen', 1, 1, NULL, 50, 10), (NULL, 'A4', 2, 2, NULL, 100, 5);
+INSERT INTO bucket VALUES(1, 1, 10), (1, 2, 5);
+INSERT INTO bucket VALUES(2, 1, 20), (2, 2, 100);

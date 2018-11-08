@@ -5,14 +5,13 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-public class SubCategoryId implements Serializable {
+public class OrderInfoId implements Serializable {
 
     @Getter
     @Setter
-    private int categoryId;
+    private int orderId;
 
     @Getter
     @Setter
-    private String name;
-
+    private Product product;
 }

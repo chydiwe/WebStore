@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Table(name = "category")
 @Entity
@@ -22,11 +21,5 @@ public class Category implements Serializable {
     @Setter
     @Column(name = "category_name")
     private String name;
-
-    @Getter
-    @Setter
-    @OneToMany
-    @JoinColumn(name = "category_id")
-    private Set<SubCategory> subCategories;
 
 }

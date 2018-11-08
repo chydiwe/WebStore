@@ -20,6 +20,6 @@ public class PaymentStatus implements Serializable {
     @Getter
     @Setter
     @Column(name = "payment_status_name")
-    private String status;
+    private String name;
 
 }

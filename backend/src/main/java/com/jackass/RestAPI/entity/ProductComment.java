@@ -1,5 +1,6 @@
 package com.jackass.RestAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,7 @@ public class ProductComment implements Serializable {
     @Getter
     @Setter
     @Column(name = "product_id")
+    @JsonIgnore
     private int productId;
 
     @Getter

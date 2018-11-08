@@ -6,17 +6,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "order_info")
 @Entity
-public class OrderInfo {
+@IdClass(OrderInfoId.class)
+public class OrderInfo implements Serializable {
 
     @Id
     @Getter
-    @Setter(onMethod_ = @JsonIgnore)
+    @Setter
     @Column(name = "order_id")
+    @JsonIgnore
     private int orderId;
 
+    @Id
     @Getter
     @Setter
     @OneToOne

@@ -98,7 +98,14 @@ class PanelSite extends React.Component {
                         }
                         </div>
                     </div>
-                    <div className="trash"><img src={trashIcon} alt=""/><p>Корзина</p></div>
+
+                        <div className="trash">
+                            <Link to='/order-page'>
+                                <img src={trashIcon} alt=""/>
+                            </Link>
+                            <p>Корзина</p>
+                        </div>
+
                 </div>
             </div>
         )
