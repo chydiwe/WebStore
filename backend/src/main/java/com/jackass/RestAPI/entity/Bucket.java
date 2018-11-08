@@ -1,21 +1,26 @@
 package com.jackass.RestAPI.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "bucket")
 @Entity
-public class Bucket {
+@IdClass(BucketId.class)
+public class Bucket implements Serializable {
 
     @Id
     @Getter
     @Setter
     @Column(name = "user_id")
+    @JsonIgnore
     private int userId;
 
+    @Id
     @Getter
     @Setter
     @OneToOne

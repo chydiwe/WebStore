@@ -31,11 +31,6 @@ public class Product implements Serializable {
 
     @Getter
     @Setter
-    @Column(name = "sub_category_name")
-    private String subCategory;
-
-    @Getter
-    @Setter
     @OneToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;

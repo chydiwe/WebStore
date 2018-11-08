@@ -86,8 +86,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET, params = "category")
-    public ResponseEntity<Set<Product>> getProductByCategory(@RequestParam int category,
-                                                             @RequestParam int num) {
+    public ResponseEntity<Set<Product>> getProductByCategory(@RequestParam int category/*,
+                                                             @RequestParam int num*/) {
         Category categoryObj = categoryRepository.getCategoryById(category);
 
         if (categoryObj == null) {
@@ -101,8 +101,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET, params = "manufacturer")
-    public ResponseEntity<Set<Product>> getProductByManufacturer(@RequestParam int manufacturer,
-                                                                 @RequestParam int num) {
+    public ResponseEntity<Set<Product>> getProductByManufacturer(@RequestParam int manufacturer/*,
+                                                                 @RequestParam int num*/) {
         Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturer);
 
         if (manufacturerObj == null) {
@@ -116,7 +116,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public ResponseEntity<Set<Product>> getPage(@RequestParam int num) {
+    public ResponseEntity<Set<Product>> getPage(/*@RequestParam int num*/) {
         Set<Product> products = productRepository.findAll(/*PageRequest.of(num-1, PAGE_SIZE)*/);
         return ResponseEntity.ok().body(products);
     }

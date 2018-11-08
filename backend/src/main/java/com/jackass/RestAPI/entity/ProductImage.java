@@ -1,5 +1,6 @@
 package com.jackass.RestAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ public class ProductImage implements Serializable {
     @Getter
     @Setter
     @Column(name = "product_id")
+    @JsonIgnore
     private int productId;
 
     @Id
