@@ -53,8 +53,8 @@ Base url for all api requests: ~/api/ .
     Params:
         ```
             name,
-            category,
-            manufacturer,
+            categoryId,
+            manufacturerId,
             cost,
             quantity
         ```
@@ -267,97 +267,143 @@ Base url for all api requests: ~/api/ .
     ```
 
 
-## All info tables /info
+## Manufacturers
 
-* GET /category
-* GET /sub_category
-* GET /manufacturer
-* GET /payment
-* GET /delivery
-* GET /payment
-* GET /payment_status
-* GET /order_status
+* GET /products/manufacturers
 
-Response body: list of items of that group
+    Response body:
+    
+    ```
+    {
+        {
+            "id": "1",
+            "name": "H&M",
+            "logo": "https://google.com/images/123332",
+            "info": "Good company"
+        }, 
+        {
+            "id": "2",
+            "name": "K&L",
+            "logo": "https://google.com/images/123332",
+            "info": "Good company"
+        }
+    }
+    ```
+    
+     If such manufactury does not exist then you will get response with status 404 (NOT FOUND).
 
-* POST /category
-    params:
+* POST /products/manufacturers
+
+    Params:
+        ```
+            name, logo, info
+        ```
+    
+     If such manufactury does not exist then you will get response with status 32 (CONFLICT).
+ 
+* DELETE /products/manufacturers
+
+    Params:
+        ```
+            manufacturerId
+        ```
+    
+     If such manufactury does not exist then you will get response with status 404 (NOT FOUND).
+
+## Deliveries
+
+* GET /deliveries
+
+    Response body:
+    
     ```
-        name
+    {
+        {
+            "id": "1",
+            "name": "By own"
+        }, 
+        {
+            "id": "2",
+            "name": "With delivery"
+        }
+    }
     ```
-* POST /sub_category
-    params:
+    
+     If such delivry does not exist then you will get response with status 404 (NOT FOUND).
+
+* POST /deliveries
+
+    Params:
+        ```
+            name
+        ```
+    
+     If such delivery does not exist then you will get response with status 32 (CONFLICT).
+ 
+* DELETE /deliveries
+
+    Params:
+        ```
+            deliveryId
+        ```
+    
+     If such delivery does not exist then you will get response with status 404 (NOT FOUND).
+
+## Categories
+
+* GET /products/categories
+
+    Response body:
+    
     ```
-        id
-        name
+    {
+        {
+            "id": "1",
+            "name": "Office stuff",
+            "subCategories": {
+                                {
+                                    "categoryId": "1",
+                                    "name": "Pen"
+                                },
+                                {
+                                    "categoryId": "1",
+                                    "name": "Pencil"
+                                }                              
+                             }
+        }, 
+        {
+            "id": "2",
+            "name": "School stuff",
+            "subCategories": {
+                                {
+                                    "categoryId": "2",
+                                    "name": "Pen"
+                                },
+                                {
+                                    "categoryId": "2",
+                                    "name": "Pencil"
+                                }                              
+                             }
+        }
+    }
     ```
-* POST /manufacturer
-    params:
-    ```
-        name
-    ```
-* POST /payment
-    params:
-    ```
-        name
-    ```
-* POST /delivery
-    params:
-    ```
-        name
-    ```
-* POST /category
-    params:
-    ```
-        name
-    ```
-* POST /category
-    params:
-    ```
-        name
-    ```
-* POST /category
-    params:
-    ```
-        name
-    ```
-* DELETE /category
-    params:
-    ```
-        id
-    ```
-* DELETE /sub_category
-    params:
-    ```
-        name
-    ```
-* DELETE /manufacturer
-    params:
-    ```
-        name
-    ```
-* DELETE /group
-    params:
-    ```
-        name
-    ```
-* DELETE /payment
-    params:
-    ```
-        name
-    ```
-* DELETE /payment_status
-    params:
-    ```
-        name
-    ```
-* DELETE /payment
-    params:
-    ```
-        name
-    ```
-* DELETE /order_status
-    params:
-    ```
-        name
-    ```
+    
+     If such delivry does not exist then you will get response with status 404 (NOT FOUND).
+
+* POST /products/categories
+
+    Params:
+        ```
+            name
+        ```
+    
+     If such delivery does not exist then you will get response with status 32 (CONFLICT).
+ 
+* DELETE /products/categories
+
+    Params:
+        ```
+            categoryId
+        ```
+    
+     If such delivery does not exist then you will get response with status 404 (NOT FOUND).

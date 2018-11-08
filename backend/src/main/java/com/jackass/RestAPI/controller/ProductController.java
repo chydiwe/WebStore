@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("/api/products")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ProductController {
     @Autowired
@@ -29,8 +29,8 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void addProduct (@RequestParam String name,
-                            @RequestParam int category,
-                            @RequestParam int manufacturer,
+                            @RequestParam int categoryId,
+                            @RequestParam int manufacturerId,
                             @RequestParam int cost,
                             @RequestParam int quantity) {
 
@@ -40,13 +40,13 @@ public class ProductController {
             throw new AlreadyExistsException("Product with such name already exists.");
         }
 
-        Category categoryObj = categoryRepository.getCategoryById(category);
+        Category categoryObj = categoryRepository.getCategoryById(categoryId);
 
         if (categoryObj == null) {
             throw new NotFoundException("Category with such id does not exists.");
         }
 
-        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturer);
+        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturerId);
 
         if (manufacturerObj == null) {
             throw new NotFoundException("Manufacturer with such id does not exists.");
@@ -63,9 +63,9 @@ public class ProductController {
         productRepository.save(product);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "id")
-    public ResponseEntity<Product> getProductById(@RequestParam int id) {
-        Product product = productRepository.getProductById(id);
+    @RequestMapping(method = RequestMethod.GET, params = "productId")
+    public ResponseEntity<Product> getProductById(@RequestParam int productId) {
+        Product product = productRepository.getProductById(productId);
 
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");

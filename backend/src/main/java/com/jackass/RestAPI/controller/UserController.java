@@ -93,8 +93,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/bucket", method = RequestMethod.DELETE)
-    public void deleteBucket(@RequestParam int id) {
-        User user = userRepository.getUserById(id);
+    public void deleteBucket(@RequestParam int userId) {
+        User user = userRepository.getUserById(userId);
 
         if (user == null) {
             throw new NotFoundException("Wrong user ID.");
@@ -118,7 +118,7 @@ public class UserController {
         }
 
         if (products != null) {
-            Bucket elem = products.stream().filter(bucket -> bucket.getProduct().getId() == productId)
+            Bucket elem = products.stream().filter(bucket -> bucket.getProducts().getId() == productId)
                     .findFirst().get();
             bucketRepository.delete(elem);
             elem.setAmount(elem.getAmount() + amount);
@@ -126,7 +126,7 @@ public class UserController {
         } else {
             Bucket bucket = new Bucket();
             bucket.setUserId(userId);
-            bucket.setProduct(product);
+            bucket.setProducts(product);
             bucket.setAmount(amount);
             bucketRepository.save(bucket);
         }

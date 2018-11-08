@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Set;
 
 @Table(name = "user")
@@ -26,7 +27,7 @@ public class User implements Serializable {
     private String email;
 
     @Getter
-    @Setter(onMethod_={@JsonIgnore})
+    @Setter(onMethod_ = {@JsonIgnore})
     @Column(name = "password")
     private String password;
 
@@ -46,7 +47,7 @@ public class User implements Serializable {
     private String patronymic;
 
     @Getter
-    @Setter(onMethod_=@JsonIgnore)
+    @Setter(onMethod_ = @JsonIgnore)
     @OneToOne
     @JoinColumn(name = "user_group")
     private Group group;
@@ -58,7 +59,7 @@ public class User implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Set<Bucket> products;
