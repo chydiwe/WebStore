@@ -28,12 +28,12 @@ public class PaymentStatusController {
     public void addPaymentStatus(@RequestParam String name) {
         Set<PaymentStatus> statuses = paymentStatusRepository.findAll();
         for (PaymentStatus ps : statuses) {
-            if (ps.getStatus().equals(name)) {
+            if (ps.getName().equals(name)) {
                 throw new AlreadyExistsException("Such payment status name already exists.");
             }
         }
         PaymentStatus paymentStatus = new PaymentStatus();
-        paymentStatus.setStatus(name);
+        paymentStatus.setName(name);
         paymentStatusRepository.save(paymentStatus);
     }
 

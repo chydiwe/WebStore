@@ -25,7 +25,7 @@ public class Bucket implements Serializable {
     @Setter
     @OneToOne
     @JoinColumn(name = "product_id")
-    private Product products;
+    private Product product;
 
     @Getter
     @Setter
