@@ -23,10 +23,12 @@
 }
 
 .dropMenuOn {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 90%;
-    background-color: #f9f9f9;
+    background-color: rgba(0, 0, 0, 0.41);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -39,9 +41,6 @@
 
 .dropdown-content a:hover {
     background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropbtn {
 }
 
 .RightMenu {
@@ -87,61 +86,78 @@
     align-items: stretch;
     height: 100%;
 }
-.logo{
+
+.logo {
     width: 2em;
     padding-right: 15px;
 }
+
 .nameFirm {
-    width:15%;
+    width: 15%;
     display: flex;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5rem;
 }
-.category{
+
+.category {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
-    width:15%;
+    font-size: 1.5rem;
+    width: 15%;
     height: 10vh;
 }
-.category:hover{
+
+.category:hover {
     background: white;
     color: black;
 }
-.category_menuOn{
+
+li {
+    height: 1.5rem;
+}
+
+.category_menuOn {
     display: flex;
     flex-direction: row;
     position: absolute;
     top: 10vh;
     background: white;
-    left: 0px;
+    left: 0;
     width: 100%;
+
 }
-.category_menuOff{
+
+.category_menuOff {
     display: none;
 }
-.category_menuOn ul{
-     display: flex;
-     justify-content: space-around;
-     width: 100%;
-     color: black;
+
+.category_menuOn div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    color: black;
+    height: 7vh;
 }
-.category_menuOn ul>li:hover{
-   background: black;
+
+.category_menuOn div > div:hover {
+    background: black;
     color: white;
-    height: 100%;
 }
+
 .searchMenu {
     width: 60%;
     display: flex;
     align-items: center;
     height: 8vh;
 }
-.AppBlur{
-    filter: grayscale(0.5) blur(5px) ;
+
+.AppBlur {
+    filter: grayscale(0.5) blur(5px);
     z-index: 1;
 }
+
 .searchMenu input {
     width: 65%;
     height: 2em;

@@ -3,7 +3,7 @@ import {POST_ADDITEM,
     POST_ADDITEM_FAILED} from "../action/addItemonserver";
 
 const initialState = {
-    itemAdd: none
+    itemAdd: []
 };
 
 export function addItem(state = initialState, action) {
