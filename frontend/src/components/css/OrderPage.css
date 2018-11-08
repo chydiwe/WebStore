@@ -269,9 +269,7 @@ footer > ul > li ul li a:hover{
 }
 
 .button {
-    padding: 5px;
-    margin: 25px;
-    margin-right: 0;
+    margin: 25px 0 25px 25px;
     padding: 0.6em 1em;
     font-size: 1.2em;
     border-width: 0;

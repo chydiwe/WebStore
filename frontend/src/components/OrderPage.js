@@ -1,12 +1,8 @@
 import React, {Component} from 'react'
 import "./css/OrderPage.css"
-import minus from './img/minus.png'
+// import minus from './img/minus.png'
 
 export default class OrderPage extends Component{
-
-
-
-
 
     render(productIdList) {
         return (
