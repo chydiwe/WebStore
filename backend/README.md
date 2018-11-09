@@ -24,7 +24,26 @@ Base url for all api requests: ~/api/ .
         }
     ```
     If such user does not exist then you will get response with status 404 (NOT FOUND).
-
+    
+* GET /users
+    
+    Params:
+    ```
+        id
+    ```
+    Response body:
+    
+    ```
+        {
+            "id": "1",
+            "email": "admin@mail.ru",
+            "name": "admin",
+            "surname": "admin",
+            "patronymic": "admin"
+            "phoneNumber" : "null"
+            "products" : <see Bucket>
+        }
+    ```
 
 * POST /users
 
@@ -359,31 +378,11 @@ Base url for all api requests: ~/api/ .
     {
         {
             "id": "1",
-            "name": "Office stuff",
-            "subCategories": {
-                                {
-                                    "categoryId": "1",
-                                    "name": "Pen"
-                                },
-                                {
-                                    "categoryId": "1",
-                                    "name": "Pencil"
-                                }                              
-                             }
+            "name": "Office stuff"
         }, 
         {
             "id": "2",
-            "name": "School stuff",
-            "subCategories": {
-                                {
-                                    "categoryId": "2",
-                                    "name": "Pen"
-                                },
-                                {
-                                    "categoryId": "2",
-                                    "name": "Pencil"
-                                }                              
-                             }
+            "name": "School stuff"
         }
     }
     ```
@@ -563,3 +562,81 @@ Base url for all api requests: ~/api/ .
         ```
     
      If such group does not exist then you will get response with status 404 (NOT FOUND).
+     
+## Bucket
+* GET /users/bucket
+
+    Patams:
+    ```
+        userId
+    ```
+    
+    Response body:
+    
+    ```
+    [
+    {
+        "product": {
+            "id": 2,
+            "name": "A4",
+            "category": {
+                "id": 2,
+                "name": "Paper"
+            },
+            "manufacturer": {
+                "id": 2,
+                "name": "EngTools",
+                "logo": null,
+                "info": null
+            },
+            "shortInfo": null,
+            "cost": 100,
+            "quantity": 5,
+            "comments": [],
+            "images": []
+        },
+        "amount": 5
+    },
+    {
+        "product": {
+            "id": 1,
+            "name": "Pen",
+            "category": {
+                "id": 1,
+                "name": "Writing tools"
+            },
+            "manufacturer": {
+                "id": 1,
+                "name": "RusTools",
+                "logo": null,
+                "info": null
+            },
+            "shortInfo": null,
+            "cost": 50,
+            "quantity": 10,
+            "comments": [],
+            "images": []
+        },
+        "amount": 10
+    }
+    ]
+    ```
+If such group does not exist then you will get response with status 404 (NOT FOUND).
+
+* POST /users/bucket
+    
+    Params:
+    ```
+        userId
+        productId
+        amount
+    ```
+ If one of the parameters do not exist then you will get response with status 404 (NOT FOUND).
+ 
+ * DELETE /users/bucket
+ 
+    Params:
+    ```
+        userId
+    ```
+If such group does not exist then you will get response with status 404 (NOT FOUND).  
