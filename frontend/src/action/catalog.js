@@ -7,7 +7,7 @@ export const GET_CATALOG_INFO_FAILED = 'GET_CATALOG_INFO_FAILED',
 export default function getCatalog() {
     return dispatch => {
 
-        return fetch(`http://localhost:8080/api/products/page?num=1`, {method: 'GET'})
+        return fetch(`http://localhost:8080/api/products/page`, {method: 'GET'})
             .then(response => Promise.all([response, response.json()]))
             .then(([response, json]) => {
                 console.log(response);

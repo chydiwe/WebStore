@@ -122,7 +122,7 @@ class Register extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit} className="registrationForm">
-                    <h2>Registration</h2>
+                    <h2>Регистрация</h2>
                     <label htmlFor="email">E-mail</label><br/>
                     <input type="text" id="email" className="" onChange={this.handleEmailChange}
                             value={this.state.email}/><br/>

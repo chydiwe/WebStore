@@ -79,17 +79,21 @@ class PanelSite extends React.Component {
                         }} className='dropMenuOff'>  {user.isLogin === true ?
                             <ul className='profile'>
                                 <li>Имя:{user.name}</li>
-                                <li><input type="submit" onClick={userLogout} value='выход'/></li>
+                                <li>
+                                    <button onClick={userLogout}>Выйти</button>
+                                </li>
                             </ul>
                             :
                             <form action="">
+                                <p>Почта или Логин</p>
                                 <input ref={(node) => {
                                     this._loginEl = node
-                                }} type="text"/><br/>
-                                <input ref={(node) => {
+                                }} type="text"/>
+                                <p>Пароль</p>
+                                <input  ref={(node) => {
                                     this._passEl = node
-                                }} type='password'/><br/>
-                                <input type='submit' onClick={this.handelClick} value='Вход'/>
+                                }} type='password'/>
+                                <button onClick={this.handelClick}>Вход</button>
                                 <Link to='/register'>
                                     <button>регистрация</button>
                                 </Link>
@@ -99,12 +103,12 @@ class PanelSite extends React.Component {
                         </div>
                     </div>
 
-                        <div className="trash">
-                            <Link to='/order-page'>
-                                <img src={trashIcon} alt=""/>
-                            </Link>
-                            <p>Корзина</p>
-                        </div>
+                    <div className="trash">
+                        <Link to='/order-page'>
+                            <img src={trashIcon} alt=""/>
+                        </Link>
+                        <p>Корзина</p>
+                    </div>
 
                 </div>
             </div>

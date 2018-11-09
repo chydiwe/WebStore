@@ -24,7 +24,7 @@ class AdminPanel extends React.Component {
     }
 
     getManufacturer() {
-        fetch(`http://localhost:8080/api/info/manufacturer`, {method: 'GET'})
+        fetch(`http://localhost:8080/api/products/manufacturers`, {method: 'GET'})
             .then(response => Promise.all([response, response.json()]))
             .then(([response, json]) => {
                 if (response.status === 200) {
@@ -39,7 +39,7 @@ class AdminPanel extends React.Component {
     }
 
     getCategory() {
-        fetch(`http://localhost:8080/api/info/category`, {method: 'GET'})
+        fetch(`http://localhost:8080/api/products/categories`, {method: 'GET'})
             .then(response => Promise.all([response, response.json()]))
             .then(([response, json]) => {
                 if (response.status === 200) {
@@ -57,7 +57,7 @@ class AdminPanel extends React.Component {
 
     sendItem(e) {
         e.preventDefault()
-        const str = `name=${this._nameItem.value}&category=${this._category.value}&manufacturer=${this._manufacturer.value}&cost=${this._costItem.value}&quantity=${this._quanItem.value}`
+        const str = `name=${this._nameItem.value}&categoryId=${this._category.value}&manufacturerId=${this._manufacturer.value}&cost=${this._costItem.value}&quantity=${this._quanItem.value}`
         this.props.addItem(str)
     }
 
