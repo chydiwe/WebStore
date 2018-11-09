@@ -407,3 +407,120 @@ Base url for all api requests: ~/api/ .
         ```
     
      If such delivery does not exist then you will get response with status 404 (NOT FOUND).
+
+## Payments
+
+* GET /payments
+
+    Response body:
+    
+    ```
+    {
+        {
+            "id": "1",
+            "name": "Credit card"
+        }, 
+        {
+            "id": "2",
+            "name": "Cash"
+        }
+    }
+    ```
+    
+     If such payment does not exist then you will get response with status 404 (NOT FOUND).
+
+* POST /payments
+
+    Params:
+        ```
+            name
+        ```
+    
+     If such payment exists then you will get response with status 32 (CONFLICT).
+ 
+* DELETE /deliveries
+
+    Params:
+        ```
+            id
+        ```
+    
+     If such payment does not exist then you will get response with status 404 (NOT FOUND).
+     
+## Order Status
+
+* GET /orders/statuses
+
+    Response body:
+    
+    ```
+    {
+        {
+            "id": "1",
+            "name": "Ready"
+        }, 
+        {
+            "id": "2",
+            "name": "Cancelled"
+        }
+    }
+    ```
+    
+     If such order status does not exist then you will get response with status 404 (NOT FOUND).
+
+* POST /orders/statuses
+
+    Params:
+        ```
+            name
+        ```
+    
+     If such order status exists then you will get response with status 32 (CONFLICT).
+ 
+* DELETE /orders/statuses
+
+    Params:
+        ```
+            id
+        ```
+    
+     If such orded status does not exist then you will get response with status 404 (NOT FOUND).
+     
+## Payment Status
+
+* GET /payments/statuses
+
+    Response body:
+    
+    ```
+    {
+        {
+            "id": "1",
+            "name": "Done"
+        }, 
+        {
+            "id": "2",
+            "name": "Waiting"
+        }
+    }
+    ```
+    
+     If such payment status does not exist then you will get response with status 404 (NOT FOUND).
+
+* POST /payments/statuses
+
+    Params:
+        ```
+            name
+        ```
+    
+     If such payment status exists then you will get response with status 32 (CONFLICT).
+ 
+* DELETE /payments/statuses
+
+    Params:
+        ```
+            id
+        ```
+    
+     If such payment status does not exist then you will get response with status 404 (NOT FOUND).
