@@ -305,7 +305,7 @@ Base url for all api requests: ~/api/ .
 
     Params:
         ```
-            manufacturerId
+            id
         ```
     
      If such manufactury does not exist then you will get response with status 404 (NOT FOUND).
@@ -344,7 +344,7 @@ Base url for all api requests: ~/api/ .
 
     Params:
         ```
-            deliveryId
+            id
         ```
     
      If such delivery does not exist then you will get response with status 404 (NOT FOUND).
@@ -403,7 +403,7 @@ Base url for all api requests: ~/api/ .
 
     Params:
         ```
-            categoryId
+            id
         ```
     
      If such delivery does not exist then you will get response with status 404 (NOT FOUND).
