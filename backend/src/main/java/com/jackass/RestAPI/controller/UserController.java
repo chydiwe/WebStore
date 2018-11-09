@@ -61,7 +61,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, params = "token")
     public void confirm(@RequestParam String token) {
-        tokenRepository.deleteByToken(token);
+        tokenRepository.delete(token);
     }
 
     @RequestMapping(method = RequestMethod.GET)

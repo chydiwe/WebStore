@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Conditional(ConditionsConfig.InMemoryCondition.class)
 public class InMemoryConfirmationTokenRepository extends InMemoryRepository<ConfirmationToken> implements ConfirmationTokenRepository {
     @Override
-    public void deleteByToken(String token) {
+    public void delete(String token) {
         table.remove(token);
     }
 
