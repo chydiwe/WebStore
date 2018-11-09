@@ -524,3 +524,42 @@ Base url for all api requests: ~/api/ .
         ```
     
      If such payment status does not exist then you will get response with status 404 (NOT FOUND).
+     
+## Groups
+
+* GET /users/groups
+
+    Response body:
+    
+    ```
+    {
+        {
+            "id": "1",
+            "name": "Admin"
+        }, 
+        {
+            "id": "2",
+            "name": "Manager"
+        }
+    }
+    ```
+    
+     If such group does not exist then you will get response with status 404 (NOT FOUND).
+
+* POST /users/groups
+
+    Params:
+        ```
+            name
+        ```
+    
+     If such group exists then you will get response with status 32 (CONFLICT).
+ 
+* DELETE /users/groups
+
+    Params:
+        ```
+            id
+        ```
+    
+     If such group does not exist then you will get response with status 404 (NOT FOUND).
