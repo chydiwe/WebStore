@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/orders/status")
+@RequestMapping("/api/orders/statuses")
 @CrossOrigin(origins = "http://localhost:3000")
 public class OrderStatusController {
 
