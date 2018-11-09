@@ -1,13 +1,10 @@
 package com.jackass.RestAPI.controller;
 
-import com.jackass.RestAPI.entity.Bucket;
 import com.jackass.RestAPI.entity.ConfirmationToken;
-import com.jackass.RestAPI.entity.Product;
 import com.jackass.RestAPI.entity.User;
 import com.jackass.RestAPI.exception.AlreadyExistsException;
 import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.mail.MailManager;
-import com.jackass.RestAPI.repository.BucketRepository;
 import com.jackass.RestAPI.repository.ConfirmationTokenRepository;
 import com.jackass.RestAPI.repository.ProductRepository;
 import com.jackass.RestAPI.repository.UserRepository;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -74,6 +70,17 @@ public class UserController {
 
         if (user == null) {
             throw new NotFoundException("Wrong email or password.");
+        }
+
+        return ResponseEntity.ok().body(user);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<User> getUserById(@RequestParam int id) {
+        User user = userRepository.getUserById(id);
+
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
         }
 
         return ResponseEntity.ok().body(user);

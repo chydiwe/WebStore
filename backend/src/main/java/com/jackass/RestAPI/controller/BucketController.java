@@ -25,8 +25,8 @@ public class BucketController {
     private BucketRepository bucketRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getBucket(@RequestParam int id) {
-        User user = userRepository.getUserById(id);
+    public ResponseEntity<?> getBucket(@RequestParam int userId) {
+        User user = userRepository.getUserById(userId);
 
         if (user == null) {
             throw new NotFoundException("Wrong user ID.");
@@ -36,8 +36,8 @@ public class BucketController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteBucket(@RequestParam int id) {
-        User user = userRepository.getUserById(id);
+    public void deleteBucket(@RequestParam int userId) {
+        User user = userRepository.getUserById(userId);
 
         if (user == null) {
             throw new NotFoundException("Wrong user ID.");
