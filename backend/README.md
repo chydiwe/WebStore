@@ -312,7 +312,7 @@ Base url for all api requests: ~/api/ .
 
 ## Deliveries
 
-* GET /deliveries
+* GET /orders/deliveries
 
     Response body:
     
@@ -331,7 +331,7 @@ Base url for all api requests: ~/api/ .
     
      If such delivry does not exist then you will get response with status 404 (NOT FOUND).
 
-* POST /deliveries
+* POST /orders/deliveries
 
     Params:
         ```
@@ -340,7 +340,7 @@ Base url for all api requests: ~/api/ .
     
      If such delivery does not exist then you will get response with status 32 (CONFLICT).
  
-* DELETE /deliveries
+* DELETE /orders/deliveries
 
     Params:
         ```
@@ -410,7 +410,7 @@ Base url for all api requests: ~/api/ .
 
 ## Payments
 
-* GET /payments
+* GET /orders/payments
 
     Response body:
     
@@ -429,7 +429,7 @@ Base url for all api requests: ~/api/ .
     
      If such payment does not exist then you will get response with status 404 (NOT FOUND).
 
-* POST /payments
+* POST /orders/payments
 
     Params:
         ```
@@ -438,7 +438,7 @@ Base url for all api requests: ~/api/ .
     
      If such payment exists then you will get response with status 32 (CONFLICT).
  
-* DELETE /deliveries
+* DELETE /orders/payments
 
     Params:
         ```
@@ -488,7 +488,7 @@ Base url for all api requests: ~/api/ .
      
 ## Payment Status
 
-* GET /payments/statuses
+* GET /orders/payments/statuses
 
     Response body:
     
@@ -507,7 +507,7 @@ Base url for all api requests: ~/api/ .
     
      If such payment status does not exist then you will get response with status 404 (NOT FOUND).
 
-* POST /payments/statuses
+* POST /orders/payments/statuses
 
     Params:
         ```
@@ -516,7 +516,7 @@ Base url for all api requests: ~/api/ .
     
      If such payment status exists then you will get response with status 32 (CONFLICT).
  
-* DELETE /payments/statuses
+* DELETE /orders/payments/statuses
 
     Params:
         ```
