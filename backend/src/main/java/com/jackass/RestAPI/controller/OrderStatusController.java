@@ -38,8 +38,8 @@ public class OrderStatusController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteOrderStatus(@RequestParam int orderStatusId) {
-        OrderStatus os = orderStatusRepository.getOrderStatusById(orderStatusId);
+    public void deleteOrderStatus(@RequestParam int id) {
+        OrderStatus os = orderStatusRepository.getOrderStatusById(id);
         if (os == null) {
             throw new NotFoundException("Wrong order status ID.");
         }

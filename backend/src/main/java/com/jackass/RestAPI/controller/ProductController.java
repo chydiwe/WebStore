@@ -63,15 +63,26 @@ public class ProductController {
         productRepository.save(product);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "productId")
-    public ResponseEntity<Product> getProductById(@RequestParam int productId) {
-        Product product = productRepository.getProductById(productId);
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Product> getProductById(@RequestParam int id) {
+        Product product = productRepository.getProductById(id);
 
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");
         }
 
         return ResponseEntity.ok().body(product);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteProduct(@RequestParam int id) {
+        Product product = productRepository.getProductById(id);
+
+        if (product == null) {
+            throw new NotFoundException("Wrong product ID.");
+        }
+
+        productRepository.delete(product);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "name")

@@ -2,6 +2,7 @@ package com.jackass.RestAPI.controller;
 
 import com.jackass.RestAPI.entity.Category;
 import com.jackass.RestAPI.exception.AlreadyExistsException;
+import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,15 @@ public class CategoryController {
         Category category = new Category();
         category.setName(name);
         categoryRepository.save(category);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteCategory(@RequestParam int id) {
+        Category category = categoryRepository.getCategoryById(id);
+        if (category == null) {
+            throw new NotFoundException("Wrong manufacturer ID.");
+        }
+        categoryRepository.delete(category);
     }
 
 }

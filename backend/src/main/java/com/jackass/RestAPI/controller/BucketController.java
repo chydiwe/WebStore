@@ -73,6 +73,7 @@ public class BucketController {
                     .orElse(null);
             if (elem == null) {
                 elem = new Bucket();
+                elem.setUserId(user.getId());
                 elem.setAmount(amount);
                 elem.setProduct(product);
             } else {

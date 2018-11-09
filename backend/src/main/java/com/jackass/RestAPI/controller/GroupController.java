@@ -38,8 +38,8 @@ public class GroupController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteGroup(@RequestParam int groupId) {
-        Group group = groupRepository.getGroupById(groupId);
+    public void deleteGroup(@RequestParam int id) {
+        Group group = groupRepository.getGroupById(id);
         if (group == null) {
             throw new NotFoundException("Wrong group ID.");
         }

@@ -38,8 +38,8 @@ public class PaymentController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deletePayment(@RequestParam int paymentId) {
-        Payment payment = paymentRepository.getPaymentById(paymentId);
+    public void deletePayment(@RequestParam int id) {
+        Payment payment = paymentRepository.getPaymentById(id);
         if (payment == null) {
             throw new NotFoundException("Wrong payment ID.");
         }

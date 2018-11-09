@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>rest_tests</title>
+<style type="text/css" media="all">
+@import url( "./style/jbehave-core.css" );
+</style>
+</head>
+<body>
+ 
+<script type="syntaxhighlighter" class="brush: txt"><![CDATA[
+
+(rest_tests.story)
+Scenario: 
+Given running server (FAILED)
+(org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'infoController': Unsatisfied dependency expressed through field 'manufacturerRepository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'inMemoryManufacturerRepository' defined in file [C:\Users\Well\IdeaProjects\WebStore\backend\target\classes\com\jackass\RestAPI\repository\inmemory\InMemoryManufacturerRepository.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.jackass.RestAPI.repository.inmemory.InMemoryManufacturerRepository]: Constructor threw exception; nested exception is java.lang.ClassCastException: com.sun.proxy.$Proxy28 cannot be cast to java.util.Set)
+!-- Check registration
+When POST /user? email=admin@mail.ru & password=admin & name=admin & surname=admin & patronymic=admin (NOT PERFORMED)
+Then user with email admin@mail.ru has token (NOT PERFORMED)
+
+
+
+]]></script>
+</body>
+<!--  SyntaxHighlighter resources:  should be included at end of body -->
+<link rel="stylesheet" type="text/css" href="./style/sh-3.0.83/shCore.css"/>
+<link rel="stylesheet" type="text/css" href="./style/sh-3.0.83/shThemeRDark.css"/>
+<script language="javascript" src="./js/sh-3.0.83/shCore.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushBash.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushCss.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushDiff.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushGroovy.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushJava.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushJScript.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushPlain.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushPython.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushRuby.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushScala.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushXml.js"></script>
+<script language="javascript" src="./js/shBrushBdd.js"></script>
+<script type="text/javascript">
+    SyntaxHighlighter.defaults['gutter'] = false;
+    SyntaxHighlighter.defaults['toolbar'] = false;    
+    SyntaxHighlighter.all();
+</script>
+</html>

@@ -38,8 +38,8 @@ public class DeliveryController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteDelivery(@RequestParam int deliveryId) {
-        Delivery delivery = deliveryRepository.getDeliveryById(deliveryId);
+    public void deleteDelivery(@RequestParam int id) {
+        Delivery delivery = deliveryRepository.getDeliveryById(id);
         if (delivery == null) {
             throw new NotFoundException("Wrong delivery ID.");
         }

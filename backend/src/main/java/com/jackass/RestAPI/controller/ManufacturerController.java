@@ -25,7 +25,9 @@ public class ManufacturerController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void addManufacturer(@RequestParam String name, @RequestParam String logo, @RequestParam String info) {
+    public void addManufacturer(@RequestParam String name,
+                                @RequestParam String logo,
+                                @RequestParam String info) {
         Set<Manufacturer> manufacturers = manufacturerRepository.findAll();
         for (Manufacturer m : manufacturers) {
             if (m.getName().equals(name)) {
@@ -40,8 +42,8 @@ public class ManufacturerController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteManufacturer(@RequestParam int manufacturerId) {
-        Manufacturer manufacturer = manufacturerRepository.getManufacturerById(manufacturerId);
+    public void deleteManufacturer(@RequestParam int id) {
+        Manufacturer manufacturer = manufacturerRepository.getManufacturerById(id);
         if (manufacturer == null) {
             throw new NotFoundException("Wrong manufacturer ID.");
         }
