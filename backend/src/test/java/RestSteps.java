@@ -1,12 +1,11 @@
+import com.jackass.RestAPI.conf.ConditionsConfig;
 import com.jackass.RestAPI.controller.ProductController;
 import com.jackass.RestAPI.controller.UserController;
 import com.jackass.RestAPI.entity.ConfirmationToken;
 import com.jackass.RestAPI.entity.User;
 import com.jackass.RestAPI.repository.ConfirmationTokenRepository;
 import com.jackass.RestAPI.repository.UserRepository;
-import com.jackass.RestAPI.conf.ConditionsConfig;
 import junit.framework.TestCase;
-
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -48,7 +47,7 @@ public class RestSteps {
     @Then("user with email $email has token")
     public void checkThatTokenExists(String email){
         User user = userRepository.getUserByEmail(email);
-        ConfirmationToken confirmationToken = confirmationTokenRepository.getTokenById(user.getId());
+        ConfirmationToken confirmationToken = confirmationTokenRepository.getConfirmationTokenById(user.getId());
         TestCase.assertEquals(user.getId(), confirmationToken.getId());
     }
 
