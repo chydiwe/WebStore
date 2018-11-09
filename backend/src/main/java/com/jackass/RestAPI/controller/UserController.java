@@ -75,8 +75,8 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<User> getUserById(@RequestParam int id) {
+    @RequestMapping(method = RequestMethod.GET, params = "id")
+    public ResponseEntity<User> getUser(@RequestParam int id) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
