@@ -1,6 +1,6 @@
 package com.jackass.RestAPI.controller;
 
-import com.jackass.RestAPI.entity.Bucket;
+import com.jackass.RestAPI.entity.BucketItem;
 import com.jackass.RestAPI.entity.Product;
 import com.jackass.RestAPI.entity.User;
 import com.jackass.RestAPI.exception.NotFoundException;
@@ -43,8 +43,8 @@ public class BucketController {
             throw new NotFoundException("Wrong user ID.");
         }
 
-        Set<Bucket> products = user.getProducts();
-        for (Bucket b : products) {
+        Set<BucketItem> products = user.getProducts();
+        for (BucketItem b : products) {
             bucketRepository.delete(b);
         }
         user.setProducts(null);
@@ -64,15 +64,15 @@ public class BucketController {
             throw new NotFoundException("Wrong user ID.");
         }
 
-        Set<Bucket> products = user.getProducts();
+        Set<BucketItem> products = user.getProducts();
 
         if (products != null) {
-            Bucket elem = products.stream()
+            BucketItem elem = products.stream()
                     .filter(bucket -> bucket.getProduct().getId() == productId)
                     .findFirst()
                     .orElse(null);
             if (elem == null) {
-                elem = new Bucket();
+                elem = new BucketItem();
                 elem.setUserId(user.getId());
                 elem.setAmount(amount);
                 elem.setProduct(product);
@@ -81,11 +81,11 @@ public class BucketController {
             }
             bucketRepository.save(elem);
         } else {
-            Bucket bucket = new Bucket();
-            bucket.setUserId(userId);
-            bucket.setProduct(product);
-            bucket.setAmount(amount);
-            bucketRepository.save(bucket);
+            BucketItem bucketItem = new BucketItem();
+            bucketItem.setUserId(userId);
+            bucketItem.setProduct(product);
+            bucketItem.setAmount(amount);
+            bucketRepository.save(bucketItem);
         }
     }
 }

@@ -2,6 +2,7 @@ package com.jackass.RestAPI.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jackass.RestAPI.IdClasses.BucketId;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ import java.io.Serializable;
 @Table(name = "bucket")
 @Entity
 @IdClass(BucketId.class)
-public class Bucket implements Serializable {
+public class BucketItem implements Serializable {
 
     @Id
     @Getter

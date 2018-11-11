@@ -1,11 +1,11 @@
 package com.jackass.RestAPI.repository;
 
-import com.jackass.RestAPI.entity.Bucket;
+import com.jackass.RestAPI.entity.BucketItem;
 
 public interface BucketRepository {
 
-    void delete(Bucket bucket);
+    void delete(BucketItem bucketItem);
 
-    Bucket save(Bucket bucket);
+    BucketItem save(BucketItem bucketItem);
 
 }

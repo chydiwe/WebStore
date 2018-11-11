@@ -564,7 +564,7 @@ Base url for all api requests: ~/api/ .
      If such group does not exist then you will get response with status 404 (NOT FOUND).
      
 ## Bucket
-* GET /users/bucket
+* GET /users/bucketItem
 
     Patams:
     ```
@@ -623,7 +623,7 @@ Base url for all api requests: ~/api/ .
     ```
 If such group does not exist then you will get response with status 404 (NOT FOUND).
 
-* POST /users/bucket
+* POST /users/bucketItem
     
     Params:
     ```
@@ -633,7 +633,7 @@ If such group does not exist then you will get response with status 404 (NOT FOU
     ```
  If one of the parameters do not exist then you will get response with status 404 (NOT FOUND).
  
- * DELETE /users/bucket
+ * DELETE /users/bucketItem
  
     Params:
     ```

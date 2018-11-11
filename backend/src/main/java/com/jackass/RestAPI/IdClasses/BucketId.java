@@ -1,15 +1,16 @@
-package com.jackass.RestAPI.entity;
+package com.jackass.RestAPI.IdClasses;
 
+import com.jackass.RestAPI.entity.Product;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 
-public class OrderInfoId implements Serializable {
+public class BucketId implements Serializable {
 
     @Getter
     @Setter
-    private int orderId;
+    private int userId;
 
     @Getter
     @Setter
