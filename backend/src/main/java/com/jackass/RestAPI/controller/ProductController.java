@@ -5,9 +5,7 @@ import com.jackass.RestAPI.entity.Manufacturer;
 import com.jackass.RestAPI.entity.Product;
 import com.jackass.RestAPI.exception.AlreadyExistsException;
 import com.jackass.RestAPI.exception.NotFoundException;
-import com.jackass.RestAPI.repository.CategoryRepository;
-import com.jackass.RestAPI.repository.ManufacturerRepository;
-import com.jackass.RestAPI.repository.ProductRepository;
+import com.jackass.RestAPI.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +22,10 @@ public class ProductController {
     private CategoryRepository categoryRepository;
     @Autowired
     private ManufacturerRepository manufacturerRepository;
+    @Autowired
+    private ProductImageRepository productImageRepository;
+    @Autowired
+    private ProductCommentRepository productCommentRepository;
 
     private static final int PAGE_SIZE = 20;
 
