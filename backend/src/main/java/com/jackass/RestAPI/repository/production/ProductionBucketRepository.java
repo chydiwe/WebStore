@@ -1,6 +1,6 @@
 package com.jackass.RestAPI.repository.production;
 
-import com.jackass.RestAPI.IdClasses.BucketId;
+import com.jackass.RestAPI.entity.id.BucketId;
 import com.jackass.RestAPI.conf.ConditionsConfig;
 import com.jackass.RestAPI.entity.BucketItem;
 import com.jackass.RestAPI.repository.BucketRepository;

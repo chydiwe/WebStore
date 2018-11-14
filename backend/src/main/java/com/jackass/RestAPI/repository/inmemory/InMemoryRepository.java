@@ -19,7 +19,7 @@ public abstract class InMemoryRepository<T> {
 
     private static Map<Class, List> database = new ConcurrentHashMap<>();
 
-    protected int id = 0;
+    protected int id = 1;
     protected Set<T> table;
 
     public InMemoryRepository() {

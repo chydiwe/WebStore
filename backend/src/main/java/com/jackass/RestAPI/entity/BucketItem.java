@@ -2,7 +2,7 @@ package com.jackass.RestAPI.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jackass.RestAPI.IdClasses.BucketId;
+import com.jackass.RestAPI.entity.id.BucketId;
 import lombok.Getter;
 import lombok.Setter;
 

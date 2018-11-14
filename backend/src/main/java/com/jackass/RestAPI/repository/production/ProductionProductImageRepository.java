@@ -1,6 +1,6 @@
 package com.jackass.RestAPI.repository.production;
 
-import com.jackass.RestAPI.IdClasses.ProductImageId;
+import com.jackass.RestAPI.entity.id.ProductImageId;
 import com.jackass.RestAPI.conf.ConditionsConfig;
 import com.jackass.RestAPI.entity.ProductImage;
 import com.jackass.RestAPI.repository.ProductImageRepository;

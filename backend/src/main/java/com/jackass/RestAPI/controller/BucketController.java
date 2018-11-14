@@ -17,6 +17,7 @@ import java.util.Set;
 @RequestMapping("api/users/bucket")
 @CrossOrigin(origins = "http://localhost:3000")
 public class BucketController {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -44,10 +45,40 @@ public class BucketController {
         }
 
         Set<BucketItem> products = user.getProducts();
+        if (products == null) {
+            throw new NotFoundException("User does not have products in bucket.");
+        }
         for (BucketItem b : products) {
             bucketRepository.delete(b);
         }
-        user.setProducts(null);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, params = {"userId", "productId"})
+    public void deleteFromBucket(@RequestParam int userId,
+                                 @RequestParam int productId) {
+        User user = userRepository.getUserById(userId);
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
+        }
+
+        Set<BucketItem> products = user.getProducts();
+        if (products == null) {
+            throw new NotFoundException("User does not have products in bucket.");
+        }
+
+        Product product = productRepository.getProductById(productId);
+        if (product == null) {
+            throw new NotFoundException("Wrong product ID.");
+        }
+
+        BucketItem elem = products.stream()
+                .filter(bucket -> bucket.getProduct().getId() == productId)
+                .findFirst()
+                .orElse(null);
+        if (elem == null) {
+            throw new NotFoundException("Bucket does not have such product.");
+        }
+        bucketRepository.delete(elem);
     }
 
     @RequestMapping(method = RequestMethod.POST)

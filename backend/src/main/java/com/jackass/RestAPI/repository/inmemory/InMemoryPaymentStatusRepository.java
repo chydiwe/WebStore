@@ -1,10 +1,15 @@
 package com.jackass.RestAPI.repository.inmemory;
 
+import com.jackass.RestAPI.conf.ConditionsConfig;
 import com.jackass.RestAPI.entity.PaymentStatus;
 import com.jackass.RestAPI.repository.PaymentStatusRepository;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
+@Component
+@Conditional(ConditionsConfig.InMemoryCondition.class)
 public class InMemoryPaymentStatusRepository extends InMemoryRepository<PaymentStatus> implements PaymentStatusRepository {
     @Override
     public PaymentStatus getPaymentStatusById(int id) {
