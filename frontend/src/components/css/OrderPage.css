@@ -1,4 +1,4 @@
-/*  тут стили для корзины */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 .order-container{
     padding-top: 8%;
@@ -47,8 +47,6 @@ body {
     display: inline-block;
     width: 18px;
     height: 17px;
-
-   /* background: url("delete-icn.svg") no-repeat center;*/
     padding-left: 15px;
     padding-top:60px;
 }
@@ -94,39 +92,7 @@ table{
     margin-top: 8px;
     color: #86939E;
 }
-.quantity {
-    padding-top: 20px;
-    /*margin-right: 60px;*/
-}
-.quantity input {
-    -webkit-appearance: none;
-    border: none;
-    text-align: center;
-    width: 32px;
-    font-size: 16px;
-    color: #43484D;
-    font-weight: 300;
-}
 
-button[class*=btn] {
-    width: 30px;
-    height: 30px;
-    background-color: #E1E8EE;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-}
-.minus-btn img {
-    margin-bottom: 3px;
-}
-.plus-btn img {
-    margin-top: 2px;
-}
-
-button:focus,
-input:focus {
-    outline:0;
-}
 .total-price {
     width: 83px;
     padding-top: 27px;
@@ -135,110 +101,25 @@ input:focus {
     color: #43484D;
     font-weight: 300;
 }
-@media (max-width: 800px) {
-    .shopping-cart {
-        width: 100%;
-        height: auto;
-        overflow: hidden;
-    }
-    .item {
-        height: auto;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .image img {
-        width: 100%;
-        text-align: center;
-        margin-top:6px;
-        margin-bottom:6px;
-    }
-    .image,
-    .quantity,
-    .description {
-        width: 100%;
-        text-align: center;
-        margin: 6px 0;
-    }
-    .buttons {
-        margin-right: 20px;
-    }
+
+
+/* fixed styles */
+
+.quantity > div,
+.quantity > p {
+    display: inline-block;
+    vertical-align: middle;
 }
 
-a, a:visited {
-    outline:none;
-    color:#389dc1;
-}
-
-a:hover{
-    text-decoration:none;
-}
-
-section, footer, header, aside{
-    display: block;
+.quantity > p {
+    width: 4em;
+    margin: 0;
 }
 
 
-/*-------------------------
-	The footer
---------------------------*/
 
 
-footer{
-    height: 245px;
-    color:#222121;
-    font-size:12px;
-
-    position:relative;
-
-    background-color:#fdfdfd;
-
-}
-
-/* Set a width to the outermost UL and center it */
-
-footer > ul{
-    width:960px;
-    position:fixed;
-    left:50%;
-    bottom:0;
-    margin-left:-480px;
-    padding-bottom: 60px;
-    z-index:-1;
-}
-
-/* The four columns of links */
-
-footer > ul > li{
-    width:25%;
-    float:left;
-}
-
-footer ul{
-    list-style: none;
-}
-
-/* The links */
-
-footer > ul > li ul li{
-    margin-left:43px;
-    text-transform: uppercase;
-    font-weight:bold;
-    line-height:1.8;
-}
-
-footer > ul > li ul li a{
-    text-decoration: none !important;
-    color:#7d8691 !important;
-}
-
-footer > ul > li ul li a:hover{
-    color:#ddd !important;
-}
-
-
-/* раздел кнопки оформить заказ */
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
-
+/* Раздел кнопки оформить заказ */
 .float-right {
     float: right;
 }
