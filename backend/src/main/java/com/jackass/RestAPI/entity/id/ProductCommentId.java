@@ -1,4 +1,4 @@
-package com.jackass.RestAPI.IdClasses;
+package com.jackass.RestAPI.entity.id;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,54 +1,107 @@
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.jackass.RestAPI.conf.ConditionsConfig;
-import com.jackass.RestAPI.controller.ProductController;
-import com.jackass.RestAPI.controller.UserController;
-import com.jackass.RestAPI.entity.ConfirmationToken;
-import com.jackass.RestAPI.entity.User;
-import com.jackass.RestAPI.repository.ConfirmationTokenRepository;
-import com.jackass.RestAPI.repository.UserRepository;
-import junit.framework.TestCase;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.SpringApplication;
+
+import java.io.IOException;
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class RestSteps {
 
-    private UserController userController;
-    private ProductController productController;
-
-    private UserRepository userRepository;
-    private ConfirmationTokenRepository confirmationTokenRepository;
+    private String basePath;
+    private HttpClient httpClient;
+    private ObjectMapper jsonConverter;
 
     @Given("running server")
-    public void init(){
+    public void init() {
         // activate in memory flag
         ConditionsConfig.IN_MEMORY = true;
 
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        applicationContext.scan("com.jackass.RestAPI");
-        applicationContext.refresh();
+        this.basePath = "http://localhost:8080/api";
+        this.httpClient = HttpClients.createDefault();
+        this.jsonConverter = new ObjectMapper();
 
-        this.userController = applicationContext.getBean(UserController.class);
-        this.productController = applicationContext.getBean(ProductController.class);
-
-        this.userRepository = applicationContext.getBean(UserRepository.class);
-        this.confirmationTokenRepository = applicationContext.getBean(ConfirmationTokenRepository.class);
+        SpringApplication.run(InMemoryWebStoreApplication.class);
     }
 
-    @When("POST /user? email=$email & password=$password & name=$name & surname=$surname & patronymic=$patronymic")
-    public void addUser(String email,
-                        String password,
-                        String name,
-                        String surname,
-                        String patronymic){
-        userController.register(email, password, name, surname, patronymic);
+    @When("POST $path return status code $status")
+    public void postWithStatus(String path, String status) throws IOException {
+        HttpPost post = new HttpPost(basePath + path);
+        HttpResponse response = httpClient.execute(post);
+        assertTrue(response.getStatusLine().getStatusCode() == Integer.valueOf(status));
     }
 
-    @Then("user with email $email has token")
-    public void checkThatTokenExists(String email){
-        User user = userRepository.getUserByEmail(email);
-        ConfirmationToken confirmationToken = confirmationTokenRepository.getConfirmationTokenById(user.getId());
-        TestCase.assertEquals(user.getId(), confirmationToken.getId());
+    @When("DELETE $path return status code $status")
+    public void deleteWithStatus(String path, String status) throws IOException {
+        HttpDelete delete = new HttpDelete(basePath + path);
+        HttpResponse response = httpClient.execute(delete);
+        assertTrue(response.getStatusLine().getStatusCode() == Integer.valueOf(status));
+    }
+
+
+    @When("GET $path then $key has value $value")
+    public void get(String path, String key, String value) throws IOException {
+        HttpGet get = new HttpGet(basePath + path);
+        HttpResponse response = httpClient.execute(get);
+        byte[] result = EntityUtils.toByteArray(response.getEntity());
+        JsonNode node = jsonConverter.readTree(result);
+        assertTrue(node.get(key).equals(value));
+    }
+
+    @When("GET $path then json has values $keyToValue")
+    public void getHas(String path, String objects) throws IOException {
+        HttpGet get = new HttpGet(basePath + path);
+        HttpResponse response = httpClient.execute(get);
+        byte[] result = EntityUtils.toByteArray(response.getEntity());
+        JsonNode json = jsonConverter.readTree(result);
+        Arrays.stream(objects.split("###")).forEach(object -> {
+            String[] keyToValues = object.split(";");
+            for (String keyToValue : keyToValues){
+                assertTrue(hasValue(json, keyToValue.split("=")));
+            }
+        });
+    }
+
+    @When("GET $path then json hasn't values $keyToValue")
+    public void getHasNot(String path, String objects) throws IOException {
+        HttpGet get = new HttpGet(basePath + path);
+        HttpResponse response = httpClient.execute(get);
+        byte[] result = EntityUtils.toByteArray(response.getEntity());
+        JsonNode json = jsonConverter.readTree(result);
+        Arrays.stream(objects.split("###")).forEach(object -> {
+            String[] keyToValues = object.split(";");
+            for (String keyToValue : keyToValues){
+                assertFalse(hasValue(json, keyToValue.split("=")));
+            }
+        });
+    }
+
+    private boolean hasValue(JsonNode json, String[] keyToValue) {
+        if (json.getNodeType() == JsonNodeType.OBJECT) {
+            return keyToValue[1].equals(json.get(keyToValue[0]).asText());
+        } else if (json.getNodeType() == JsonNodeType.ARRAY){
+            for (int i = 0; i < json.size(); i++){
+                if(hasValue(json.get(i), keyToValue)){
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.jackass.RestAPI.repository.production;
 
-import com.jackass.RestAPI.IdClasses.ProductCommentId;
+import com.jackass.RestAPI.entity.id.ProductCommentId;
 import com.jackass.RestAPI.conf.ConditionsConfig;
 import com.jackass.RestAPI.entity.ProductComment;
 import com.jackass.RestAPI.repository.ProductCommentRepository;

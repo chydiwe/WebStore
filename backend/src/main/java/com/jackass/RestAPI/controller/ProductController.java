@@ -99,9 +99,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET, params = "category")
-    public ResponseEntity<Set<Product>> getProductByCategory(@RequestParam int category/*,
+    public ResponseEntity<Set<Product>> getProductByCategory(@RequestParam int categoryId/*,
                                                              @RequestParam int num*/) {
-        Category categoryObj = categoryRepository.getCategoryById(category);
+        Category categoryObj = categoryRepository.getCategoryById(categoryId);
 
         if (categoryObj == null) {
             throw new NotFoundException("Wrong category.");
@@ -114,9 +114,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET, params = "manufacturer")
-    public ResponseEntity<Set<Product>> getProductByManufacturer(@RequestParam int manufacturer/*,
+    public ResponseEntity<Set<Product>> getProductByManufacturer(@RequestParam int manufacturerId/*,
                                                                  @RequestParam int num*/) {
-        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturer);
+        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturerId);
 
         if (manufacturerObj == null) {
             throw new NotFoundException("Wrong manufacturer.");

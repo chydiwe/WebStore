@@ -19,7 +19,7 @@ public class InMemoryManufacturerRepository extends InMemoryRepository<Manufactu
 
     @Override
     public Set<Manufacturer> findAll() {
-        return null;
+        return table;
     }
 
     @Override

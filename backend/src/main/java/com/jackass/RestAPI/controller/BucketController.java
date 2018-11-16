@@ -17,6 +17,7 @@ import java.util.Set;
 @RequestMapping("api/users/bucket")
 @CrossOrigin(origins = "http://localhost:3000")
 public class BucketController {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired

@@ -1,10 +1,15 @@
 package com.jackass.RestAPI.repository.inmemory;
 
+import com.jackass.RestAPI.conf.ConditionsConfig;
 import com.jackass.RestAPI.entity.Group;
 import com.jackass.RestAPI.repository.GroupRepository;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
+@Component
+@Conditional(ConditionsConfig.InMemoryCondition.class)
 public class InMemoryGroupRepository extends InMemoryRepository<Group> implements GroupRepository {
     @Override
     public Group getGroupById(int id) {

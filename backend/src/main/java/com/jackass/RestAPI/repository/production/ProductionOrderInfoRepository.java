@@ -1,6 +1,6 @@
 package com.jackass.RestAPI.repository.production;
 
-import com.jackass.RestAPI.IdClasses.OrderInfoId;
+import com.jackass.RestAPI.entity.id.OrderInfoId;
 import com.jackass.RestAPI.conf.ConditionsConfig;
 import com.jackass.RestAPI.entity.OrderInfo;
 import com.jackass.RestAPI.repository.OrderInfoRepository;
