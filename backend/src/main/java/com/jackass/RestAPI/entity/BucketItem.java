@@ -24,7 +24,7 @@ public class BucketItem implements Serializable {
     @Id
     @Getter
     @Setter
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 

@@ -14,5 +14,5 @@ public class BucketId implements Serializable {
 
     @Getter
     @Setter
-    private Product product;
+    private int product;
 }

@@ -30,3 +30,8 @@ When GET /products?id=2 then json has values id=2;name=Pencil;cost=50;quantity=3
 When GET /products/page?categoryId=1 then json has values id=1;name=Pen;cost=100;quantity=100###id=2;name=Pencil;cost=50;quantity=300
 When GET /products/page?manufacturerId=1 then json has values id=1;name=Pen;cost=100;quantity=100###id=2;name=Pencil;cost=50;quantity=300
 !-- [END] Test product controller.
+
+!-- [START] Test bucket controller.
+When POST /users/bucket?userId=1&productId=1&amount=10 return status code 200
+When GET /users/bucket?userId=1 then json has values id=1
+!-- [END] Test bucket controller.
