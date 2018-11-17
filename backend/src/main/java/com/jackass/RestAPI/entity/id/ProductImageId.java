@@ -13,5 +13,5 @@ public class ProductImageId implements Serializable {
 
     @Getter
     @Setter
-    private String image;
+    private int image;
 }

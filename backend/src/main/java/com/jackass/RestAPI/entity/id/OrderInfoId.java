@@ -14,5 +14,5 @@ public class OrderInfoId implements Serializable {
 
     @Getter
     @Setter
-    private Product product;
+    private int product;
 }
