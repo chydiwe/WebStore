@@ -127,28 +127,28 @@ class Register extends Component {
                     <input type="text" id="email" className="" onChange={this.handleEmailChange}
                             value={this.state.email}/><br/>
 
-                    <label htmlFor="pass">Password</label><br/>
+                    <label htmlFor="pass">Пароль</label><br/>
                     <input type="password" id="pass" onChange={this.handlePassChange} value={this.state.pass}/><br/>
 
-                    <label htmlFor="passConf">Confirm password</label><br/>
+                    <label htmlFor="passConf">Повторите пароль</label><br/>
                     <input type="password" id="passConf" onChange={this.handlePassConfChange}
                            value={this.state.passConf}/><br/>
 
-                    <label htmlFor="userName">Name</label><br/>
+                    <label htmlFor="userName">Имя</label><br/>
                     <input type="text" id="userName" onChange={this.handleFIOChange} value={this.state.name}/><br/>
 
-                    <label htmlFor="userSurname">Surname</label><br/>
+                    <label htmlFor="userSurname">Фамилия</label><br/>
                     <input type="text" id="userSurname" onChange={this.handleFIOChange} value={this.state.surname}/><br/>
 
-                    <label htmlFor="userPatronymic">Patronymic</label><br/>
+                    <label htmlFor="userPatronymic">Отчество</label><br/>
                     <input type="text" id="userPatronymic" onChange={this.handleFIOChange}
                            value={this.state.patronymic}/><br/>
 
-                    <label htmlFor="phoneNumber">Phone number</label><br/>
+                    <label htmlFor="phoneNumber">Телефон</label><br/>
                     <input type="text" id="phoneNumber" onChange={this.handlePhoneNumbChange}
                            value={this.state.phoneNumber}/><br/>
 
-                    <button onClick={this.submitInf}>Register</button>
+                    <button onClick={this.submitInf}>Зарегистрироваться</button>
                 </form>
             </div>
         );
