@@ -54,7 +54,7 @@ class PanelSite extends React.Component {
         const {userLogout, user} = this.props;
         return (
             <div className='panelSite'>
-                <div className='nameFirm'><img className='logo' src={logo} alt=""/>MAGIC STATIONARY</div>
+                <div className='nameFirm'><Link to='/'><img className='logo' src={logo} alt=""/>MAGIC STATIONARY</Link></div>
                 <div className='category'
                      onClick={(node, classOn, classOff, isBlur) => this.sideMenu(this._categoryMenu, 'category_menuOn', 'category_menuOff', true)}>Категории
                     <div ref={(node) => this._categoryMenu = node} className='category_menuOff'>

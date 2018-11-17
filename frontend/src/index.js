@@ -12,7 +12,6 @@ import PanelSite from "./components/PanelSite";
 import adminPanel from "./components/AdminPanel"
 import FooterSite from "./components/FooterSite";
 import OrderPage from "./components/OrderPage";
-
 class Pages extends React.Component {
     render() {
         return(

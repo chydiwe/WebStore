@@ -10,7 +10,6 @@ export default function getCatalog() {
         return fetch(`http://localhost:8080/api/products/page`, {method: 'GET'})
             .then(response => Promise.all([response, response.json()]))
             .then(([response, json]) => {
-                console.log(response);
                 if (response.status === 200) {
                     dispatch({
                         type: GET_CATALOG_INFO_SUCCES,

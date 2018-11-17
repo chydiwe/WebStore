@@ -110,7 +110,12 @@ li {
     padding-top: 5%;
     font-family: "Ubuntu", serif;
 }
-
+.testApi{
+    width: 50%;
+}
+.testApi input{
+    width: 100%;
+}
 .registrationForm label::before {
     content: "";
     display: block;
