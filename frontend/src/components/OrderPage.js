@@ -28,47 +28,73 @@ class ShoppingCartItem extends Component {
     constructor(props){
         super(props);
 
-        /* вызов метода запроса полной инфы о товаре по id, сохранение результата в переменную productInfo */
-        /* let productInfo = ... */
-        // const {id, name, manufacturer, cost, images} = productInfo;
+        let it = this.props.item;
+        this.state = {...it};
+        this.state.itemCountSum = it.product.cost * it.amount;
 
-        this.state = {
-            quantity: 1,
-            itemCountSum: 100 /* props.cost */
-        };
         this.quantityAdd = this.quantityAdd.bind(this);
         this.quantityReduce = this.quantityReduce.bind(this);
     }
 
     quantityAdd(){
-        if (this.state.quantity !== 50) {
+        if (this.state.amount !== this.state.product.quantity) {
             this.setState({
-                quantity: ++this.state.quantity,
-                itemCountSum: this.state.quantity * 100 /* cost */
+                amount: ++this.state.amount,
+                itemCountSum: this.state.amount * this.state.product.cost
+            });
+
+            let temp = this.props.order.state.products.slice();
+            temp.forEach(item => {
+                if (item.product.id === this.state.product.id) {
+                    item.amount = this.state.amount;
+                }
+            }, this);
+
+            let sum = temp.map( item => item.product.cost * item.amount ).reduce((sum, current) => { return sum + current }, 0);
+
+            this.props.order.setState({
+                products: temp,
+                listSum: sum,
+                totalSum: sum + this.props.order.state.deliverySum
             });
         }
     }
 
     quantityReduce(){
-        if (this.state.quantity !== 1) {
+        if (this.state.amount !== 1) {
             this.setState({
-                quantity: --this.state.quantity,
-                itemCountSum: this.state.quantity * 100 /* cost */
+                amount: --this.state.amount,
+                itemCountSum: this.state.amount * this.state.product.cost
+            });
+
+            let temp = this.props.order.state.products.slice();
+            temp.forEach(item => {
+                if (item.product.id === this.state.product.id) {
+                    item.amount = this.state.amount;
+                }
+            }, this);
+
+            let sum = temp.map( item => item.product.cost * item.amount ).reduce((sum, current) => { return sum + current }, 0);
+
+            this.props.order.setState({
+                products: temp,
+                listSum: sum,
+                totalSum: sum + this.props.order.state.deliverySum
             });
         }
     }
 
-    render() { /* {item,i} */
+    render() {
         return(
-            <tr className="shopping-cart-item"> {/* key={i} */}
+            <tr className="shopping-cart-item">
                 <td>
-                    <img src={notFound} alt=""/>
+                    <img src={ this.state.product.images[0] || notFound } alt=""/>
                 </td>
                 <td className="description">
                     <p>
-                        <span>Степлер</span><br/>
-                        <span>ООО "Канцеляр"</span><br/>
-                        <span>Синий</span>
+                        <span>{ this.state.product.name }</span><br/>
+                        <span>{ this.state.product.category.name }</span><br/>
+                        <span>{ this.state.product.manufacturer.name }</span>
                     </p>
                 </td>
 
@@ -76,7 +102,7 @@ class ShoppingCartItem extends Component {
                     <div onClick={this.quantityAdd}>
                         <Plus />
                     </div>
-                    <p>{this.state.quantity}</p>
+                    <p>{this.state.amount}</p>
                     <div onClick={this.quantityReduce}>
                         <Minus />
                     </div>
@@ -95,11 +121,90 @@ class ShoppingCartItem extends Component {
 
 
 export default class OrderPage extends Component{
-    constructor(){
+    constructor() {
         super();
+
+        /* вызов метода запроса инфы о корзине пользователя по его id*/
+
+        this.state = {
+            products: [
+                {
+                    product: {
+                        id: 2,
+                        name: "Степлер Croco",
+                        category: {
+                            id: 2,
+                            name: "Степлеры"
+                        },
+                        manufacturer: {
+                            id: 2,
+                            name: "EngTools",
+                            logo: null,
+                            info: null
+                        },
+                        shortInfo: null,
+                        cost: 100,
+                        quantity: 5,
+                        comments: [],
+                        images: [ "http://img.3259404.ru/3259404.ru/brandshop/maped/groups/small_image/groupId346.png" ]
+                    },
+                    amount: 5
+                },
+                {
+                    product: {
+                        id: 3,
+                        name: "Гелевая ручка",
+                        category: {
+                            id: 2,
+                            name: "Ручки"
+                        },
+                        manufacturer: {
+                            id: 2,
+                            name: "EngTools",
+                            logo: null,
+                            info: null
+                        },
+                        shortInfo: null,
+                        cost: 100,
+                        quantity: 50,
+                        comments: [],
+                        images: []
+                    },
+                    amount: 4
+                },
+                {
+                    product: {
+                        id: 4,
+                        name: "Тетрадь Восход",
+                        category: {
+                            id: 2,
+                            name: "Тетради"
+                        },
+                        manufacturer: {
+                            id: 2,
+                            name: "EngTools",
+                            logo: null,
+                            info: null
+                        },
+                        shortInfo: null,
+                        cost: 100,
+                        quantity: 10,
+                        comments: [],
+                        images: []
+                    },
+                    amount: 2
+                }
+            ]
+        };
+
+        this.state.listSum = this.state.products.map( item => item.product.cost * item.amount ).reduce((sum, current) => { return sum + current }, 0);
+        this.state.deliverySum = 450;
+        this.state.totalSum = this.state.listSum + this.state.deliverySum;
     }
 
     render() {
+        const order = this; /* чтобы из дочерних компонентов менять state родителя */
+
         return (
             <div className="order-container">
                 <div>
@@ -113,24 +218,25 @@ export default class OrderPage extends Component{
                                 <td>Описание</td>
                                 <td>Количество</td>
                                 <td>Цена</td>
-                                <td></td>
+                                <td>{/**/}</td>
                             </tr>
 
-                            <ShoppingCartItem />
-                            <ShoppingCartItem />
-                            <ShoppingCartItem />
+                            { Array.isArray(this.state.products) && (this.state.products.length > 0) ?
+                                this.state.products.map( item => (<ShoppingCartItem item={ item } order={ order } />)) :
+                                    <tr colSpan={6} className="shopping-cart-item">{/* */}</tr>
+                            }
 
                         </tbody>
                     </table>
 
                     <div className="order-accept-block">
                         <div className="float-right">
-                            <p id="goods-cost">Стоимость товаров: <span>1300</span></p>
-                            <p id="deliver-price">Стоимость доставки: <span>450</span></p>
-                            <p id="total-sum">Итого: <span>1750</span></p>
+                            <p id="goods-cost">Стоимость товаров: <span>{ this.state.listSum }</span></p>
+                            <p id="deliver-price">Стоимость доставки: <span>{ this.state.deliverySum }</span></p>
+                            <p id="total-sum">Итого: <span>{ this.state.totalSum }</span></p>
                             <button className="button">Оформить заказ</button>
                         </div>
-                        <div className="clear-float"></div>
+                        <div className="clear-float">{/**/}</div>
                     </div>
 
                 </div>
