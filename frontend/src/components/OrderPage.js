@@ -2,6 +2,11 @@ import React, {Component} from 'react'
 import "./css/OrderPage.css"
 import notFound from "./img/notfound.png";
 
+const Cross = () =>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 21.9 21.9" width="25px" height="25px">
+        <path d="M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0  c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4  s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3  s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7  s-0.1-0.5-0.3-0.7L14.1,11.3z" fill="#bfbfbf"/>
+    </svg>
+
 const Minus = () =>
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 52 52" width="40px" height="40px">
         <g>
@@ -55,17 +60,21 @@ class ShoppingCartItem extends Component {
 
     render() { /* {item,i} */
         return(
-            <tr className="item"> {/* key={i} */}
-                <td className="image"><img src={notFound} alt=""/></td>
+            <tr className="shopping-cart-item"> {/* key={i} */}
+                <td>
+                    <img src={notFound} alt=""/>
+                </td>
                 <td className="description">
-                    <span>Our Legacy</span>
-                    <span>Brushed Scarf</span>
-                    <span>Brown</span>
+                    <p>
+                        <span>Степлер</span><br/>
+                        <span>ООО "Канцеляр"</span><br/>
+                        <span>Синий</span>
+                    </p>
                 </td>
 
                 <td className="quantity">
                     <div onClick={this.quantityAdd}>
-                        <Plus/>
+                        <Plus />
                     </div>
                     <p>{this.state.quantity}</p>
                     <div onClick={this.quantityReduce}>
@@ -75,8 +84,8 @@ class ShoppingCartItem extends Component {
 
                 <td className="total-price">{ this.state.itemCountSum } руб.</td>
 
-                <td className="delete-btn">
-                    <img src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w18h181338911473cross.png" alt=""/>
+                <td>
+                    <Cross />
                 </td>
             </tr>
         );
@@ -86,15 +95,17 @@ class ShoppingCartItem extends Component {
 
 
 export default class OrderPage extends Component{
+    constructor(){
+        super();
+    }
 
     render() {
         return (
             <div className="order-container">
                 <div>
 
-                    <div className="title">
-                        Корзина
-                    </div>
+                    <h1>Ваша корзина</h1>
+
                     <table>
                         <tbody>
                             <tr className="hat">
@@ -106,7 +117,8 @@ export default class OrderPage extends Component{
                             </tr>
 
                             <ShoppingCartItem />
-
+                            <ShoppingCartItem />
+                            <ShoppingCartItem />
 
                         </tbody>
                     </table>
