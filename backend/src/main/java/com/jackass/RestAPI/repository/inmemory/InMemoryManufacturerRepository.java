@@ -6,6 +6,7 @@ import com.jackass.RestAPI.repository.ManufacturerRepository;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -19,7 +20,7 @@ public class InMemoryManufacturerRepository extends InMemoryRepository<Manufactu
 
     @Override
     public Set<Manufacturer> findAll() {
-        return table;
+        return new HashSet<>(table);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.jackass.RestAPI.repository.OrderStatusRepository;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -18,7 +19,7 @@ public class InMemoryOrderStatusRepository extends InMemoryRepository<OrderStatu
 
     @Override
     public Set<OrderStatus> findAll() {
-        return table;
+        return new HashSet<>(table);
     }
 
     @Override

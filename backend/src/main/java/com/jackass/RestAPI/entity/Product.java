@@ -52,7 +52,7 @@ public class Product implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Set<ProductComment> comments;
 

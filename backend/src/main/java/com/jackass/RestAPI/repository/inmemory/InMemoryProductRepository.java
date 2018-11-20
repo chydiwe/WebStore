@@ -8,6 +8,7 @@ import com.jackass.RestAPI.repository.ProductRepository;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,7 @@ public class InMemoryProductRepository extends InMemoryRepository<Product> imple
 
     @Override
     public Set<Product> findAll(/*Pageable pageable*/) {
-        return table;
+        return new HashSet<>(table);
     }
 
     @Override

@@ -2,20 +2,19 @@ package com.jackass.RestAPI.repository.inmemory.reflection;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
-public interface Table<T> extends Set<T> {
+public interface Table<T> extends List<T> {
 
     @Override
-    @Recursive
+    @Recursive(RecursiveType.WRITE)
     boolean add(T t);
 
     @Override
-    @Recursive
+    @Recursive(RecursiveType.WRITE)
     boolean remove(Object o);
 
     @Override
-    @Recursive
+    @Recursive(RecursiveType.WRITE)
     boolean removeAll(Collection<?> c);
 
 }

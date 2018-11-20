@@ -3,9 +3,11 @@ package com.jackass.RestAPI.repository.inmemory;
 import com.jackass.RestAPI.conf.ConditionsConfig;
 import com.jackass.RestAPI.entity.Category;
 import com.jackass.RestAPI.repository.CategoryRepository;
+import org.apache.commons.collections4.SetUtils;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -18,7 +20,7 @@ public class InMemoryCategoryRepository extends InMemoryRepository<Category> imp
 
     @Override
     public Set<Category> findAll() {
-        return table;
+        return new HashSet<>(table);
     }
 
     @Override
