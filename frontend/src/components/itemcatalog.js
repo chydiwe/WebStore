@@ -22,16 +22,14 @@ class Catalog extends Component {
     }
 
     addInBucket(item) {
-        fetch(`http://localhost:8080/api/users/bucket?userId=1&productId=${item.id}&amount=1`, {method: 'POST'})
-            .then(response => Promise.all([response, response.json()]))
-            .then(([response, json]) => {
-                if (response.status === 200) {
-
-                }
-                else {
-                    alert("ERROR")
-                }
-            })
+        const {user}=this.props
+        fetch(`http://localhost:8080/api/users/bucket?userId=${user.id}&productId=${item.id}&amount=1`, {method: 'POST'})
+                .then((response)=>{
+                    if(response.status===200){
+                        console.log('addtoBucket')
+                    }
+                })
+            .catch((error)=>console.log(error))
     }
 
     componentWillMount() {
@@ -49,8 +47,9 @@ class Catalog extends Component {
 }
 
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
     return {
+        user: store.session.user,
         catalog: store.catalog
     }
 }
