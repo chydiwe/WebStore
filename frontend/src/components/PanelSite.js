@@ -47,7 +47,7 @@ class PanelSite extends React.Component {
     }
 
     render() {
-        const {userLogout, user} = this.props, Submitbutton = withRouter(({history}) => (
+        const {user} = this.props,{logOut}=this.props.action, Submitbutton = withRouter(({history}) => (
             <button type="button" onClick={() => this.handelClick(history)}>Вход</button>));
         return (
             <div className='panelSite'>
@@ -78,7 +78,7 @@ class PanelSite extends React.Component {
                             <ul className='profile'>
                                 <li>Имя:{user.name}</li>
                                 <li>
-                                    <button onClick={userLogout}>Выйти</button>
+                                    <button onClick={logOut}>Выйти</button>
                                 </li>
                             </ul>
                             :
