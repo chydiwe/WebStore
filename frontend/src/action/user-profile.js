@@ -1,9 +1,6 @@
 import fetch from 'cross-fetch'
 import {sessionService} from 'redux-react-session';
-export const GET_USER_INFO_FAILED = 'GET_USER_INFO_FAILED',
-    GET_USER_INFO_SUCCES = 'GET_USER_INFO_SUCCES',
-    GET_USER_INFO = 'GET_USER_INFO',
-    LOGOUT_USER = 'LOGOUT_USER';
+
 
 export function userLogIn(user,history) {
     return () => {
@@ -24,11 +21,10 @@ export function userLogIn(user,history) {
 }
 
 
-export function logOut(history) {
+export function logOut() {
     return () => {
         sessionService.deleteSession();
         sessionService.deleteUser();
-        history.push('/');
     }
 
 };
