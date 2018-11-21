@@ -20,7 +20,10 @@ class PanelSite extends React.Component {
     constructor(props) {
         super(props);
         this.sideMenu = this.sideMenu.bind(this);
-        this.handelClick = this.handelClick.bind(this)
+        this.handelClick = this.handelClick.bind(this);
+
+        this.mouseEnter = this.mouseEnter.bind(this);
+        this.mouseLeave = this.mouseLeave.bind(this);
     }
 
     sideMenu(nodeEl, classOn, classOff, isBlur) {
@@ -39,6 +42,21 @@ class PanelSite extends React.Component {
         }
     }
 
+    mouseEnter() {
+        console.log(" mouse enter ");
+        this.sideMenu(this._categoryMenu, 'category_menuOn', 'category_menuOff', true)
+    }
+
+    mouseLeave() {
+        console.log(" mouse leave ");
+        this.sideMenu(this._categoryMenu, 'category_menuOn', 'category_menuOff', true)
+
+        // Старый метод Макса
+        // onClick={ (node, classOn, classOff, isBlur) => this.sideMenu(this._categoryMenu, 'category_menuOn', 'category_menuOff', true)}
+
+    }
+
+
     handelClick(history) {
         const name = ReactDOM.findDOMNode(this._loginEl).value,
             pass = ReactDOM.findDOMNode(this._passEl).value;
@@ -51,10 +69,10 @@ class PanelSite extends React.Component {
             <button type="button" onClick={() => this.handelClick(history)}>Вход</button>));
         return (
             <div className='panelSite'>
-                <div className='nameFirm'><Link to='/'><img className='logo' src={logo} alt=""/>MAGIC STATIONARY</Link>
+                <div className='nameFirm'>
+                    <Link to='/'><img className='logo' src={logo} alt="logo"/>MAGIC STATIONARY</Link>
                 </div>
-                <div className='category'
-                     onClick={(node, classOn, classOff, isBlur) => this.sideMenu(this._categoryMenu, 'category_menuOn', 'category_menuOff', true)}>Категории
+                <div className='category' onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>Категории
                     <div ref={(node) => this._categoryMenu = node} className='category_menuOff'>
                         <div className='category'>
                             <div>Бумажная продукция</div>
@@ -63,7 +81,10 @@ class PanelSite extends React.Component {
                             <div>Школьные принадлежности</div>
                             <div>Подарочная упаковка</div>
                         </div>
-                    </div></div>
+                    </div>
+                </div>
+
+
                 <div className='searchMenu'><input type="text" placeholder='Найти'/>
                     <button><img src={iconFind} alt=""/></button>
                 </div>
