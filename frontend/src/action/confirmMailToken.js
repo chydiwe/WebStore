@@ -18,7 +18,7 @@ export function confirmToken(token) {
                 if (response.status === 200) {
                     dispatch({
                         type: POST_MAIL_TOKEN_SUCCES,
-                        payload:{isConfirm:true}
+                        payload:true
                     })
                 }
                 else {

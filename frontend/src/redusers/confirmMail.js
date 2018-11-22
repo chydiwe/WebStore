@@ -12,7 +12,7 @@ export function confirmToken(state = initialState, action) {
         case POST_MAIL_TOKEN_FAILED:
             return {isConfirm: action.payload};
         case POST_MAIL_TOKEN_SUCCES: {
-            return {isConfirm: action.payload}
+            return {isConfirm: action.payload};
         }
         default:
             return state

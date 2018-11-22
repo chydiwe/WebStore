@@ -38,7 +38,7 @@ const Plus = () =>
     </svg>
 
 
-const ShoppingCartItem = ({item, add, del}) =>
+const ShoppingCartItem = ({item, change}) =>
     <tr className="shopping-cart-item">
         <td>
             <img src={item.product.images[0] || notFound} alt=""/>
@@ -52,61 +52,63 @@ const ShoppingCartItem = ({item, add, del}) =>
         </td>
 
         <td className="quantity">
-            <div onClick={add}>
+            <div onClick={() => change('+')}>
                 <Plus/>
             </div>
             <p>{item.amount}</p>
-            <div onClick={del}>
+            <div onClick={() => change('-')}>
                 <Minus/>
             </div>
         </td>
 
-        <td className="total-price">{()=>item.amount*item.product.cost} руб.</td>
+        <td className="total-price">{item.amount * item.product.cost} руб.</td>
 
-        <td>
-            <Cross/>
+        <td onClick={() => change('del')}>
+            <Cross />
         </td>
     </tr>
-
 
 
 class OrderPage extends Component {
     constructor() {
         super();
-
-        this.quantityAdd = this.quantityAdd.bind(this);
-        this.quantityReduce = this.quantityReduce.bind(this);
+        this.quantityChange = this.quantityChange.bind(this);
         /* вызов метода запроса инфы о корзине пользователя по его id*/
 
         this.state = {
-           products:[]
+            products: []
         };
 
     }
 
-    quantityAdd(item,key) {
-        const nProd=this.state.products;
-        item.amount++;
-        nProd[key]=item;
+    quantityChange(item, key, op) {
+        const nProd = this.state.products;
+        if (op === '+') {
+            item.amount++;
+            nProd[key] = item;
+        }
+        if (op === '-') {
+            item.amount--;
+            nProd[key] = item;
+        }
+        if(op==='del'){
+            nProd.splice(key, 1)
+        }
         this.setState({
-            products:nProd
+            products: nProd
         })
-     }
+    }
 
-    quantityReduce(item,key) {
-        const nProd=this.state.products;
-        item.amount--;
-        nProd[key]=item;
-        this.setState({
-            products:nProd
-        })
+    componentDidMount() {
+        this.props.user
+            .then(response => fetch(`http://localhost:8080/api/users/bucket?userId=${response.id}`)
+                .then(response => response.json())
+                .then(response => this.setState({products: response})))
     }
-    componentDidMount(){
-      this.props.user
-          .then(response=>fetch(`http://localhost:8080/api/users/bucket?userId=${response.id}`)
-              .then(response=>response.json())
-              .then(response=>console.log(response)))
-    }
+     componentWillUpdate(){
+        const nProd=this.state.products.filter(item=>item.amount>0);
+        if(nProd.length!==this.state.products.length) this.setState({products:nProd})
+     }
     render() {
 
         return (
@@ -124,9 +126,8 @@ class OrderPage extends Component {
                             <td>Цена</td>
                             <td>{/**/}</td>
                         </tr>
-                        { this.state.products.map((item,key) =>
-                            <ShoppingCartItem item={item} add={() => this.quantityAdd(item,key)}
-                                              del={() => this.quantityReduce(item,key)}/>)
+                        {this.state.products.map((item, key) =>
+                            <ShoppingCartItem item={item} change={(op) => this.quantityChange(item, key, op)}/>)
 
                         }
                         </tbody>
@@ -134,8 +135,10 @@ class OrderPage extends Component {
 
                     <div className="order-accept-block">
                         <div className="float-right">
-                            <p id="total-sum">Итого: <span>{this.state.totalSum}</span></p>
-                            <button className="button">Оформить заказ</button>
+                            <p id="total-sum">Итого: <span>{this.state.products.map(item => item.product.cost * item.amount).reduce((sum, current) => {
+                                return sum + current
+                            }, 0)}</span></p>
+                            <button onClick={() => alert('Пока все')} className="button">Оформить заказ</button>
                         </div>
                         <div className="clear-float">{/**/}</div>
                     </div>
@@ -145,10 +148,11 @@ class OrderPage extends Component {
         );
     }
 }
+
 const mapStateToProps = store => {
     return {
         user: sessionService.loadUser(),
     }
 };
 
-export default connect(mapStateToProps,null)(OrderPage)
+export default connect(mapStateToProps, null)(OrderPage)

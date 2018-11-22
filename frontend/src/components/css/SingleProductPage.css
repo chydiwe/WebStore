@@ -6,10 +6,15 @@
     margin: 0 auto;
     font-family: 'Ubuntu', sans-serif;
     color: #4a4a4a;
-}
 
+}
+.product-container table{
+    box-shadow: 2px 2px 5px 1px silver;
+}
 #product-title {
     font-size: 2em;
+    text-align: left;
+    padding-left: 10px;
 }
 
 #product-image {
@@ -17,7 +22,7 @@
     width: 350px;
     height: 350px;
     margin: 0 3em 3em;
-    background-color: lightgrey;
+    background-color: #fff9fc;
 }
 
 p {
