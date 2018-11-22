@@ -1,7 +1,6 @@
 package com.jackass.RestAPI.controller;
 
 import com.jackass.RestAPI.entity.*;
-import com.jackass.RestAPI.entity.Order;
 import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,5 +120,15 @@ public class OrderController {
         }
         order.setDateFinished(LocalDate.now());
         orderRepository.save(order);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, params = "comment")
+    public void changeComment(@RequestParam int id,
+                              @RequestParam String comment) {
+        Order order = orderRepository.getOrderById(id);
+        if (order == null) {
+            throw new NotFoundException("Wrong order ID.");
+        }
+        order.setUserComment(comment);
     }
 }
