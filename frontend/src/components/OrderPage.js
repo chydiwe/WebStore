@@ -84,7 +84,7 @@ class OrderPage extends Component {
 
     }
 
-    quantityAdd(item,key    ) {
+    quantityAdd(item,key) {
         const nProd=this.state.products;
         item.amount++;
         nProd[key]=item;
