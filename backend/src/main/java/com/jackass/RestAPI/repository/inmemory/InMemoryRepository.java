@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public abstract class InMemoryRepository<T> {
 
@@ -37,40 +38,56 @@ public abstract class InMemoryRepository<T> {
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             Recursive recursive = method.getDeclaredAnnotation(Recursive.class);
             if (recursive != null) {
-                onRecursive(args, recursive.value());
+                onRecursive(args);
             }
             return method.invoke(delegate, args);
         }
 
-        private void onRecursive(Object[] args, RecursiveType type) throws IllegalAccessException {
+        private void onRecursive(Object[] args) throws IllegalAccessException {
             Pair<String, String> primaryKeyToValue = getPrimaryKeyToValue(args);
 
             if (primaryKeyToValue == null) {
                 return;
             }
 
-            for (Object arg : args){
+            for (Object arg : args) {
                 List<Field> relatedFields = new ArrayList<>();
                 for (Field field : arg.getClass().getDeclaredFields()) {
-                    if (database.containsKey(field.getClass())) {
+                    Column column = field.getDeclaredAnnotation(Column.class);
+
+                    database.keySet().stream()
+                            .filter(table -> {
+                                if(!table.equals(arg.getClass())){
+                                    for (Field f : table.getDeclaredFields()){
+                                        Id id = f.getDeclaredAnnotation(Id.class);
+                                        Column c = f.getDeclaredAnnotation(Column.class);
+                                        if(id != null && c != null && c.name().equals(column.name())){
+                                            return true;
+                                        }
+                                    }
+                                }
+
+                                return false;
+                            }).collect(Collectors.toSet());
+
+                    if (database.containsKey(field.getType())) {
                         relatedFields.add(field);
                     }
                 }
 
                 for (Field field : relatedFields) {
                     List rows = database.get(field.getClass());
-                    for (Object row : rows){
-                        for(Field column : row.getClass().getDeclaredFields()) {
+                    if (rows == null) {
+                        continue;
+                    }
+
+                    for (Object row : rows) {
+                        for (Field column : row.getClass().getDeclaredFields()) {
                             Column[] columns = column.getDeclaredAnnotationsByType(Column.class);
                             for (Column c : columns) {
                                 if (c.name().equals(primaryKeyToValue.getKey()) && column.get(row).equals(primaryKeyToValue.getValue())) {
-                                    if(type == RecursiveType.READ){
-                                        field.setAccessible(true);
-                                        field.set(arg, column.get(row));
-                                    } else {
-                                        column.setAccessible(true);
-                                        column.set(row, field.get(arg));
-                                    }
+                                    column.setAccessible(true);
+                                    column.set(row, field.get(arg));
                                 }
                             }
                         }

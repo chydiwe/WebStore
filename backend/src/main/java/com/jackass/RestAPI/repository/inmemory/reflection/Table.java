@@ -6,15 +6,15 @@ import java.util.List;
 public interface Table<T> extends List<T> {
 
     @Override
-    @Recursive(RecursiveType.WRITE)
+    @Recursive
     boolean add(T t);
 
     @Override
-    @Recursive(RecursiveType.WRITE)
+    @Recursive
     boolean remove(Object o);
 
     @Override
-    @Recursive(RecursiveType.WRITE)
+    @Recursive
     boolean removeAll(Collection<?> c);
 
 }
