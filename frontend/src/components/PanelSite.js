@@ -61,6 +61,7 @@ class PanelSite extends React.Component {
         const name = ReactDOM.findDOMNode(this._loginEl).value,
             pass = ReactDOM.findDOMNode(this._passEl).value;
         this.props.actions.userLogIn({name, pass})
+        console.log(this.props)
 
     }
 

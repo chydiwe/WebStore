@@ -19,17 +19,6 @@ class SingleProductPage extends Component {
     }
 
     render() {
-        const data = {
-            img: '/url',
-            name: 'Pen',
-            cost: 100,
-            shortInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.\n' +
-                'Minima praesentium asperiores nostrum dolore tenetur iusto\n' +
-                'iure sunt unde inventore veniam incidunt, odit dolor voluptatum\n' +
-                'hic vitae sequi iste dolorem odio?',
-            quantity:50,
-            manufacturer:{name:'RusTool'}
-        }
         return (
             <div className="product-container">
                 <h2 id="product-title"> {this.state.data.name} </h2>
@@ -61,7 +50,7 @@ class SingleProductPage extends Component {
                 <div className="descr-container">
                     <h3>Описание товара</h3>
                     <p id="product-short-info">
-                        {data.shortInfo}
+                        {this.state.data.shortInfo}
                     </p>
                 </div>
 
