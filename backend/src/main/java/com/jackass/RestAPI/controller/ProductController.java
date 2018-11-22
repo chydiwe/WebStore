@@ -65,6 +65,21 @@ public class ProductController {
         productRepository.save(product);
     }
 
+    @RequestMapping(method = RequestMethod.POST, params = "quantity")
+    public void changeQuantity (@RequestParam int id,
+                                @RequestParam int quantity) {
+        Product product = productRepository.getProductById(id);
+
+        if (product == null) {
+            throw new NotFoundException("Wrong product ID.");
+        }
+
+        if (quantity <= 0) {
+            throw new NotFoundException("Wrong quantity.");
+        }
+        product.setQuantity(quantity);
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Product> getProductById(@RequestParam int id) {
         Product product = productRepository.getProductById(id);
