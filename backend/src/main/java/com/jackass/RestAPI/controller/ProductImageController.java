@@ -7,16 +7,13 @@ import com.jackass.RestAPI.repository.ProductImageRepository;
 import com.jackass.RestAPI.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
 @RestController
 @RequestMapping("api/products/images")
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost")
 public class ProductImageController {
     @Autowired
     private ProductRepository productRepository;
