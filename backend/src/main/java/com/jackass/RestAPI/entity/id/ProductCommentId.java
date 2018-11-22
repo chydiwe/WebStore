@@ -17,5 +17,5 @@ public class ProductCommentId implements Serializable {
 
     @Getter
     @Setter
-    private int comment;
+    private String comment;
 }

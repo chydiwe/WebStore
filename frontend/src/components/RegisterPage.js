@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {registration} from "../action/registerUser";
 import connect from "react-redux/es/connect/connect";
+import {withRouter} from "react-router-dom";
 
 class Register extends Component {
     constructor(props) {
@@ -34,11 +35,13 @@ class Register extends Component {
         this.submitInf = this.submitInf.bind(this)
     }
 
-    submitInf() {
+    submitInf(history) {
         const url = `email=${this.state.email}&password=${this.state.pass}&name=${this.state.name}&surname=${this.state.surname}&patronymic=${this.state.patronymic}${(this.state.phoneNumber !== '') ? `&phonenumber=${this.state.phoneNumber}` : ''}`;
+        this.props.regUser(url);
+        setTimeout(function () {
+            history.push('/')
 
-        this.state.formValid ?  this.props.regUser(url) :
-            console.log("Some field have bad value!")
+        }, 2000)
     }
 
     handleSubmit(event) {
@@ -106,7 +109,8 @@ class Register extends Component {
             case "userPatronymic":
                 this.setState({patronymic: event.target.value.trim()});
                 break;
-            default: break;
+            default:
+                break;
         }
         (event.target.value.trim() !== "") ? this.toggleClass(event.target, true) :
             this.toggleClass(event.target, false)
@@ -119,13 +123,15 @@ class Register extends Component {
     }
 
     render() {
+        const Submit = withRouter(({history}) => (
+            <button type='button' onClick={() => this.submitInf(history)}>Зарегистрироваться</button>));
         return (
             <div>
                 <form onSubmit={this.handleSubmit} className="registrationForm">
                     <h2>Регистрация</h2>
                     <label htmlFor="email">E-mail</label><br/>
                     <input type="text" id="email" className="" onChange={this.handleEmailChange}
-                            value={this.state.email}/><br/>
+                           value={this.state.email}/><br/>
 
                     <label htmlFor="pass">Пароль</label><br/>
                     <input type="password" id="pass" onChange={this.handlePassChange} value={this.state.pass}/><br/>
@@ -138,7 +144,8 @@ class Register extends Component {
                     <input type="text" id="userName" onChange={this.handleFIOChange} value={this.state.name}/><br/>
 
                     <label htmlFor="userSurname">Фамилия</label><br/>
-                    <input type="text" id="userSurname" onChange={this.handleFIOChange} value={this.state.surname}/><br/>
+                    <input type="text" id="userSurname" onChange={this.handleFIOChange}
+                           value={this.state.surname}/><br/>
 
                     <label htmlFor="userPatronymic">Отчество</label><br/>
                     <input type="text" id="userPatronymic" onChange={this.handleFIOChange}
@@ -147,8 +154,7 @@ class Register extends Component {
                     <label htmlFor="phoneNumber">Телефон</label><br/>
                     <input type="text" id="phoneNumber" onChange={this.handlePhoneNumbChange}
                            value={this.state.phoneNumber}/><br/>
-
-                    <button onClick={this.submitInf}>Зарегистрироваться</button>
+                    <Submit/>
                 </form>
             </div>
         );

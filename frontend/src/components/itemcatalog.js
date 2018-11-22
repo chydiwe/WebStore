@@ -4,11 +4,12 @@ import connect from "react-redux/es/connect/connect";
 import getCatalog from '../action/catalog'
 import notFound from './img/notfound.png'
 import fetch from "cross-fetch";
+import {Link} from "react-router-dom";
 
 const Item_catalog = ({item, i, addInBucket = f => f}) =>
 
     <div key={i} className='item_catalog card_catalog'>
-        <img src={notFound} className='item_img'/>
+        <Link to={`/item?id=${item.id}`}><img src={notFound} className='item_img'/></Link>
         <h2 className='item_name'>{item.name}</h2>
         <li className='item_price'>Цена:{item.cost}</li>
         <button className='item_add' onClick={() => addInBucket(item)}>Добавить</button>
