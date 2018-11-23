@@ -20,7 +20,7 @@ public class InMemoryCategoryRepository extends InMemoryRepository<Category> imp
 
     @Override
     public Set<Category> findAll() {
-        return new HashSet<>(table);
+        return table;
     }
 
     @Override

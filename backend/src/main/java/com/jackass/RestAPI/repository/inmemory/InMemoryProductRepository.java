@@ -38,7 +38,7 @@ public class InMemoryProductRepository extends InMemoryRepository<Product> imple
 
     @Override
     public Set<Product> findAll(/*Pageable pageable*/) {
-        return new HashSet<>(table);
+        return table;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class InMemoryDeliveryRepository extends InMemoryRepository<Delivery> imp
 
     @Override
     public Set<Delivery> findAll() {
-        return new HashSet<>(table);
+        return table;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class InMemoryGroupRepository extends InMemoryRepository<Group> implement
 
     @Override
     public Set<Group> findAll() {
-        return new HashSet<>(table);
+        return table;
     }
 
     @Override

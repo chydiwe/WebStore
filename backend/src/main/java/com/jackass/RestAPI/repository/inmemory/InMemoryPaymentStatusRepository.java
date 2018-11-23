@@ -19,7 +19,7 @@ public class InMemoryPaymentStatusRepository extends InMemoryRepository<PaymentS
 
     @Override
     public Set<PaymentStatus> findAll() {
-        return new HashSet<>(table);
+        return table;
     }
 
     @Override

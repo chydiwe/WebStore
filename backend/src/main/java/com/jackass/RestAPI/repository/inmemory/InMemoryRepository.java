@@ -2,28 +2,32 @@ package com.jackass.RestAPI.repository.inmemory;
 
 import com.jackass.RestAPI.repository.inmemory.reflection.*;
 import javafx.util.Pair;
+import org.springframework.boot.web.embedded.jetty.JettyWebServer;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 public abstract class InMemoryRepository<T> {
 
-    private static Map<Class, List> database = new ConcurrentHashMap<>();
+    private static Map<Class, InMemoryTable> database = new ConcurrentHashMap<>();
 
     protected int id = 1;
-    protected List<T> table;
+    protected Set<T> table;
 
     public InMemoryRepository() {
-        this.table = (List<T>) Proxy.newProxyInstance(this.getClass().getClassLoader(),
+        this.table = (InMemoryTable) Proxy.newProxyInstance(this.getClass().getClassLoader(),
                 new Class[]{Table.class}, new TableInvocationHandler(new InMemoryTable<T>()));
-        this.database.put(ReflectionUtils.getGenericParameterClass(this.getClass()), table);
+        this.database.put(ReflectionUtils.getGenericParameterClass(this.getClass()), (InMemoryTable) table);
     }
 
     private class TableInvocationHandler implements InvocationHandler {
@@ -38,59 +42,71 @@ public abstract class InMemoryRepository<T> {
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             Recursive recursive = method.getDeclaredAnnotation(Recursive.class);
             if (recursive != null) {
-                onRecursive(args);
+                onRecursive(recursive, args);
             }
             return method.invoke(delegate, args);
         }
 
-        private void onRecursive(Object[] args) throws IllegalAccessException {
-            Pair<String, String> primaryKeyToValue = getPrimaryKeyToValue(args);
+        private void onRecursive(Recursive operation, Object[] entities) throws IllegalAccessException {
+            Pair<String, String> primaryKeyToValue = getPrimaryKeyToValue(entities);
 
             if (primaryKeyToValue == null) {
                 return;
             }
 
-            for (Object arg : args) {
-                List<Field> relatedFields = new ArrayList<>();
-                for (Field field : arg.getClass().getDeclaredFields()) {
-                    Column column = field.getDeclaredAnnotation(Column.class);
+            for (Object entity : entities) {
+                for (Field field : entity.getClass().getDeclaredFields()) {
+                    // find table for field and add new object
+                    JoinColumn joinColumn = field.getDeclaredAnnotation(JoinColumn.class);
+                    if (joinColumn != null) {
+                        field.setAccessible(true);
+                        Object object = field.get(entity);
 
-                    database.keySet().stream()
-                            .filter(table -> {
-                                if(!table.equals(arg.getClass())){
-                                    for (Field f : table.getDeclaredFields()){
-                                        Id id = f.getDeclaredAnnotation(Id.class);
-                                        Column c = f.getDeclaredAnnotation(Column.class);
-                                        if(id != null && c != null && c.name().equals(column.name())){
-                                            return true;
-                                        }
-                                    }
-                                }
+                        Class table;
+                        if (field.getDeclaredAnnotation(OneToMany.class) != null) {
+                            table = ReflectionUtils.getGenericParameterClass(field.getType());
+                        } else {
+                            table = field.getClass();
+                        }
 
-                                return false;
-                            }).collect(Collectors.toSet());
-
-                    if (database.containsKey(field.getType())) {
-                        relatedFields.add(field);
-                    }
-                }
-
-                for (Field field : relatedFields) {
-                    List rows = database.get(field.getClass());
-                    if (rows == null) {
+                        executeOperation(operation.value(), table, object);
                         continue;
                     }
 
-                    for (Object row : rows) {
-                        for (Field column : row.getClass().getDeclaredFields()) {
-                            Column[] columns = column.getDeclaredAnnotationsByType(Column.class);
-                            for (Column c : columns) {
-                                if (c.name().equals(primaryKeyToValue.getKey()) && column.get(row).equals(primaryKeyToValue.getValue())) {
-                                    column.setAccessible(true);
-                                    column.set(row, field.get(arg));
-                                }
-                            }
-                        }
+                    // find table from foreign key
+                    Column column = field.getDeclaredAnnotation(Column.class);
+                    if (column != null) {
+                        field.setAccessible(true);
+                        Object object = field.get(entity);
+
+                        database.entrySet().stream()
+                                .forEach(entry -> {
+                                    try {
+                                        Class table = entry.getKey();
+                                        InMemoryTable rows = entry.getValue();
+                                        if (!table.equals(entity.getClass())) {
+                                            for (Field f : table.getDeclaredFields()) {
+                                                Id id = f.getDeclaredAnnotation(Id.class);
+                                                Column c = f.getDeclaredAnnotation(Column.class);
+                                                if (id != null && c != null && c.name().equals(column.name())) {
+                                                    for (Object row : rows) {
+                                                        Field columnValueOfRow = row.getClass().getDeclaredField(f.getName());
+                                                        columnValueOfRow.setAccessible(true);
+
+                                                        if (columnValueOfRow.get(row).equals(object)) {
+
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } catch (NoSuchFieldException e) {
+                                    } catch (IllegalAccessException e) {
+                                    }
+                                });
+
+//                        executeOperation(operation.value(), table, object);
                     }
                 }
             }
@@ -112,6 +128,14 @@ public abstract class InMemoryRepository<T> {
             return null;
         }
 
-    }
+        private void executeOperation(SQL operation, Class table, Object entity) {
+            InMemoryTable rows = database.get(table);
+            if (operation == SQL.INSERT) {
+                rows.insert(entity);
+            } else {
+                rows.delete(entity);
+            }
+        }
 
+    }
 }

@@ -20,7 +20,7 @@ public class InMemoryManufacturerRepository extends InMemoryRepository<Manufactu
 
     @Override
     public Set<Manufacturer> findAll() {
-        return new HashSet<>(table);
+        return table;
     }
 
     @Override

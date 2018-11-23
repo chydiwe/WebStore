@@ -19,7 +19,7 @@ public class InMemoryPaymentRepository extends InMemoryRepository<Payment> imple
 
     @Override
     public Set<Payment> findAll() {
-        return new HashSet<>(table);
+        return table;
     }
 
     @Override

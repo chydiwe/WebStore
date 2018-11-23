@@ -19,7 +19,7 @@ public class InMemoryOrderStatusRepository extends InMemoryRepository<OrderStatu
 
     @Override
     public Set<OrderStatus> findAll() {
-        return new HashSet<>(table);
+        return table;
     }
 
     @Override

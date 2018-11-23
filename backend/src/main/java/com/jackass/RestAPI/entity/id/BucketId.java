@@ -1,6 +1,5 @@
 package com.jackass.RestAPI.entity.id;
 
-import com.jackass.RestAPI.entity.Product;
 import lombok.Getter;
 import lombok.Setter;
 
