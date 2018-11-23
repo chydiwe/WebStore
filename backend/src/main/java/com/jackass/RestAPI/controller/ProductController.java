@@ -78,6 +78,20 @@ public class ProductController {
             throw new NotFoundException("Wrong quantity.");
         }
         product.setQuantity(quantity);
+        productRepository.save(product);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, params = "info")
+    public void changeInfo(@RequestParam int id,
+                           @RequestParam String info) {
+        Product product = productRepository.getProductById(id);
+
+        if (product == null) {
+            throw new NotFoundException("Wrong product ID.");
+        }
+
+        product.setShortInfo(info);
+        productRepository.save(product);
     }
 
     @RequestMapping(method = RequestMethod.GET)

@@ -157,5 +157,6 @@ public class OrderController {
             throw new NotFoundException("Wrong order ID.");
         }
         order.setUserComment(comment);
+        orderRepository.save(order);
     }
 }
