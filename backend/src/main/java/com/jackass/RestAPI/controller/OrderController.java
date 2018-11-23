@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -25,6 +27,8 @@ public class OrderController {
     private DeliveryRepository deliveryRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BucketRepository bucketRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Order> getOrder(@RequestParam int id) {
@@ -46,18 +50,12 @@ public class OrderController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void addOrder(@RequestParam int customer,
-                         @RequestParam int manager,
                          @RequestParam int delivery,
                          @RequestParam int payment,
                          @RequestParam String comment) {
         User userCustomer = userRepository.getUserById(customer);
         if (userCustomer == null) {
             throw new NotFoundException("Wrong user-customer ID.");
-        }
-
-        User userManager = userRepository.getUserById(manager);
-        if (userManager == null) {
-            throw new NotFoundException("Wrong user-manager ID.");
         }
 
         Delivery deliveryObj = deliveryRepository.getDeliveryById(delivery);
@@ -75,6 +73,35 @@ public class OrderController {
         order.setDelivery(deliveryObj);
         order.setPayment(paymentObj);
         order.setUserComment(comment);
+
+        Set<OrderInfo> products = new HashSet<>();
+
+        Set<BucketItem> bucket = userCustomer.getProducts();
+
+        for (BucketItem bi : bucket) {
+            OrderInfo tmp = new OrderInfo();
+            tmp.setProduct(bi.getProduct());
+            tmp.setAmount(bi.getAmount());
+            products.add(tmp);
+            bucketRepository.delete(bi);
+        }
+        order.setProducts(products);
+
+        orderRepository.save(order);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, params = "manager")
+    public void changeManager(@RequestParam int id,
+                              @RequestParam int manager) {
+        Order order = orderRepository.getOrderById(id);
+        if (order == null) {
+            throw new NotFoundException("Wrong order ID.");
+        }
+        User user = userRepository.getUserById(manager);
+        if (user == null) {
+            throw new NotFoundException("Wrong manager ID.");
+        }
+        order.setUserManager(user);
         orderRepository.save(order);
     }
 
