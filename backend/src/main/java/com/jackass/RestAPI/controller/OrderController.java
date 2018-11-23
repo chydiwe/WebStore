@@ -83,6 +83,7 @@ public class OrderController {
             tmp.setProduct(bi.getProduct());
             tmp.setAmount(bi.getAmount());
             products.add(tmp);
+            bucketRepository.delete(bi);
         }
         order.setProducts(products);
 
