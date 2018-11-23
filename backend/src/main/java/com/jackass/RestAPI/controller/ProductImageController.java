@@ -43,9 +43,9 @@ public class ProductImageController {
         return ResponseEntity.ok().body(product.getImages());
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteImage(@RequestParam int id,
-                            @RequestParam String URI) {
+    @RequestMapping(value = "id={id}&URI={URI}", method = RequestMethod.DELETE)
+    public void deleteImage(@PathVariable int id,
+                            @PathVariable String URI) {
         Product product = productRepository.getProductById(id);
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");

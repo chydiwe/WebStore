@@ -90,9 +90,9 @@ public class OrderInfoController {
         recalculateCost(orderId);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, params = {"orderId", "productId"})
-    public void deleteFromOrder(@RequestParam int orderId,
-                                @RequestParam int productId) {
+    @RequestMapping(value = "orderId={orderId}&productId={productId}", method = RequestMethod.DELETE, params = {"orderId", "productId"})
+    public void deleteFromOrder(@PathVariable int orderId,
+                                @PathVariable int productId) {
         Order order = orderRepository.getOrderById(orderId);
         if (order == null) {
             throw new NotFoundException("Wrong order ID.");

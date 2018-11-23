@@ -63,8 +63,8 @@ public class UserController {
         mailManager.sendToken(user.getEmail(), token.getToken());
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "token")
-    public void confirm(@RequestParam String token) {
+    @RequestMapping(value = "token={token}", method = RequestMethod.POST, params = "token")
+    public void confirm(@PathVariable String token) {
         ConfirmationToken tokenObj = tokenRepository.getConfirmationTokenByToken(token);
         tokenRepository.delete(tokenObj);
     }
@@ -80,8 +80,8 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "id")
-    public ResponseEntity<User> getUser(@RequestParam int id) {
+    @RequestMapping(value = "id={id}", method = RequestMethod.GET, params = "id")
+    public ResponseEntity<User> getUser(@PathVariable int id) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
@@ -91,9 +91,9 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "patr")
-    public void changePatr(@RequestParam int id,
-                           @RequestParam String patr) {
+    @RequestMapping(value = "id={id}&patr={patr}", method = RequestMethod.POST, params = "patr")
+    public void changePatr(@PathVariable int id,
+                           @PathVariable String patr) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
@@ -103,8 +103,8 @@ public class UserController {
         user.setPatronymic(patr);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, params = "patr")
-    public void deletePatr(@RequestParam int id) {
+    @RequestMapping(value = "deletePatr={id}", method = RequestMethod.DELETE, params = "patr")
+    public void deletePatr(@PathVariable int id) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
@@ -114,9 +114,9 @@ public class UserController {
         user.setPatronymic(null);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "group")
-    public void changeGroup(@RequestParam int id,
-                           @RequestParam int group) {
+    @RequestMapping(value = "id={id}&group={group}", method = RequestMethod.POST, params = "group")
+    public void changeGroup(@PathVariable int id,
+                            @PathVariable int group) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
@@ -132,9 +132,9 @@ public class UserController {
         user.setGroup(groupObj);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "phone")
-    public void changePhone(@RequestParam int id,
-                            @RequestParam String phone) {
+    @RequestMapping(value = "id={id}&phone={phone}", method = RequestMethod.POST, params = "phone")
+    public void changePhone(@PathVariable int id,
+                            @PathVariable String phone) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
@@ -144,8 +144,8 @@ public class UserController {
         user.setPhoneNumber(phone);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, params = "phone")
-    public void deletePhone(@RequestParam int id) {
+    @RequestMapping(value = "deletePhone={id}", method = RequestMethod.DELETE, params = "phone")
+    public void deletePhone(@PathVariable int id) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {

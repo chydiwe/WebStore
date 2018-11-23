@@ -52,9 +52,9 @@ public class BucketController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, params = {"userId", "productId"})
-    public void deleteFromBucket(@RequestParam int userId,
-                                 @RequestParam int productId) {
+    @RequestMapping(value = "userId={userId}&productId={productId", method = RequestMethod.DELETE, params = {"userId", "productId"})
+    public void deleteFromBucket(@PathVariable int userId,
+                                 @PathVariable int productId) {
         User user = userRepository.getUserById(userId);
         if (user == null) {
             throw new NotFoundException("Wrong user ID.");

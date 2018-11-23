@@ -29,7 +29,7 @@ public class ProductController {
 
     private static final int PAGE_SIZE = 20;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, params = "name")
     public void addProduct (@RequestParam String name,
                             @RequestParam int categoryId,
                             @RequestParam int manufacturerId,
@@ -65,9 +65,9 @@ public class ProductController {
         productRepository.save(product);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "quantity")
-    public void changeQuantity (@RequestParam int id,
-                                @RequestParam int quantity) {
+    @RequestMapping(value = "id={id}&quantity={quantity}", method = RequestMethod.POST, params = "quantity")
+    public void changeQuantity (@PathVariable int id,
+                                @PathVariable int quantity) {
         Product product = productRepository.getProductById(id);
 
         if (product == null) {
@@ -81,9 +81,9 @@ public class ProductController {
         productRepository.save(product);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "info")
-    public void changeInfo(@RequestParam int id,
-                           @RequestParam String info) {
+    @RequestMapping(value = "id={id}&info={info}", method = RequestMethod.POST, params = "info")
+    public void changeInfo(@PathVariable int id,
+                           @PathVariable String info) {
         Product product = productRepository.getProductById(id);
 
         if (product == null) {
@@ -116,8 +116,8 @@ public class ProductController {
         productRepository.delete(product);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "name")
-    public ResponseEntity<Product> getProductByName(@RequestParam String name) {
+    @RequestMapping(value = "name={name}", method = RequestMethod.GET, params = "name")
+    public ResponseEntity<Product> getProductByName(@PathVariable String name) {
         Product product = productRepository.getProductByName(name);
 
         if (product == null) {
@@ -142,8 +142,8 @@ public class ProductController {
         return ResponseEntity.ok().body(products);
     }
 
-    @RequestMapping(value = "/page", method = RequestMethod.GET, params = "manufacturer")
-    public ResponseEntity<Set<Product>> getProductByManufacturer(@RequestParam int manufacturerId/*,
+    @RequestMapping(value = "/page?manufacturerId={manufacturerId}", method = RequestMethod.GET, params = "manufacturer")
+    public ResponseEntity<Set<Product>> getProductByManufacturer(@PathVariable int manufacturerId/*,
                                                                  @RequestParam int num*/) {
         Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturerId);
 
