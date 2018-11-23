@@ -1,10 +1,17 @@
 
 (rest_tests.story)
 Scenario: 
-Given running server (FAILED)
-(org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'infoController': Unsatisfied dependency expressed through field 'manufacturerRepository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'inMemoryManufacturerRepository' defined in file [C:\Users\Well\IdeaProjects\WebStore\backend\target\classes\com\jackass\RestAPI\repository\inmemory\InMemoryManufacturerRepository.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.jackass.RestAPI.repository.inmemory.InMemoryManufacturerRepository]: Constructor threw exception; nested exception is java.lang.ClassCastException: com.sun.proxy.$Proxy28 cannot be cast to java.util.Set)
-!-- Check registration
-When POST /user? email=admin@mail.ru & password=admin & name=admin & surname=admin & patronymic=admin (NOT PERFORMED)
-Then user with email admin@mail.ru has token (NOT PERFORMED)
-
-
+Given running server
+!-- [START] Test bucket controller.
+When POST /users?email=admin@mail.ru&password=admin&name=admin&surname=admin&patronymic=admin return status code 200
+When GET /users?id=1 then json has values id=1
+When POST /products/categories?name=School return status code 200
+When GET /products/categories then json has values id=1
+When POST /products/manufacturers?name=Hans&logo=image1&info=Good_store return status code 200
+When GET /products/manufacturers?id=1 then json has values id=1
+When POST /products?name=Pen&categoryId=1&manufacturerId=1&cost=100&quantity=100 return status code 200
+When GET /products?id=1 then json has values id=1
+When POST /users/bucket?userId=1&productId=1&amount=10 return status code 200
+When GET /users/bucket?userId=1 then json has values amount=10 (FAILED)
+(java.lang.NullPointerException)
+!-- [END] Test bucket controller.
