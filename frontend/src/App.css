@@ -122,10 +122,10 @@ li {
 }
 
 .registrationForm button {
-    width: 150px;
+
     padding: 5px;
-    margin: 25px;
-    margin-left: 0;
+    margin-top: 25px;
+    margin-bottom: 25px;
     font-size: 1.2em;
     color: aliceblue;
     border: 2px solid forestgreen;
@@ -155,4 +155,3 @@ li {
 .validFieldValue {
     border-color: green;
 }
-
