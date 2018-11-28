@@ -24,8 +24,14 @@ public class BucketController {
     @Autowired
     private BucketRepository bucketRepository;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getBucket(@RequestParam int userId) {
+    //
+    //  GET
+    //
+    @RequestMapping(
+            value = "userId={userId}",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<?> getBucket(@PathVariable int userId) {
         User user = userRepository.getUserById(userId);
 
         if (user == null) {
@@ -35,55 +41,16 @@ public class BucketController {
         return ResponseEntity.ok().body(user.getProducts());
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteBucket(@RequestParam int userId) {
-        User user = userRepository.getUserById(userId);
-
-        if (user == null) {
-            throw new NotFoundException("Wrong user ID.");
-        }
-
-        Set<BucketItem> products = user.getProducts();
-        if (products == null) {
-            throw new NotFoundException("User does not have products in bucket.");
-        }
-        for (BucketItem b : products) {
-            bucketRepository.delete(b);
-        }
-    }
-
-    @RequestMapping(value = "userId={userId}&productId={productId", method = RequestMethod.DELETE, params = {"userId", "productId"})
-    public void deleteFromBucket(@PathVariable int userId,
-                                 @PathVariable int productId) {
-        User user = userRepository.getUserById(userId);
-        if (user == null) {
-            throw new NotFoundException("Wrong user ID.");
-        }
-
-        Set<BucketItem> products = user.getProducts();
-        if (products == null) {
-            throw new NotFoundException("User does not have products in bucket.");
-        }
-
-        Product product = productRepository.getProductById(productId);
-        if (product == null) {
-            throw new NotFoundException("Wrong product ID.");
-        }
-
-        BucketItem elem = products.stream()
-                .filter(bucket -> bucket.getProduct().getId() == productId)
-                .findFirst()
-                .orElse(null);
-        if (elem == null) {
-            throw new NotFoundException("Bucket does not have such product.");
-        }
-        bucketRepository.delete(elem);
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public void addToBucket(@RequestParam int userId,
-                            @RequestParam int productId,
-                            @RequestParam int amount) {
+    //
+    //  POST
+    //
+    @RequestMapping(
+            value = "userId={userId}&productId={productId}&amount={amount}",
+            method = RequestMethod.POST
+    )
+    public void addToBucket(@PathVariable int userId,
+                            @PathVariable int productId,
+                            @PathVariable int amount) {
         Product product = productRepository.getProductById(productId);
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");
@@ -117,5 +84,59 @@ public class BucketController {
             bucketItem.setAmount(amount);
             bucketRepository.save(bucketItem);
         }
+    }
+
+    //
+    //  DELETE
+    //
+    @RequestMapping(
+            value = "userId={userId}",
+            method = RequestMethod.DELETE)
+
+    public void deleteBucket(@PathVariable int userId) {
+        User user = userRepository.getUserById(userId);
+
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
+        }
+
+        Set<BucketItem> products = user.getProducts();
+        if (products == null) {
+            throw new NotFoundException("User does not have products in bucket.");
+        }
+        for (BucketItem b : products) {
+            bucketRepository.delete(b);
+        }
+    }
+
+    @RequestMapping(
+            value = "userId={userId}&productId={productId}",
+            method = RequestMethod.DELETE
+    )
+    public void deleteFromBucket(@PathVariable int userId,
+                                 @PathVariable int productId) {
+        User user = userRepository.getUserById(userId);
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
+        }
+
+        Set<BucketItem> products = user.getProducts();
+        if (products == null) {
+            throw new NotFoundException("User does not have products in bucket.");
+        }
+
+        Product product = productRepository.getProductById(productId);
+        if (product == null) {
+            throw new NotFoundException("Wrong product ID.");
+        }
+
+        BucketItem elem = products.stream()
+                .filter(bucket -> bucket.getProduct().getId() == productId)
+                .findFirst()
+                .orElse(null);
+        if (elem == null) {
+            throw new NotFoundException("Bucket does not have such product.");
+        }
+        bucketRepository.delete(elem);
     }
 }

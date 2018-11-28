@@ -25,11 +25,26 @@ public class ProductCommentController {
     @Autowired
     private UserRepository userRepository;
 
+    //
+    //  GET
+    //
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> getComments(@RequestParam int productId) {
+        Product product = productRepository.getProductById(productId);
+        if (product == null) {
+            throw new NotFoundException("Wrong product ID.");
+        }
+
+        return ResponseEntity.ok().body(product.getComments());
+    }
+
+    //
+    //  POST
+    //
     @RequestMapping(method = RequestMethod.POST)
     public void addComment(@RequestParam int productId,
                            @RequestParam int userId,
-                           @RequestParam String comment,
-                           @RequestParam LocalDate date) {
+                           @RequestParam String comment) {
         Product product = productRepository.getProductById(productId);
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");
@@ -44,20 +59,13 @@ public class ProductCommentController {
         productComment.setProductId(productId);
         productComment.setUserId(userId);
         productComment.setComment(comment);
-        productComment.setDate(date);
+        productComment.setDate(LocalDate.now());
         productCommentRepository.save(productComment);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getComments(@RequestParam int productId) {
-        Product product = productRepository.getProductById(productId);
-        if (product == null) {
-            throw new NotFoundException("Wrong product ID.");
-        }
-
-        return ResponseEntity.ok().body(product.getComments());
-    }
-
+    //
+    //  DELETE
+    //
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteComments(@RequestParam int productId,
                                @RequestParam String comment) {

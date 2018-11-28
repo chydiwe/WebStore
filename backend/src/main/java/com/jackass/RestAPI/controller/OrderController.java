@@ -30,8 +30,14 @@ public class OrderController {
     @Autowired
     private BucketRepository bucketRepository;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Order> getOrder(@RequestParam int id) {
+    //
+    //  GET
+    //
+    @RequestMapping(
+            value = "id={id}",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<Order> getOrder(@PathVariable int id) {
         Order order = orderRepository.getOrderById(id);
         if (order == null) {
             throw new NotFoundException("Wrong order ID.");
@@ -39,20 +45,30 @@ public class OrderController {
         return ResponseEntity.ok().body(order);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteOrder(@RequestParam int id) {
-        Order order = orderRepository.getOrderById(id);
-        if (order == null) {
-            throw new NotFoundException("Wrong order ID.");
+    @RequestMapping(
+            value = "userId={userId}",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<Set<Order>> getUserOrders(@PathVariable int userId) {
+        User user = userRepository.getUserById(userId);
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
         }
-        orderRepository.delete(order);
+        Set<Order> orders = orderRepository.findAllByUserCustomer(user);
+        return ResponseEntity.ok().body(orders);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void addOrder(@RequestParam int customer,
-                         @RequestParam int delivery,
-                         @RequestParam int payment,
-                         @RequestParam String comment) {
+    //
+    //  POST
+    //
+    @RequestMapping(
+            value = "customer={}&delivery={}&payment={}&comment={}",
+            method = RequestMethod.POST
+    )
+    public void addOrder(@PathVariable int customer,
+                         @PathVariable int delivery,
+                         @PathVariable int payment,
+                         @PathVariable String comment) {
         User userCustomer = userRepository.getUserById(customer);
         if (userCustomer == null) {
             throw new NotFoundException("Wrong user-customer ID.");
@@ -90,7 +106,10 @@ public class OrderController {
         orderRepository.save(order);
     }
 
-    @RequestMapping(value = "id={id}&manager={manager}", method = RequestMethod.POST, params = "manager")
+    @RequestMapping(
+            value = "id={id}&manager={manager}",
+            method = RequestMethod.POST
+    )
     public void changeManager(@PathVariable int id,
                               @PathVariable int manager) {
         Order order = orderRepository.getOrderById(id);
@@ -105,7 +124,10 @@ public class OrderController {
         orderRepository.save(order);
     }
 
-    @RequestMapping(value = "id={id}&paymentStatus={paymentStatus}", method = RequestMethod.POST, params = "paymentStatus")
+    @RequestMapping(
+            value = "id={id}&paymentStatus={paymentStatus}",
+            method = RequestMethod.POST, params = "paymentStatus"
+    )
     public void updatePaymentStatus(@PathVariable int id,
                                     @PathVariable int paymentStatus) {
         PaymentStatus paymentStatusObj = paymentStatusRepository.getPaymentStatusById(paymentStatus);
@@ -122,7 +144,10 @@ public class OrderController {
         orderRepository.save(order);
     }
 
-    @RequestMapping(value = "id={id}&orderStatus={orderStatus}", method = RequestMethod.POST, params = "orderStatus")
+    @RequestMapping(
+            value = "id={id}&orderStatus={orderStatus}",
+            method = RequestMethod.POST, params = "orderStatus"
+    )
     public void updateOrderStatus(@PathVariable int id,
                                   @PathVariable int orderStatus) {
         Order order = orderRepository.getOrderById(id);
@@ -139,7 +164,10 @@ public class OrderController {
         orderRepository.save(order);
     }
 
-    @RequestMapping(value = "id={id}", method = RequestMethod.POST, params = "finish")
+    @RequestMapping(
+            value = "id={id}",
+            method = RequestMethod.POST
+    )
     public void closeOrder(@PathVariable int id) {
         Order order = orderRepository.getOrderById(id);
         if (order == null) {
@@ -149,7 +177,10 @@ public class OrderController {
         orderRepository.save(order);
     }
 
-    @RequestMapping(value = "id={id}&comment={comment}", method = RequestMethod.POST, params = "comment")
+    @RequestMapping(
+            value = "id={id}&comment={comment}",
+            method = RequestMethod.POST
+    )
     public void changeComment(@PathVariable int id,
                               @PathVariable String comment) {
         Order order = orderRepository.getOrderById(id);
@@ -158,5 +189,19 @@ public class OrderController {
         }
         order.setUserComment(comment);
         orderRepository.save(order);
+    }
+
+    //
+    //  DELETE
+    //
+    @RequestMapping(
+            value = "id={id}",
+            method = RequestMethod.DELETE)
+    public void deleteOrder(@PathVariable int id) {
+        Order order = orderRepository.getOrderById(id);
+        if (order == null) {
+            throw new NotFoundException("Wrong order ID.");
+        }
+        orderRepository.delete(order);
     }
 }
