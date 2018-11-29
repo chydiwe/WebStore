@@ -92,11 +92,12 @@ class PanelSite extends React.Component {
                 <div className="RightMenu">
                     <div className='dropdown'>
                         <img src={profileIcon} className='dropbtn'
-                             onClick={(node, classOn, classOff, isBlur) => this.sideMenu(this._dropMenu, 'dropMenuOn', 'dropMenuOff', false)}/>{user.isLogin ?
-                        <p>Профиль</p> : <p>Войти</p>}
+                             onClick={(node, classOn, classOff, isBlur) => this.sideMenu(this._dropMenu, 'dropMenuOn', 'dropMenuOff', false)}/>
+                        {user.isLogin ? <p>Профиль</p> : <p>Войти</p>}
                         <div ref={(node) => {
                             this._dropMenu = node
-                        }} className='dropMenuOff'>  {user.isLogin === true ?
+                        }} className='dropMenuOff'>
+                            {user.isLogin === true ?
                             <ul className='profile'>
                                 <li>Имя:{user.name}</li>
                                 <li>

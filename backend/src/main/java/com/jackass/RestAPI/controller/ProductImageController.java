@@ -20,9 +20,30 @@ public class ProductImageController {
     @Autowired
     private ProductImageRepository productImageRepository;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void addImage(@RequestParam int id,
-                         @RequestParam String URI) {
+    //
+    //  GET
+    //
+    @RequestMapping(
+            value = "id={id}",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<?> getImages(@PathVariable int id) {
+        Product product = productRepository.getProductById(id);
+        if (product == null) {
+            throw new NotFoundException("Wrong product ID.");
+        }
+        return ResponseEntity.ok().body(product.getImages());
+    }
+
+    //
+    //  POST
+    //
+    @RequestMapping(
+            value = "id={id}&URI={URI}",
+            method = RequestMethod.POST
+    )
+    public void addImage(@PathVariable int id,
+                         @PathVariable String URI) {
         Product product = productRepository.getProductById(id);
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");
@@ -34,16 +55,13 @@ public class ProductImageController {
         productImageRepository.save(productImage);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getImages(@RequestParam int id) {
-        Product product = productRepository.getProductById(id);
-        if (product == null) {
-            throw new NotFoundException("Wrong product ID.");
-        }
-        return ResponseEntity.ok().body(product.getImages());
-    }
-
-    @RequestMapping(value = "id={id}&URI={URI}", method = RequestMethod.DELETE)
+    //
+    //  DELETE
+    //
+    @RequestMapping(
+            value = "id={id}&URI={URI}",
+            method = RequestMethod.DELETE
+    )
     public void deleteImage(@PathVariable int id,
                             @PathVariable String URI) {
         Product product = productRepository.getProductById(id);
@@ -62,8 +80,11 @@ public class ProductImageController {
         throw new NotFoundException("Wrong image URI.");
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, params = "id")
-    public void deleteAllImages(@RequestParam int id) {
+    @RequestMapping(
+            value = "id={id}",
+            method = RequestMethod.DELETE
+    )
+    public void deleteAllImages(@PathVariable int id) {
         Product product = productRepository.getProductById(id);
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");

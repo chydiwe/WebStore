@@ -18,9 +18,6 @@ class AdminPanel extends React.Component {
         this.getManufacturer = this.getManufacturer.bind(this);
         this.getCategory = this.getCategory.bind(this);
         this.sendItem = this.sendItem.bind(this);
-        //this.getItems = this.getItems.bind(this);
-
-
     }
 
     getManufacturer() {
