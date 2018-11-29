@@ -14,7 +14,6 @@ export function registration(userInfo) {
             .then(response => Promise.all([response,]))
             .then(([response, json])=>{
                 if(response.status===200){
-                    console.log(response)
                     dispatch({
                         type: POST_REGISTRATION_SUCCES,
                         payload: response.status
