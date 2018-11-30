@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import "./css/UserPage.css"
-import notFound from "./img/notfound.png";
+import notFound from "./img/notFound_mini.png";
 
 const Data=
     {
         image: notFound,
-        surname: "Ублюдов",
+        surname: "Веселый",
         name:"Васян",
         patronymic:"Улдарович",
         email: "vasyyyan@mail.ru",
@@ -62,7 +62,6 @@ export default class UserPage extends Component {
     }
 
 
-
     render() {
 
         return (
@@ -70,7 +69,7 @@ export default class UserPage extends Component {
                 <div id="main">
                     <div className="row" id="real-estates-detail">
                         <div className="col-lg-4 col-md-4 col-xs-12">
-                            <div className="panel panel-default">
+                            <div className="panel panel-default pan1">
                                 <div className="panel-heading">
                                     <header className="panel-title">
                                         <div className="text-center">
@@ -87,10 +86,10 @@ export default class UserPage extends Component {
                             </div>
                         </div>
                         <div className="col-lg-8 col-md-8 col-xs-12">
-                            <div className="panel">
+                            <div className="panel pan2">
                                 <div className="panel-body">
-                                    <div>
-                                        <h4> Общая информация </h4>
+                                    <div className="">
+                                        <h4 className="text-center"> Личная информация </h4>
                                         <table className="table table-th-block">
                                             <tbody>
                                             <tr>
@@ -128,7 +127,7 @@ export default class UserPage extends Component {
                                         <input type="submit" name="submit" className="button" value="Редактировать"/>
                                     </div>
                                     <div>
-                                        <h4>Ваша история заказов</h4>
+                                        <h4 className="text-center">Ваша история заказов</h4>
                                         <div className=" history-orders">
                                             <table className=" table_blur">
                                                 <tbody>

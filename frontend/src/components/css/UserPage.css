@@ -1,15 +1,77 @@
-@import url('http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css');
-@import url('http://bootstraptema.ru/plugins/font-awesome/4-4-0/font-awesome.min.css');
 
 body{background:url(http://bootstraptema.ru/images/bg/bg-1.png)}
+
+body{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+h3{
+    font-size: 24px;
+}
+.h3{
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+    display: block;
+
+}
+html {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+* {
+    box-sizing: border-box;
+}
+
+div{
+    display:block;
+}
+
+.btn-toolbar:before, .clearfix:before, .container-fluid:before,
+.container:before, .modal-footer:before, .nav:before,
+.navbar-collapse:before, .navbar-header:before,.navbar:before,
+.pager:before,.panel-body:before,.row:before{
+    display: table;
+    content: "  ";
+}
+
+.btn-toolbar:after,
+.clearfix:after, .container-fluid:after, .container:after,
+.modal-footer:after, .nav:after, .navbar-collapse:after,
+.navbar-header:after, .navbar:after, .pager:after,
+.panel-body:after, .row:after{
+    clear:both;
+}
+#real-estates-detail #author img{
+    border-radius: 100%;
+    border:5px solid #ecf0f1;
+    margin-bottom: 10px;
+}
+img{
+    vertical-align: middle;
+}
+.row{
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.container{
+    width:970px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 #main {
     background-color: #f2f2f2;
     padding: 20px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
+    /*-webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+     -ms-border-radius: 4px;
+     -o-border-radius: 4px;*/
     border-radius: 4px;
     border-bottom: 4px solid #ddd;
 }
@@ -33,15 +95,39 @@ body{background:url(http://bootstraptema.ru/images/bg/bg-1.png)}
 .panel-default .panel-heading {
     background-color: #fff;
 }
+.panel-default>.panel-heading{
+    /*color:#333;
+    border-color: #ddd;*/
+}
+.pan2{
+    position: relative;
+    top:4vh;
+}
+.pan1{
+    position: relative;
+    top:8vh;
+}
+.panel{
+    margin-bottom: 20px;
+
+    background-color: #fff;
+    border:1px solid #00000000;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
 #real-estates-detail .slides li img {
     height: 450px;
 }
 .history-orders{
     overflow: scroll; /* Добавляем полосы прокрутки */
-    width: 700px; /* Ширина блока */
+    width: 40vw; /* Ширина блока */
     height: 250px; /* Высота блока */
     padding: 8px; /* Поля вокруг текста */
+    margin:12px;
     border: solid 1px black; /* Параметры рамки */
+}
+header{
+    display: block;
 }
 .button {
     margin: 25px 0 25px 25px;
@@ -58,16 +144,94 @@ body{background:url(http://bootstraptema.ru/images/bg/bg-1.png)}
 .button:active {
     background-color:#941a3e;
 }
+.b, strong{
+    font-weight: 700;
+}
+.panel{
+    margin-bottom: 20px;
+    background-color: #fff;
+    border:1px solid #00000000 transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.panel-heading{
+    padding:10px 15px;
+    border-bottom:1px solid #00000000 transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.panel-title{
+    /*margin-top: 0;
+    margin-bottom: 0;*/
+    font-size: 16px;
+    color:inherit;
+}
+.text-center{
+    text-align: center;
+}
+.panel-default{
+    border-color: #ddd;
+}
+.panel-body{
+    padding:15px;
+}
+.col-lg-4{
+    width: 33.3333333%;
+}
+.col-lg-4{
+    float: left;
+}
+.col-lg-8{
+    width: 66.666666667%;
+    float:left;
+}
+.col-lg-8 .col-md-8 .col-xs-12{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-lg-4 .col-md-4 .col-xs-12{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.col-md-4{
+    width:33.33333333%;
+}
+:after, :before {
+    box-sizing: border-box;
+}
+
 table{
     width: 100%;
     text-align: center;
     margin-bottom: 15px;
     border-collapse: collapse;
     border-bottom: 1px solid #E1E8EE;
+    background-color: 1px solid #E1E8EE;
+    border-spacing: 0;
+    display: table;
+    border-color: grey;
+    font-variant: normal;
+}
+.table>tbody>tr>td.active{
+    background-color: #f5f5f5;
+}
+.table>tbody>tr>td{
+    padding:8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top:1px solid #ddd;
 }
 
 table tr td {
     padding: 0;
+}
+td,th{
+    display: table-cell;
 }
 
 .table_blur {
@@ -120,4 +284,17 @@ input {
     padding: 10px 15px;
     position: relative;
     transition: all 0.5s ease;
+}
+input{
+    width: 450px;
+    font-size: 18px;
+    padding: 6px 0 4px 10px;
+    border:1px solid #cecece;
+    background:#f6f6f6;
+    border-radius: 8px;
+    font-family: inherit;
+    line-height: inherit;
+    margin:0;
+    font:inherit;
+    color: inherit;
 }
