@@ -39,7 +39,7 @@ const Data =
 
 const UserItem = ({item}) =>
     <tr className="">
-        <td>1
+        <td>
             <img src={item.product}/>
         </td>
         <td>
