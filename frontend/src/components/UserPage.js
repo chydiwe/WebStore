@@ -2,12 +2,12 @@ import React, {Component} from 'react'
 import "./css/UserPage.css"
 import notFound from "./img/notFound_mini.png";
 
-const Data=
+const Data =
     {
         image: notFound,
         surname: "Веселый",
-        name:"Васян",
-        patronymic:"Улдарович",
+        name: "Васян",
+        patronymic: "Улдарович",
         email: "vasyyyan@mail.ru",
         country: "Россия",
         city: "Бутейко",
@@ -39,7 +39,7 @@ const Data=
 
 const UserItem = ({item}) =>
     <tr className="">
-        <td>
+        <td>1
             <img src={item.product}/>
         </td>
         <td>
@@ -67,91 +67,69 @@ export default class UserPage extends Component {
         return (
             <div className="container">
                 <div id="main">
-                    <div className="row" id="real-estates-detail">
-                        <div className="col-lg-4 col-md-4 col-xs-12">
-                            <div className="panel panel-default pan1">
-                                <div className="panel-heading">
-                                    <header className="panel-title">
-                                        <div className="text-center">
-                                            <strong> Ваш профиль </strong>
-                                        </div>
-                                    </header>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="text-center" id="author">
-                                        <img src={Data.image} alt=""/>
-                                        <h3> {Data.name} </h3>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="panel-body">
+                        <div className="text-center" id="author">
+                            <img src={Data.image} alt=""/>
+                            <h3> {Data.name} </h3>
                         </div>
-                        <div className="col-lg-8 col-md-8 col-xs-12">
-                            <div className="panel pan2">
-                                <div className="panel-body">
-                                    <div className="">
-                                        <h4 className="text-center"> Личная информация </h4>
-                                        <table className="table table-th-block">
-                                            <tbody>
-                                            <tr>
-                                                <td className="active">Фамилия:</td>
-                                                <td><input type="text" name="agree" value={Data.surname} disabled="disabled"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="active">Имя:</td>
-                                                <td><input type="text" name="agree" value={Data.name} disabled="disabled"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="active">Отчество:</td>
-                                                <td><input type="text" name="agree" value={Data.patronymic} disabled="disabled"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="active">E-mail:</td>
-                                                <td><input type="text" name="agree" value={Data.email} disabled="disabled"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="active">Страна:</td>
-                                                <td><input type="text" name="agree" value={Data.country} disabled="disabled"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="active">Город:</td>
-                                                <td><input type="text" name="agree" value={Data.city} disabled="disabled"/></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td className="active">Телефон:</td>
-                                                <td><input type="text" name="agree" value={Data.contact} disabled="disabled"/></td>
-                                            </tr>
-
-                                            </tbody>
-                                        </table>
-                                        <input type="submit" name="submit" className="button" value="Редактировать"/>
-                                    </div>
-                                    <div>
-                                        <h4 className="text-center">Ваша история заказов</h4>
-                                        <div className=" history-orders">
-                                            <table className=" table_blur">
-                                                <tbody>
-                                                <tr>
-                                                    <td>Продукт</td>
-                                                    <td>Описание</td>
-                                                    <td>Количество</td>
-                                                    <td>Цена</td>
-                                                    <td>Дата получения</td>
-                                                </tr>
-                                                {Data.history.map((item)=><UserItem item={item}/>)}
 
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <table className='infoUser'>
+                            <h4 className="text-center"> Личная информация </h4>
+                            <tbody>
+                            <tr>
+                                <td className="active">Фамилия:</td>
+                                <td>{Data.surname}</td>
+                            </tr>
+                            <tr>
+                                <td className="active">Имя:</td>
+                                <td>{Data.name}</td>
+                            </tr>
+                            <tr>
+                                <td className="active">Отчество:</td>
+                                <td>{Data.patronymic}</td>
+                            </tr>
+                            <tr>
+                                <td className="active">E-mail:</td>
+                                <td>{Data.email}</td>
+                            </tr>
+                            <tr>
+                                <td className="active">Страна:</td>
+                                <td>{Data.country}</td>
+                            </tr>
+                            <tr>
+                                <td className="active">Город:</td>
+                                <td>{Data.city}</td>
+                            </tr>
+
+                            <tr>
+                                <td className="active">Телефон:</td>
+                                <td>{Data.contact}</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <input type="submit" name="submit" className="button" value="Редактировать"/>
+                    <h4 className="text-center">Ваша история заказов</h4>
+                    <div className=" history-orders">
+                        <table className=" table_blur">
+                            <tbody>
+                            <tr>
+                                <td>Продукт</td>
+                                <td>Описание</td>
+                                <td>Количество</td>
+                                <td>Цена</td>
+                                <td>Дата получения</td>
+                            </tr>
+                            {Data.history.map((item) => <UserItem item={item}/>)}
+
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-        )
+            </div>)
     }
 }
 
