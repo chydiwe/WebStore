@@ -23,10 +23,8 @@ class Register extends Component {
                 surnameValid: true,
                 patrValid: true,
                 phoneNumbValid: true
-            },
-            formValid: false
+            }
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePassChange = this.handlePassChange.bind(this);
         this.handlePassConfChange = this.handlePassConfChange.bind(this);
@@ -36,20 +34,18 @@ class Register extends Component {
     }
 
     submitInf(history) {
-        const url = `email=${this.state.email}&password=${this.state.pass}&name=${this.state.name}&surname=${this.state.surname}&patronymic=${this.state.patronymic}${(this.state.phoneNumber !== '') ? `&phonenumber=${this.state.phoneNumber}` : ''}`;
-        this.props.regUser(url);
-        setTimeout(function () {
-            history.push('/')
-
-        }, 2000)
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
         let valids = this.state.valids;
-        this.setState({
-            formValid: Object.keys(valids).every(key => valids[key] === true)
-        }, this.submit)
+        let formValid = Object.keys(valids).every(key => valids[key] === true);
+        console.log(formValid);
+        if (formValid) {
+            const url = `email=${this.state.email}&password=${this.state.pass}&name=${this.state.name}&surname=${this.state.surname}&patronymic=${this.state.patronymic}${(this.state.phoneNumber !== '') ? `&phonenumber=${this.state.phoneNumber}` : ''}`;
+            this.props.regUser(url);
+            setTimeout(function () {
+                history.push('/')
+            }, 2000)
+        } else {
+            alert("Please enter correct data or missed fields!");
+        }
     }
 
     toggleClass(inputElem, checkResult) {
@@ -57,7 +53,7 @@ class Register extends Component {
     }
 
     checkEmail(email) {
-        let emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        let emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,5})$/i);
         return !!(emailValid);
     }
 
@@ -70,7 +66,7 @@ class Register extends Component {
                 ...this.state.valids,
                 emailValid: checkResult
             }
-        })
+        });
     }
 
     handlePassChange(event) {
@@ -82,7 +78,7 @@ class Register extends Component {
                 ...this.state.valids,
                 passValid: checkResult
             }
-        })
+        });
     }
 
     handlePassConfChange(event) {
@@ -94,11 +90,10 @@ class Register extends Component {
                 ...this.state.valids,
                 passValid: checkResult
             }
-        })
+        });
     }
 
     handleFIOChange(event) {
-        console.log(typeof event.target.id);
         switch (event.target.id) {
             case "userName":
                 this.setState({name: event.target.value.trim()});
@@ -112,19 +107,27 @@ class Register extends Component {
             default:
                 break;
         }
-        (event.target.value.trim() !== "") ? this.toggleClass(event.target, true) :
+        if (event.target.value.trim() !== "") {
+            this.toggleClass(event.target, true)
+        }
+        else {
             this.toggleClass(event.target, false)
+        }
     }
 
     handlePhoneNumbChange(event) {
         this.setState({phoneNumber: event.target.value});
-        let checkResult = event.target.value.match(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?/i);
-        this.toggleClass(event.target, checkResult)
+        let checkResult = event.target.value.match(/^8\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2}$/g);
+        this.toggleClass(event.target, checkResult);
     }
 
     render() {
         const Submit = withRouter(({history}) => (
-            <button type='button' onClick={() => this.submitInf(history)}>Зарегистрироваться</button>));
+            <button type='button' onClick={() => {
+                this.submitInf(history)
+            }}
+            >Зарегистрироваться</button>));
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit} className="registrationForm">
@@ -153,7 +156,7 @@ class Register extends Component {
 
                     <label htmlFor="phoneNumber">Телефон</label><br/>
                     <input type="text" id="phoneNumber" onChange={this.handlePhoneNumbChange}
-                           value={this.state.phoneNumber}/><br/>
+                           value={this.state.phoneNumber} placeholder="8(888)888-88-88"/><br/>
                     <Submit/>
                 </form>
             </div>

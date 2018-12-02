@@ -32,12 +32,50 @@ public class UserController {
     @Autowired
     private GroupRepository groupRepository;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void register(@RequestParam String email,
-                         @RequestParam String password,
-                         @RequestParam String name,
-                         @RequestParam String surname,
-                         @RequestParam String patronymic) {
+    //
+    //  GET
+    //
+    @RequestMapping(
+            value = "id={id}",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<User> getUser(@PathVariable int id) {
+        User user = userRepository.getUserById(id);
+
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
+        }
+
+        return ResponseEntity.ok().body(user);
+    }
+
+    @RequestMapping(
+            value = "email={email}&password={password}",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<User> authenticate(@PathVariable String email,
+                                             @PathVariable String password) {
+        User user = userRepository.getUserByEmailAndPassword(email, password);
+
+        if (user == null) {
+            throw new NotFoundException("Wrong email or password.");
+        }
+
+        return ResponseEntity.ok().body(user);
+    }
+
+    //
+    //  POST
+    //
+    @RequestMapping(
+            value = "email={email}&password={password}&name={name}&surname={surname}&patronymic={patronymic}",
+            method = RequestMethod.POST
+    )
+    public void register(@PathVariable String email,
+                         @PathVariable String password,
+                         @PathVariable String name,
+                         @PathVariable String surname,
+                         @PathVariable String patronymic) {
 
         User user = new User();
         user.setEmail(email);
@@ -63,60 +101,36 @@ public class UserController {
         mailManager.sendToken(user.getEmail(), token.getToken());
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "token")
-    public void confirm(@RequestParam String token) {
+    @RequestMapping(
+            value = "token={token}",
+            method = RequestMethod.POST
+    )
+    public void confirm(@PathVariable String token) {
         ConfirmationToken tokenObj = tokenRepository.getConfirmationTokenByToken(token);
         tokenRepository.delete(tokenObj);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<User> authenticate(@RequestParam String email, @RequestParam String password) {
-        User user = userRepository.getUserByEmailAndPassword(email, password);
-
-        if (user == null) {
-            throw new NotFoundException("Wrong email or password.");
-        }
-
-        return ResponseEntity.ok().body(user);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, params = "id")
-    public ResponseEntity<User> getUser(@RequestParam int id) {
+    @RequestMapping(
+            value = "id={id}&patronymic={patronymic}",
+            method = RequestMethod.POST
+    )
+    public void changePatr(@PathVariable int id,
+                           @PathVariable String patronymic) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
             throw new NotFoundException("Wrong user ID.");
         }
 
-        return ResponseEntity.ok().body(user);
+        user.setPatronymic(patronymic);
+        userRepository.save(user);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "patr")
-    public void changePatr(@RequestParam int id,
-                           @RequestParam String patr) {
-        User user = userRepository.getUserById(id);
-
-        if (user == null) {
-            throw new NotFoundException("Wrong user ID.");
-        }
-
-        user.setPatronymic(patr);
-    }
-
-    @RequestMapping(method = RequestMethod.DELETE, params = "patr")
-    public void deletePatr(@RequestParam int id) {
-        User user = userRepository.getUserById(id);
-
-        if (user == null) {
-            throw new NotFoundException("Wrong user ID.");
-        }
-
-        user.setPatronymic(null);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, params = "group")
-    public void changeGroup(@RequestParam int id,
-                           @RequestParam int group) {
+    @RequestMapping(
+            value = "id={id}&group={group}",
+            method = RequestMethod.POST)
+    public void changeGroup(@PathVariable int id,
+                            @PathVariable int group) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
@@ -130,11 +144,15 @@ public class UserController {
         }
 
         user.setGroup(groupObj);
+        userRepository.save(user);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "phone")
-    public void changePhone(@RequestParam int id,
-                            @RequestParam String phone) {
+    @RequestMapping(
+            value = "id={id}&phone={phone}",
+            method = RequestMethod.POST
+    )
+    public void changePhone(@PathVariable int id,
+                            @PathVariable String phone) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
@@ -142,10 +160,32 @@ public class UserController {
         }
 
         user.setPhoneNumber(phone);
+        userRepository.save(user);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, params = "phone")
-    public void deletePhone(@RequestParam int id) {
+    //
+    //  DELETE
+    //
+    @RequestMapping(
+            value = "deletePatronymic={id}",
+            method = RequestMethod.DELETE
+    )
+    public void deletePatr(@PathVariable int id) {
+        User user = userRepository.getUserById(id);
+
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
+        }
+
+        user.setPatronymic(null);
+        userRepository.save(user);
+    }
+
+    @RequestMapping(
+            value = "deletePhone={id}",
+            method = RequestMethod.DELETE
+    )
+    public void deletePhone(@PathVariable int id) {
         User user = userRepository.getUserById(id);
 
         if (user == null) {
@@ -153,6 +193,19 @@ public class UserController {
         }
 
         user.setPhoneNumber(null);
+        userRepository.save(user);
     }
 
+    @RequestMapping(
+            value = "id={id}",
+            method = RequestMethod.DELETE
+    )
+    public void deleteUser(@PathVariable int id) {
+        User user = userRepository.getUserById(id);
+
+        if (user == null) {
+            throw new NotFoundException("Wrong user ID.");
+        }
+        userRepository.delete(user);
+    }
 }

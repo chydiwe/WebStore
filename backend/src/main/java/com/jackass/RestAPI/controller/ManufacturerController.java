@@ -18,16 +18,25 @@ public class ManufacturerController {
     @Autowired
     private ManufacturerRepository manufacturerRepository;
 
+    //
+    //  GET
+    //
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Set<Manufacturer>> getManufacturers() {
         Set<Manufacturer> manufacturers = manufacturerRepository.findAll();
         return ResponseEntity.ok().body(manufacturers);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void addManufacturer(@RequestParam String name,
-                                @RequestParam String logo,
-                                @RequestParam String info) {
+    //
+    //  POST
+    //
+    @RequestMapping(
+            value = "name={name}&logo={logo}&info{info}",
+            method = RequestMethod.POST
+    )
+    public void addManufacturer(@PathVariable String name,
+                                @PathVariable String logo,
+                                @PathVariable String info) {
         Set<Manufacturer> manufacturers = manufacturerRepository.findAll();
         for (Manufacturer m : manufacturers) {
             if (m.getName().equals(name)) {
@@ -41,8 +50,44 @@ public class ManufacturerController {
         manufacturerRepository.save(manufacturer);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteManufacturer(@RequestParam int id) {
+    @RequestMapping(
+            value = "id={id}&logo={logo}",
+            method = RequestMethod.POST
+    )
+    public void changeLogo(@PathVariable int id,
+                           @PathVariable String logo) {
+        Manufacturer manufacturer = manufacturerRepository.getManufacturerById(id);
+        if (manufacturer == null) {
+            throw new NotFoundException("Wrong manufacturer ID.");
+        }
+
+        manufacturer.setLogo(logo);
+        manufacturerRepository.save(manufacturer);
+    }
+
+    @RequestMapping(
+            value = "id={id}&info={info}",
+            method = RequestMethod.POST)
+
+    public void changeInfo(@PathVariable int id,
+                           @PathVariable String info) {
+        Manufacturer manufacturer = manufacturerRepository.getManufacturerById(id);
+        if (manufacturer == null) {
+            throw new NotFoundException("Wrong manufacturer ID.");
+        }
+
+        manufacturer.setLogo(info);
+        manufacturerRepository.save(manufacturer);
+    }
+
+    //
+    //  DELETE
+    //
+    @RequestMapping(
+            value = "id={id}",
+            method = RequestMethod.DELETE
+    )
+    public void deleteManufacturer(@PathVariable int id) {
         Manufacturer manufacturer = manufacturerRepository.getManufacturerById(id);
         if (manufacturer == null) {
             throw new NotFoundException("Wrong manufacturer ID.");

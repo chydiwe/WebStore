@@ -18,7 +18,7 @@ class SingleProductPage extends Component {
     }
 
     addToBucket() {
-        if (this._count.value > this.state.data.quantity) {
+        if ((this._count.value > this.state.data.quantity) && (this._count.value>0)) {
             alert("К сожалению на скалде нет столько товаров")
         }
         else {

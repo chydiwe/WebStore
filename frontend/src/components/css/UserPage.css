@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 5%;
+}
+
+#main {
+    width: 50%;
+}
+
+.infoUser {
+    width: 70%;
+}
+
+.panel-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.text-center {
+    width: 30%;
+    flex-direction: column;
+    text-align: center;
+}
+
+.infoUser {
+    text-align: center;
+}
+
+.infoUser tr {
+    border-top: 1px solid rgba(128, 128, 128, 0.36);
+    height: 50px;
+
+}
+
+.infoUser tr td:first-child {
+    background: rgba(178, 178, 178, 0.25);
+    width: 30%;
+}
+
+.infoUser tr td {
+    background: white;
+}
+
+.text-center img {
+    width: 50%;
+
+    border-radius: 50%;
+}
