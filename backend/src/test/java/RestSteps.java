@@ -1,7 +1,6 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
-import com.jackass.RestAPI.conf.ConditionsConfig;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
@@ -27,9 +26,6 @@ public class RestSteps {
 
     @Given("running server")
     public void init() {
-        // activate in memory flag
-        ConditionsConfig.IN_MEMORY = true;
-
         this.basePath = "http://localhost:8080/api";
         this.httpClient = HttpClients.createDefault();
         this.jsonConverter = new ObjectMapper();

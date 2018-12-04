@@ -31,7 +31,7 @@ public class ManufacturerController {
     //  POST
     //
     @RequestMapping(
-            value = "name={name}&logo={logo}&info{info}",
+            value = "name={name}&logo={logo}&info={info}",
             method = RequestMethod.POST
     )
     public void addManufacturer(@PathVariable String name,
