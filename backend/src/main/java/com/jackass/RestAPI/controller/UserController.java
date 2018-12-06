@@ -46,7 +46,7 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "email")
+    @RequestMapping(method = RequestMethod.GET, params = {"email", "password"})
     public ResponseEntity<User> authenticate(@RequestParam String email,
                                              @RequestParam String password) {
         User user = userRepository.getUserByEmailAndPassword(email, password);
@@ -61,7 +61,8 @@ public class UserController {
     //
     //  POST
     //
-    @RequestMapping(method = RequestMethod.POST, params = "name")
+    @RequestMapping(method = RequestMethod.POST,
+                    params = {"email", "password", "name", "surname", "patronymic"})
     public void register(@RequestParam String email,
                          @RequestParam String password,
                          @RequestParam String name,
@@ -98,7 +99,7 @@ public class UserController {
         tokenRepository.delete(tokenObj);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "patronymic")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "patronymic"})
     public void changePatr(@RequestParam int id,
                            @RequestParam String patronymic) {
         User user = userRepository.getUserById(id);
@@ -111,7 +112,7 @@ public class UserController {
         userRepository.save(user);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "group")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "group"})
     public void changeGroup(@RequestParam int id,
                             @RequestParam int group) {
         User user = userRepository.getUserById(id);
@@ -130,7 +131,7 @@ public class UserController {
         userRepository.save(user);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "phone")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "phone"})
     public void changePhone(@RequestParam int id,
                             @RequestParam String phone) {
         User user = userRepository.getUserById(id);

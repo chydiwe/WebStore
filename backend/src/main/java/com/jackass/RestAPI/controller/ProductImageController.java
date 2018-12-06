@@ -52,7 +52,7 @@ public class ProductImageController {
     //
     //  DELETE
     //
-    @RequestMapping(method = RequestMethod.DELETE, params = "URI")
+    @RequestMapping(method = RequestMethod.DELETE, params = {"id", "URI"})
     public void deleteImage(@RequestParam int id,
                             @RequestParam String URI) {
         Product product = productRepository.getProductById(id);
