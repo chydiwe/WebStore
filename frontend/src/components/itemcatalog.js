@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import '../App.css'
 import connect from "react-redux/es/connect/connect";
 import getCatalog from '../action/catalog'
+
 import notFound from './img/notfound.png'
 import fetch from "cross-fetch";
 import {Link} from "react-router-dom";
@@ -32,7 +33,9 @@ class Catalog extends Component {
                 })
             .catch((error)=>console.log(error))
     }
+    componentWillReceiveProps(){
 
+    }
     componentWillMount() {
         this.props.getCatalogItems()
     }
@@ -40,7 +43,7 @@ class Catalog extends Component {
     render() {
         const catalog = this.props.catalog;
         return <div className='catalog'>
-            {catalog.map((item, i) => <Item_catalog item={item} key={i} addInBucket={this.addInBucket}/>)}
+            {catalog?catalog.map((item, i) => <Item_catalog item={item} key={i} addInBucket={this.addInBucket}/>):<div className='loader'></div>}
 
         </div>
 

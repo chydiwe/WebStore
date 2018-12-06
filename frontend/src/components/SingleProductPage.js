@@ -43,10 +43,10 @@ class SingleProductPage extends Component {
     render() {
         return (
             <div className="product-container">
-                <table>
+                {this.state.data.name!==''?<div><table>
                     <tbody>
                     <tr>
-
+                        {console.log(this.props.location.search)}
                         <td>
                             <h2 id="product-title"> {this.state.data.name} </h2>
 
@@ -71,13 +71,13 @@ class SingleProductPage extends Component {
                     </tr>
                     </tbody>
                 </table>
-                <hr/>
-                <div className="descr-container">
-                    <h3>Описание товара</h3>
-                    <p id="product-short-info">
-                        {this.state.data.shortInfo}
-                    </p>
-                </div>
+                    <hr/>
+                    <div className="descr-container">
+                        <h3>Описание товара</h3>
+                        <p id="product-short-info">
+                            {this.state.data.shortInfo}
+                        </p>
+                    </div></div>:<div className='loader'></div>}
 
             </div>
         );

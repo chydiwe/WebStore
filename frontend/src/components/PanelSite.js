@@ -9,6 +9,8 @@ import connect from "react-redux/es/connect/connect";
 import "./css/PanelSite.css"
 import logo from './img/logo.png'
 import * as sessionActions from '../action/user-profile';
+import fetch from "cross-fetch";
+import getCatalog from '../action/catalog'
 
 function blurMain() {
     let app = document.querySelector('.panelSite + div')
@@ -21,9 +23,10 @@ class PanelSite extends React.Component {
         super(props);
         this.sideMenu = this.sideMenu.bind(this);
         this.handelClick = this.handelClick.bind(this);
-
+        this.state={listCategory: null}
         this.mouseEnter = this.mouseEnter.bind(this);
         this.mouseLeave = this.mouseLeave.bind(this);
+        this.getCategory=this.getCategory.bind(this);
     }
 
     sideMenu(nodeEl, classOn, classOff, isBlur) {
@@ -65,23 +68,38 @@ class PanelSite extends React.Component {
 
     }
 
+    getCategory() {
+        fetch(`http://localhost:8080/api/products/categories`, {method: 'GET'})
+            .then((response)=> {
+                if (response.status === 200) {
+                    response.json().then(response=>this.setState({
+                        listCategory: response
+                    }))
+                }
+                else {
+                    alert("ERROR")
+                }
+            })
+    }
+   componentDidMount(){
+       this.getCategory()
+   }
     render() {
-        const {user} = this.props,{logOut}=this.props.actions, Submitbutton = withRouter(({history}) => (
+        const {user,getCatalogItems} = this.props,{logOut}=this.props.actions, Submitbutton = withRouter(({history}) => (
             <button type="button" onClick={() => this.handelClick(history)}>Вход</button>));
         return (
             <div className='panelSite'>
-                <div className='nameFirm'>
+                <div onClick={this.props.getCatalogItems()} className='nameFirm'>
                     <Link to='/'><img className='logo' src={logo} alt="logo"/>MAGIC STATIONARY</Link>
                 </div>
                 <div className='category' onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>Категории
                     <div ref={(node) => this._categoryMenu = node} className='category_menuOff'>
                         <div className='category'>
-                            <div>Бумажная продукция</div>
-                            <div>Письменные принадлежности</div>
-                            <div>Офисные принадлежности</div>
-                            <div>Школьные принадлежности</div>
-                            <div>Подарочная упаковка</div>
+                            {this.state.listCategory?this.state.listCategory.map((item,index)=>
+                                <div onClick={()=>getCatalogItems(item.id)} key={index}>{item.name}</div>
+                            ):<div></div>}
                         </div>
+
                     </div>
                 </div>
 
@@ -144,7 +162,8 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        actions: bindActionCreators(sessionActions, dispatch)
+        actions: bindActionCreators(sessionActions, dispatch),
+        getCatalogItems: (id) => dispatch(getCatalog(id))
     }
 };
 

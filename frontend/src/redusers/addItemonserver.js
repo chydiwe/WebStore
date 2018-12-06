@@ -1,20 +1,20 @@
-import {POST_ADDITEM,
-    POST_ADDITEM_SUCCES,
-    POST_ADDITEM_FAILED} from "../action/addItemonserver";
+import {POST_STATUS,
+    POST_STATUS_SUCCES,
+    POST_STATUS_FAILED} from "../action/adminPanel";
 
 const initialState = {
-    itemAdd: []
+    status: false
 };
 
-export function addItem(state = initialState, action) {
+export function STATUS(state = initialState, action) {
     switch (action.type) {
-        case POST_ADDITEM:
+        case POST_STATUS:
             return {...state};
 
-        case POST_ADDITEM_SUCCES:
-            return {itemAdd: action.payload};
-        case POST_ADDITEM_FAILED: {
-            return {itemAdd: action.payload}
+        case POST_STATUS_SUCCES:
+            return {status: action.payload};
+        case POST_STATUS_FAILED: {
+            return {status: action.payload}
         }
         default:
             return state

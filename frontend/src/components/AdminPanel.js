@@ -1,23 +1,22 @@
 import React from 'react'
 import connect from "react-redux/es/connect/connect";
-import {addItemOnServer} from "../action/addItemonserver";
+import {addCategory, addItem, delCategory, delItem} from "../action/adminPanel";
 import "./css/AdminPanel.css"
 import fetch from "cross-fetch";
 
 class AdminPanel extends React.Component {
     constructor(props) {
         super(props)
-        this.sendItem = this.sendItem.bind(this)
         this.state = {
             listManufacturer: [],
             listCategory: [],
-            listItems: [],
+            listProducts: [],
             category: '',
-            manufacturer: ''
+            manufacturer: '',
+            status: ['active', 'hidden']
         }
         this.getManufacturer = this.getManufacturer.bind(this);
         this.getCategory = this.getCategory.bind(this);
-        this.sendItem = this.sendItem.bind(this);
     }
 
     getManufacturer() {
@@ -50,32 +49,98 @@ class AdminPanel extends React.Component {
             })
     }
 
-
-
-    sendItem(e) {
-        e.preventDefault()
-        const str = `name=${this._nameItem.value}&categoryId=${this._category.value}&manufacturerId=${this._manufacturer.value}&cost=${this._costItem.value}&quantity=${this._quanItem.value}`
-        this.props.addItem(str)
+    getProducts() {
+        fetch(`http://localhost:8080/api/products`, {method: 'GET'})
+            .then((response) => {
+                if (response.status === 200) {
+                    response.json().then(response => this.setState({
+                        listProducts: response
+                    }))
+                }
+                else {
+                    alert("ERROR")
+                }
+            })
     }
 
     componentDidMount() {
         this.getManufacturer();
         this.getCategory();
-        //this.getItems();
+        this.getProducts();
     }
 
     render() {
-        return <div className='adminPanel'>
-            <div className='adminAddItem'>
+        return <div className='adminMenu'>
+            <div className='MenuChanger'>
+                <button onClick={() => {
+                    this.setState({status: ['active', 'hidden']})
+                }}>Работа с продуктами
+                </button>
+                <button onClick={() => {
+                    this.setState({status: ['hidden', 'active']})
+                }}>Работа с категориями
+                </button>
+            </div>
+            <Item status={this.state.status[0]} delItem={this.props.delItem} addItem={this.props.addItem}
+                  listCategory={this.state.listCategory}
+                  sendItem listManufacturer={this.state.listManufacturer} listProducts={this.state.listProducts}/>
+            <Category status={this.state.status[1]} addCategory={this.props.addCategory}
+                      delCategory={this.props.delCategory}
+                      listCategory={this.state.listCategory}/>
+        </div>
+    }
+
+
+}
+
+class Category extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        const {listCategory, addCategory, delCategory, status} = this.props;
+        return (
+            <div className={`adminPanel ${status}`}>
+                <div className="addCategory"><p>Добавление категории</p>
+                    <input ref={(node) => this._category = node} type="text" placeholder='Название категории'/>
+                    <button type="button"
+                            onClick={() => addCategory(this._category.value)}>Добавить категорию
+                    </button>
+                </div>
+                <div className="delCategory">
+                    <p>Удаление категории</p>
+                    <select className='categoryItem' ref={(node) => this._categorys = node}>
+                        {listCategory.map((item, index) =>
+                            <option key={index} value={item.id}>{item.name}</option>
+                        )}
+                    </select>
+                    <button onClick={() => delCategory(this._categorys.value)} type='button'>Удалить</button>
+                </div>
+            </div>
+        );
+    }
+
+}
+
+class Item extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        const {listCategory, listManufacturer, listProducts, addItem, delItem, status} = this.props;
+        return <div className={`adminPanel ${status}`}>
+            <div className='Admin AddItem'>
                 <p>Добавление товара</p>
                 <input ref={(node) => this._nameItem = node} type="text" placeholder='name'/>
                 <select className='categoryItem' ref={(node) => this._category = node}>
-                    {this.state.listCategory.map((item, index) =>
+                    {listCategory.map((item, index) =>
                         <option key={index} value={item.id}>{item.name}</option>
                     )}
                 </select>
                 <select className='manufacturerItem' ref={(node) => this._manufacturer = node}>
-                    {this.state.listManufacturer.map((item, index) =>
+                    {listManufacturer.map((item, index) =>
                         <option key={index} value={item.id}>{item.name}</option>
                     )}
                 </select>
@@ -83,24 +148,35 @@ class AdminPanel extends React.Component {
                 <input ref={(node) => this._quanItem = node} type="text" placeholder='quantity'/>
                 <input ref={(node) => this._shortInfo = node} type="text" placeholder='shortInfo'/>
                 <input ref={(node) => this._imgUrl = node} type="text" placeholder='images'/>
-                <input type="submit" onClick={this.sendItem} value='Добавить'/>
+                <button type="button"
+                        onClick={() => addItem(`name=${this._nameItem.value}&categoryId=${this._category.value}&manufacturerId=${this._manufacturer.value}&cost=${this._costItem.value}&quantity=${this._quanItem.value}`)}>Добавить
+                </button>
             </div>
-
+            <div className="Admin DelItem">
+                <p>Удаление товаров</p>
+                <select className='listProducts' ref={(node) => this._products = node}>
+                    {listProducts.map((item, index) =>
+                        <option key={index} value={item.id}>{item.name}</option>
+                    )}
+                </select>
+                <button onClick={() => delItem(this._products.value)} type="button">Удалить</button>
+            </div>
         </div>
     }
-
-
 }
 
 const mapStateToProps = (store) => {
     return {
-        itemAdd: store.itemAdd,
+        status: store.status,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItem: (item) => dispatch(addItemOnServer(item)),
+        addItem: (item) => dispatch(addItem(item)),
+        delItem: (id) => dispatch(delItem(id)),
+        addCategory: (str) => dispatch(addCategory(str)),
+        delCategory: (id) => dispatch(delCategory(id))
     }
 
 }

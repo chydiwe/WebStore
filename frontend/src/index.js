@@ -13,6 +13,7 @@ import adminPanel from "./components/AdminPanel"
 import FooterSite from "./components/FooterSite";
 import OrderPage from "./components/OrderPage";
 import UserPage from "./components/UserPage";
+import SingleProductPage from "./components/SingleProductPage";
 class Pages extends React.Component {
     render() {
         return(
@@ -24,6 +25,7 @@ class Pages extends React.Component {
                 <Route path='/register' component={Register}/>
                 <Route path='/adminpanel' component={adminPanel}/>
                 <Route path='/profile' component={UserPage}/>
+                <Route path='/item' component={SingleProductPage}/>
                 <FooterSite/>
             </div>
         )

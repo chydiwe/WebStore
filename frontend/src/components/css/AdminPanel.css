@@ -2,18 +2,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
-    padding-top: 8vw;
     padding-bottom: 5vw;
 }
-.adminAddItem {
+.MenuChanger{
+    display: flex;
+    justify-content: center;
+    padding-top: 8vw;
+}
+.Admin{
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 30%;
 }
-.adminAddItem input[type=text] {
+.adminMenu input[type=text] {
     padding: 10px;
     font-size:20px;
     border: 10px solid rgba(255, 255, 255, .5);
@@ -21,7 +25,7 @@
     color: #333;
     width: 280px;
 }
-.adminAddItem select{
+select{
     padding: 10px;
     font-size: 20px;
     border: 10px solid rgba(255, 255, 255, .5);
@@ -29,15 +33,18 @@
     color: #333;
     width: 320px;
 }
-.adminAddItem input[type=submit]{
+.adminMenu input[type=submit],.adminMenu button{
     border: none;
     background: black;
     color: white;
     font-size: 1.2rem;
     width: 320px;
 }
-.adminAddItem input[type=submit]:hover{
+.adminMenu input[type=submit]:hover, button:hover{
     background: #ffffff;
     color: #000000;
 
+}
+.hidden{
+    display: none;
 }
