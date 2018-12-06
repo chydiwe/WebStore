@@ -24,7 +24,7 @@ public class ProductImageController {
     //  GET
     //
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.GET
     )
     public ResponseEntity<?> getImages(@PathVariable int id) {
@@ -39,7 +39,7 @@ public class ProductImageController {
     //  POST
     //
     @RequestMapping(
-            value = "id={id}&URI={URI}",
+            value = "?id={id}&URI={URI}",
             method = RequestMethod.POST
     )
     public void addImage(@PathVariable int id,
@@ -59,7 +59,7 @@ public class ProductImageController {
     //  DELETE
     //
     @RequestMapping(
-            value = "id={id}&URI={URI}",
+            value = "?id={id}&URI={URI}",
             method = RequestMethod.DELETE
     )
     public void deleteImage(@PathVariable int id,
@@ -81,7 +81,7 @@ public class ProductImageController {
     }
 
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.DELETE
     )
     public void deleteAllImages(@PathVariable int id) {

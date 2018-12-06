@@ -31,7 +31,7 @@ public class ManufacturerController {
     //  POST
     //
     @RequestMapping(
-            value = "name={name}&logo={logo}&info={info}",
+            value = "?name={name}&logo={logo}&info={info}",
             method = RequestMethod.POST
     )
     public void addManufacturer(@PathVariable String name,
@@ -51,7 +51,7 @@ public class ManufacturerController {
     }
 
     @RequestMapping(
-            value = "id={id}&logo={logo}",
+            value = "?id={id}&logo={logo}",
             method = RequestMethod.POST
     )
     public void changeLogo(@PathVariable int id,
@@ -66,7 +66,7 @@ public class ManufacturerController {
     }
 
     @RequestMapping(
-            value = "id={id}&info={info}",
+            value = "?id={id}&info={info}",
             method = RequestMethod.POST)
 
     public void changeInfo(@PathVariable int id,
@@ -84,7 +84,7 @@ public class ManufacturerController {
     //  DELETE
     //
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.DELETE
     )
     public void deleteManufacturer(@PathVariable int id) {

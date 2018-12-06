@@ -18,12 +18,18 @@ public class DeliveryController {
     @Autowired
     private DeliveryRepository deliveryRepository;
 
+    //
+    //  GET
+    //
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Set<Delivery>> getDeliveries() {
         Set<Delivery> deliveries = deliveryRepository.findAll();
         return ResponseEntity.ok().body(deliveries);
     }
 
+    //
+    //  POST
+    //
     @RequestMapping(method = RequestMethod.POST)
     public void addDelivery(@RequestParam String name) {
         Set<Delivery> deliveries = deliveryRepository.findAll();
@@ -37,6 +43,9 @@ public class DeliveryController {
         deliveryRepository.save(delivery);
     }
 
+    //
+    //  DELETE
+    //
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteDelivery(@RequestParam int id) {
         Delivery delivery = deliveryRepository.getDeliveryById(id);

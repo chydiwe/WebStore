@@ -28,7 +28,7 @@ public class BucketController {
     //  GET
     //
     @RequestMapping(
-            value = "userId={userId}",
+            value = "?userId={userId}",
             method = RequestMethod.GET
     )
     public ResponseEntity<?> getBucket(@PathVariable int userId) {
@@ -45,7 +45,7 @@ public class BucketController {
     //  POST
     //
     @RequestMapping(
-            value = "userId={userId}&productId={productId}&amount={amount}",
+            value = "?userId={userId}&productId={productId}&amount={amount}",
             method = RequestMethod.POST
     )
     public void addToBucket(@PathVariable int userId,
@@ -90,7 +90,7 @@ public class BucketController {
     //  DELETE
     //
     @RequestMapping(
-            value = "userId={userId}",
+            value = "?userId={userId}",
             method = RequestMethod.DELETE)
 
     public void deleteBucket(@PathVariable int userId) {
@@ -110,7 +110,7 @@ public class BucketController {
     }
 
     @RequestMapping(
-            value = "userId={userId}&productId={productId}",
+            value = "?userId={userId}&productId={productId}",
             method = RequestMethod.DELETE
     )
     public void deleteFromBucket(@PathVariable int userId,

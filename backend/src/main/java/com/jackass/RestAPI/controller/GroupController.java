@@ -18,12 +18,18 @@ public class GroupController {
     @Autowired
     private GroupRepository groupRepository;
 
+    //
+    //  GET
+    //
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Set<Group>> getGroups() {
         Set<Group> groups = groupRepository.findAll();
         return ResponseEntity.ok().body(groups);
     }
 
+    //
+    //  POST
+    //
     @RequestMapping(method = RequestMethod.POST)
     public void addGroup(@RequestParam String name) {
         Set<Group> groups = groupRepository.findAll();
@@ -37,6 +43,9 @@ public class GroupController {
         groupRepository.save(group);
     }
 
+    //
+    //  DELETE
+    //
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteGroup(@RequestParam int id) {
         Group group = groupRepository.getGroupById(id);

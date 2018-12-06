@@ -33,7 +33,7 @@ public class ProductController {
     // GET
     //
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.GET
     )
     public ResponseEntity<Product> getProductById(@PathVariable int id) {
@@ -47,7 +47,7 @@ public class ProductController {
     }
 
     @RequestMapping(
-            value = "name={name}",
+            value = "?name={name}",
             method = RequestMethod.GET
     )
     public ResponseEntity<Product> getProductByName(@PathVariable String name) {
@@ -61,7 +61,7 @@ public class ProductController {
     }
 
     @RequestMapping(
-            value = "categoryId={categoryId}",
+            value = "?categoryId={categoryId}",
             method = RequestMethod.GET
     )
     public ResponseEntity<Set<Product>> getProductByCategory(@PathVariable int categoryId) {
@@ -78,7 +78,7 @@ public class ProductController {
     }
 
     @RequestMapping(
-            value = "manufacturerId={manufacturerId}",
+            value = "?manufacturerId={manufacturerId}",
             method = RequestMethod.GET
     )
     public ResponseEntity<Set<Product>> getProductByManufacturer(@PathVariable int manufacturerId) {
@@ -104,7 +104,7 @@ public class ProductController {
     //  POST
     //
     @RequestMapping(
-            value = "name={name}&categoryId={categoryId}&manufacturerId={manufacturerId}&cost={cost}&quantity={quantity}",
+            value = "?name={name}&categoryId={categoryId}&manufacturerId={manufacturerId}&cost={cost}&quantity={quantity}",
             method = RequestMethod.POST
     )
     public void addProduct (@PathVariable String name,
@@ -143,7 +143,7 @@ public class ProductController {
     }
 
     @RequestMapping(
-            value = "id={id}&quantity={quantity}",
+            value = "?id={id}&quantity={quantity}",
             method = RequestMethod.POST
     )
     public void changeQuantity (@PathVariable int id,
@@ -162,7 +162,7 @@ public class ProductController {
     }
 
     @RequestMapping(
-            value = "id={id}&info={info}",
+            value = "?id={id}&info={info}",
             method = RequestMethod.POST
     )
     public void changeInfo(@PathVariable int id,
@@ -181,7 +181,7 @@ public class ProductController {
     //  DELETE
     //
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.DELETE
     )
     public void deleteProduct(@PathVariable int id) {

@@ -36,7 +36,7 @@ public class UserController {
     //  GET
     //
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.GET
     )
     public ResponseEntity<User> getUser(@PathVariable int id) {
@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "email={email}&password={password}",
+            value = "?email={email}&password={password}",
             method = RequestMethod.GET
     )
     public ResponseEntity<User> authenticate(@PathVariable String email,
@@ -68,7 +68,7 @@ public class UserController {
     //  POST
     //
     @RequestMapping(
-            value = "email={email}&password={password}&name={name}&surname={surname}&patronymic={patronymic}",
+            value = "?email={email}&password={password}&name={name}&surname={surname}&patronymic={patronymic}",
             method = RequestMethod.POST
     )
     public void register(@PathVariable String email,
@@ -102,7 +102,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "token={token}",
+            value = "?token={token}",
             method = RequestMethod.POST
     )
     public void confirm(@PathVariable String token) {
@@ -111,7 +111,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "id={id}&patronymic={patronymic}",
+            value = "?id={id}&patronymic={patronymic}",
             method = RequestMethod.POST
     )
     public void changePatr(@PathVariable int id,
@@ -127,7 +127,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "id={id}&group={group}",
+            value = "?id={id}&group={group}",
             method = RequestMethod.POST)
     public void changeGroup(@PathVariable int id,
                             @PathVariable int group) {
@@ -148,7 +148,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "id={id}&phone={phone}",
+            value = "?id={id}&phone={phone}",
             method = RequestMethod.POST
     )
     public void changePhone(@PathVariable int id,
@@ -167,7 +167,7 @@ public class UserController {
     //  DELETE
     //
     @RequestMapping(
-            value = "deletePatronymic={id}",
+            value = "?deletePatronymic={id}",
             method = RequestMethod.DELETE
     )
     public void deletePatr(@PathVariable int id) {
@@ -182,7 +182,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "deletePhone={id}",
+            value = "?deletePhone={id}",
             method = RequestMethod.DELETE
     )
     public void deletePhone(@PathVariable int id) {
@@ -197,7 +197,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.DELETE
     )
     public void deleteUser(@PathVariable int id) {

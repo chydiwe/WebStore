@@ -44,7 +44,7 @@ public class OrderInfoController {
     // GET
     //
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.GET
     )
     public ResponseEntity<?> getProducts(@PathVariable int id) {
@@ -60,7 +60,7 @@ public class OrderInfoController {
     //  POST
     //
     @RequestMapping(
-            value = "orderId={}&productId={}&amount={amount}",
+            value = "?orderId={}&productId={}&amount={amount}",
             method = RequestMethod.POST
     )
     public void addProduct(@PathVariable int orderId,
@@ -106,7 +106,7 @@ public class OrderInfoController {
     //  DELETE
     //
     @RequestMapping(
-            value = "orderId={orderId}&productId={productId}",
+            value = "?orderId={orderId}&productId={productId}",
             method = RequestMethod.DELETE
     )
     public void deleteFromOrder(@PathVariable int orderId,
@@ -139,7 +139,7 @@ public class OrderInfoController {
     }
 
     @RequestMapping(
-            value = "orderId={orderId}",
+            value = "?orderId={orderId}",
             method = RequestMethod.DELETE
     )
     public void deleteOrderInfo(@PathVariable int orderId) {

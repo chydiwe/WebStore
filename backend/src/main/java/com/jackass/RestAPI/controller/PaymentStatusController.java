@@ -18,12 +18,18 @@ public class PaymentStatusController {
     @Autowired
     private PaymentStatusRepository paymentStatusRepository;
 
+    //
+    //  GET
+    //
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Set<PaymentStatus>> getPaymentStatuses() {
         Set<PaymentStatus> paymentSatuses = paymentStatusRepository.findAll();
         return ResponseEntity.ok().body(paymentSatuses);
     }
 
+    //
+    //  POST
+    //
     @RequestMapping(method = RequestMethod.POST)
     public void addPaymentStatus(@RequestParam String name) {
         Set<PaymentStatus> statuses = paymentStatusRepository.findAll();
@@ -37,6 +43,9 @@ public class PaymentStatusController {
         paymentStatusRepository.save(paymentStatus);
     }
 
+    //
+    //  DELETE
+    //
     @RequestMapping(method = RequestMethod.DELETE)
     public void deletePaymentStatus(@RequestParam int id) {
         PaymentStatus ps = paymentStatusRepository.getPaymentStatusById(id);

@@ -18,12 +18,18 @@ public class PaymentController {
     @Autowired
     private PaymentRepository paymentRepository;
 
+    //
+    //  GET
+    //
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Set<Payment>> getPayments() {
         Set<Payment> payments = paymentRepository.findAll();
         return ResponseEntity.ok().body(payments);
     }
 
+    //
+    //  POST
+    //
     @RequestMapping(method = RequestMethod.POST)
     public void addPayment(@RequestParam String name) {
         Set<Payment> payments = paymentRepository.findAll();
@@ -37,6 +43,9 @@ public class PaymentController {
         paymentRepository.save(payment);
     }
 
+    //
+    //  DELETE
+    //
     @RequestMapping(method = RequestMethod.DELETE)
     public void deletePayment(@RequestParam int id) {
         Payment payment = paymentRepository.getPaymentById(id);

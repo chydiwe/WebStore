@@ -18,12 +18,18 @@ public class OrderStatusController {
     @Autowired
     private OrderStatusRepository orderStatusRepository;
 
+    //
+    //  GET
+    //
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Set<OrderStatus>> getOrderStatuses() {
         Set<OrderStatus> orderSatuses = orderStatusRepository.findAll();
         return ResponseEntity.ok().body(orderSatuses);
     }
 
+    //
+    //  POST
+    //
     @RequestMapping(method = RequestMethod.POST)
     public void addOrderStatus(@RequestParam String name) {
         Set<OrderStatus> statuses = orderStatusRepository.findAll();
@@ -37,6 +43,9 @@ public class OrderStatusController {
         orderStatusRepository.save(orderStatus);
     }
 
+    //
+    //  DELETE
+    //
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteOrderStatus(@RequestParam int id) {
         OrderStatus os = orderStatusRepository.getOrderStatusById(id);

@@ -18,12 +18,18 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    //
+    //  GET
+    //
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Set<Category>> getCategories() {
         Set<Category> categories = categoryRepository.findAll();
         return ResponseEntity.ok().body(categories);
     }
 
+    //
+    //  POST
+    //
     @RequestMapping(method = RequestMethod.POST)
     public void addCategory(@RequestParam String name) {
         Set<Category> categories = categoryRepository.findAll();
@@ -37,6 +43,9 @@ public class CategoryController {
         categoryRepository.save(category);
     }
 
+    //
+    //  DELETE
+    //
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteCategory(@RequestParam int id) {
         Category category = categoryRepository.getCategoryById(id);

@@ -34,7 +34,7 @@ public class OrderController {
     //  GET
     //
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.GET
     )
     public ResponseEntity<Order> getOrder(@PathVariable int id) {
@@ -46,7 +46,7 @@ public class OrderController {
     }
 
     @RequestMapping(
-            value = "userId={userId}",
+            value = "?userId={userId}",
             method = RequestMethod.GET
     )
     public ResponseEntity<Set<Order>> getUserOrders(@PathVariable int userId) {
@@ -62,7 +62,7 @@ public class OrderController {
     //  POST
     //
     @RequestMapping(
-            value = "customer={}&delivery={}&payment={}&comment={}",
+            value = "?customer={}&delivery={}&payment={}&comment={}",
             method = RequestMethod.POST
     )
     public void addOrder(@PathVariable int customer,
@@ -107,7 +107,7 @@ public class OrderController {
     }
 
     @RequestMapping(
-            value = "id={id}&manager={manager}",
+            value = "?id={id}&manager={manager}",
             method = RequestMethod.POST
     )
     public void changeManager(@PathVariable int id,
@@ -125,7 +125,7 @@ public class OrderController {
     }
 
     @RequestMapping(
-            value = "id={id}&paymentStatus={paymentStatus}",
+            value = "?id={id}&paymentStatus={paymentStatus}",
             method = RequestMethod.POST, params = "paymentStatus"
     )
     public void updatePaymentStatus(@PathVariable int id,
@@ -145,7 +145,7 @@ public class OrderController {
     }
 
     @RequestMapping(
-            value = "id={id}&orderStatus={orderStatus}",
+            value = "?id={id}&orderStatus={orderStatus}",
             method = RequestMethod.POST, params = "orderStatus"
     )
     public void updateOrderStatus(@PathVariable int id,
@@ -165,7 +165,7 @@ public class OrderController {
     }
 
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.POST
     )
     public void closeOrder(@PathVariable int id) {
@@ -178,7 +178,7 @@ public class OrderController {
     }
 
     @RequestMapping(
-            value = "id={id}&comment={comment}",
+            value = "?id={id}&comment={comment}",
             method = RequestMethod.POST
     )
     public void changeComment(@PathVariable int id,
@@ -195,7 +195,7 @@ public class OrderController {
     //  DELETE
     //
     @RequestMapping(
-            value = "id={id}",
+            value = "?id={id}",
             method = RequestMethod.DELETE)
     public void deleteOrder(@PathVariable int id) {
         Order order = orderRepository.getOrderById(id);
