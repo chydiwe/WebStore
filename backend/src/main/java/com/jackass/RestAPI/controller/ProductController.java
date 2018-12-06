@@ -91,7 +91,8 @@ public class ProductController {
     //
     //  POST
     //
-    @RequestMapping(method = RequestMethod.POST, params = "name")
+    @RequestMapping(method = RequestMethod.POST,
+                    params = {"name", "categoryId", "manufacturerId", "cost", "quantity"})
     public void addProduct (@RequestParam String name,
                             @RequestParam int categoryId,
                             @RequestParam int manufacturerId,
@@ -127,7 +128,7 @@ public class ProductController {
         productRepository.save(product);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "quantity")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "quantity"})
     public void changeQuantity (@RequestParam int id,
                                 @RequestParam int quantity) {
         Product product = productRepository.getProductById(id);
@@ -143,7 +144,7 @@ public class ProductController {
         productRepository.save(product);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "info")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "info"})
     public void changeInfo(@RequestParam int id,
                            @RequestParam String info) {
         Product product = productRepository.getProductById(id);
