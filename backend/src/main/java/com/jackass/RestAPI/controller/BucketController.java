@@ -27,11 +27,8 @@ public class BucketController {
     //
     //  GET
     //
-    @RequestMapping(
-            value = "?userId={userId}",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<?> getBucket(@PathVariable int userId) {
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> getBucket(@RequestParam int userId) {
         User user = userRepository.getUserById(userId);
 
         if (user == null) {
@@ -44,13 +41,10 @@ public class BucketController {
     //
     //  POST
     //
-    @RequestMapping(
-            value = "?userId={userId}&productId={productId}&amount={amount}",
-            method = RequestMethod.POST
-    )
-    public void addToBucket(@PathVariable int userId,
-                            @PathVariable int productId,
-                            @PathVariable int amount) {
+    @RequestMapping(method = RequestMethod.POST)
+    public void addToBucket(@RequestParam int userId,
+                            @RequestParam int productId,
+                            @RequestParam int amount) {
         Product product = productRepository.getProductById(productId);
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");
@@ -89,11 +83,8 @@ public class BucketController {
     //
     //  DELETE
     //
-    @RequestMapping(
-            value = "?userId={userId}",
-            method = RequestMethod.DELETE)
-
-    public void deleteBucket(@PathVariable int userId) {
+    @RequestMapping(method = RequestMethod.DELETE, params = "userId")
+    public void deleteBucket(@RequestParam int userId) {
         User user = userRepository.getUserById(userId);
 
         if (user == null) {
@@ -109,12 +100,9 @@ public class BucketController {
         }
     }
 
-    @RequestMapping(
-            value = "?userId={userId}&productId={productId}",
-            method = RequestMethod.DELETE
-    )
-    public void deleteFromBucket(@PathVariable int userId,
-                                 @PathVariable int productId) {
+    @RequestMapping(method = RequestMethod.DELETE, params = "productId")
+    public void deleteFromBucket(@RequestParam int userId,
+                                 @RequestParam int productId) {
         User user = userRepository.getUserById(userId);
         if (user == null) {
             throw new NotFoundException("Wrong user ID.");

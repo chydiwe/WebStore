@@ -43,11 +43,8 @@ public class OrderInfoController {
     //
     // GET
     //
-    @RequestMapping(
-            value = "?id={id}",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<?> getProducts(@PathVariable int id) {
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> getProducts(@RequestParam int id) {
         Order order = orderRepository.getOrderById(id);
         if (order == null) {
             throw new NotFoundException("Wrong order ID.");
@@ -59,13 +56,10 @@ public class OrderInfoController {
     //
     //  POST
     //
-    @RequestMapping(
-            value = "?orderId={}&productId={}&amount={amount}",
-            method = RequestMethod.POST
-    )
-    public void addProduct(@PathVariable int orderId,
-                           @PathVariable int productId,
-                           @PathVariable int amount) {
+    @RequestMapping(method = RequestMethod.POST)
+    public void addProduct(@RequestParam int orderId,
+                           @RequestParam int productId,
+                           @RequestParam int amount) {
         Order order = orderRepository.getOrderById(orderId);
         if (order == null) {
             throw new NotFoundException("Wrong order ID.");
@@ -105,12 +99,9 @@ public class OrderInfoController {
     //
     //  DELETE
     //
-    @RequestMapping(
-            value = "?orderId={orderId}&productId={productId}",
-            method = RequestMethod.DELETE
-    )
-    public void deleteFromOrder(@PathVariable int orderId,
-                                @PathVariable int productId) {
+    @RequestMapping(method = RequestMethod.DELETE, params = "productId")
+    public void deleteFromOrder(@RequestParam int orderId,
+                                @RequestParam int productId) {
         Order order = orderRepository.getOrderById(orderId);
         if (order == null) {
             throw new NotFoundException("Wrong order ID.");
@@ -138,11 +129,8 @@ public class OrderInfoController {
         recalculateCost(orderId);
     }
 
-    @RequestMapping(
-            value = "?orderId={orderId}",
-            method = RequestMethod.DELETE
-    )
-    public void deleteOrderInfo(@PathVariable int orderId) {
+    @RequestMapping(method = RequestMethod.DELETE, params = "orderId")
+    public void deleteOrderInfo(@RequestParam int orderId) {
         Order order = orderRepository.getOrderById(orderId);
         if (order == null) {
             throw new NotFoundException("Wrong order ID.");

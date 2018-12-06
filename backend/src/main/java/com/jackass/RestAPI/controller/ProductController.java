@@ -32,11 +32,8 @@ public class ProductController {
     //
     // GET
     //
-    @RequestMapping(
-            value = "?id={id}",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<Product> getProductById(@PathVariable int id) {
+    @RequestMapping(method = RequestMethod.GET, params = "id")
+    public ResponseEntity<Product> getProductById(@RequestParam int id) {
         Product product = productRepository.getProductById(id);
 
         if (product == null) {
@@ -46,11 +43,8 @@ public class ProductController {
         return ResponseEntity.ok().body(product);
     }
 
-    @RequestMapping(
-            value = "?name={name}",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<Product> getProductByName(@PathVariable String name) {
+    @RequestMapping(method = RequestMethod.GET, params = "name")
+    public ResponseEntity<Product> getProductByName(@RequestParam String name) {
         Product product = productRepository.getProductByName(name);
 
         if (product == null) {
@@ -60,11 +54,8 @@ public class ProductController {
         return ResponseEntity.ok().body(product);
     }
 
-    @RequestMapping(
-            value = "?categoryId={categoryId}",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<Set<Product>> getProductByCategory(@PathVariable int categoryId) {
+    @RequestMapping(method = RequestMethod.GET, params = "categoryId")
+    public ResponseEntity<Set<Product>> getProductByCategory(@RequestParam int categoryId) {
         Category categoryObj = categoryRepository.getCategoryById(categoryId);
 
         if (categoryObj == null) {
@@ -77,11 +68,8 @@ public class ProductController {
         return ResponseEntity.ok().body(products);
     }
 
-    @RequestMapping(
-            value = "?manufacturerId={manufacturerId}",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<Set<Product>> getProductByManufacturer(@PathVariable int manufacturerId) {
+    @RequestMapping(method = RequestMethod.GET, params = "manufacturerId")
+    public ResponseEntity<Set<Product>> getProductByManufacturer(@RequestParam int manufacturerId) {
         Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturerId);
 
         if (manufacturerObj == null) {
@@ -103,15 +91,12 @@ public class ProductController {
     //
     //  POST
     //
-    @RequestMapping(
-            value = "?name={name}&categoryId={categoryId}&manufacturerId={manufacturerId}&cost={cost}&quantity={quantity}",
-            method = RequestMethod.POST
-    )
-    public void addProduct (@PathVariable String name,
-                            @PathVariable int categoryId,
-                            @PathVariable int manufacturerId,
-                            @PathVariable int cost,
-                            @PathVariable int quantity) {
+    @RequestMapping(method = RequestMethod.POST, params = "name")
+    public void addProduct (@RequestParam String name,
+                            @RequestParam int categoryId,
+                            @RequestParam int manufacturerId,
+                            @RequestParam int cost,
+                            @RequestParam int quantity) {
 
         Product product = productRepository.getProductByName(name);
 
@@ -142,12 +127,9 @@ public class ProductController {
         productRepository.save(product);
     }
 
-    @RequestMapping(
-            value = "?id={id}&quantity={quantity}",
-            method = RequestMethod.POST
-    )
-    public void changeQuantity (@PathVariable int id,
-                                @PathVariable int quantity) {
+    @RequestMapping(method = RequestMethod.POST, params = "quantity")
+    public void changeQuantity (@RequestParam int id,
+                                @RequestParam int quantity) {
         Product product = productRepository.getProductById(id);
 
         if (product == null) {
@@ -161,12 +143,9 @@ public class ProductController {
         productRepository.save(product);
     }
 
-    @RequestMapping(
-            value = "?id={id}&info={info}",
-            method = RequestMethod.POST
-    )
-    public void changeInfo(@PathVariable int id,
-                           @PathVariable String info) {
+    @RequestMapping(method = RequestMethod.POST, params = "info")
+    public void changeInfo(@RequestParam int id,
+                           @RequestParam String info) {
         Product product = productRepository.getProductById(id);
 
         if (product == null) {
@@ -180,11 +159,8 @@ public class ProductController {
     //
     //  DELETE
     //
-    @RequestMapping(
-            value = "?id={id}",
-            method = RequestMethod.DELETE
-    )
-    public void deleteProduct(@PathVariable int id) {
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteProduct(@RequestParam int id) {
         Product product = productRepository.getProductById(id);
 
         if (product == null) {
