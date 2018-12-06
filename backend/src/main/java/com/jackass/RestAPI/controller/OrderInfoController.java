@@ -99,7 +99,7 @@ public class OrderInfoController {
     //
     //  DELETE
     //
-    @RequestMapping(method = RequestMethod.DELETE, params = "productId")
+    @RequestMapping(method = RequestMethod.DELETE, params = {"orderId", "productId"})
     public void deleteFromOrder(@RequestParam int orderId,
                                 @RequestParam int productId) {
         Order order = orderRepository.getOrderById(orderId);

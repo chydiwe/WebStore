@@ -55,7 +55,8 @@ public class OrderController {
     //
     //  POST
     //
-    @RequestMapping(method = RequestMethod.POST, params = "customer")
+    @RequestMapping(method = RequestMethod.POST,
+                    params = {"customer", "delivery", "payment", "comment"})
     public void addOrder(@RequestParam int customer,
                          @RequestParam int delivery,
                          @RequestParam int payment,
@@ -97,7 +98,7 @@ public class OrderController {
         orderRepository.save(order);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "manager")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "manager"})
     public void changeManager(@RequestParam int id,
                               @RequestParam int manager) {
         Order order = orderRepository.getOrderById(id);
@@ -112,7 +113,7 @@ public class OrderController {
         orderRepository.save(order);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "paymentStatus")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "paymentStatus"})
     public void updatePaymentStatus(@RequestParam int id,
                                     @RequestParam int paymentStatus) {
         PaymentStatus paymentStatusObj = paymentStatusRepository.getPaymentStatusById(paymentStatus);
@@ -129,7 +130,7 @@ public class OrderController {
         orderRepository.save(order);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "orderStatus")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "orderStatus"})
     public void updateOrderStatus(@RequestParam int id,
                                   @RequestParam int orderStatus) {
         Order order = orderRepository.getOrderById(id);
@@ -156,7 +157,7 @@ public class OrderController {
         orderRepository.save(order);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "comment")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "comment"})
     public void changeComment(@RequestParam int id,
                               @RequestParam String comment) {
         Order order = orderRepository.getOrderById(id);

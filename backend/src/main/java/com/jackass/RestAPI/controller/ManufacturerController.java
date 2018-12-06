@@ -30,7 +30,7 @@ public class ManufacturerController {
     //
     //  POST
     //
-    @RequestMapping(method = RequestMethod.POST, params = "name")
+    @RequestMapping(method = RequestMethod.POST, params = {"name", "logo", "info"})
     public void addManufacturer(@RequestParam String name,
                                 @RequestParam String logo,
                                 @RequestParam String info) {
@@ -47,7 +47,7 @@ public class ManufacturerController {
         manufacturerRepository.save(manufacturer);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "logo")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "logo"})
     public void changeLogo(@RequestParam int id,
                            @RequestParam String logo) {
         Manufacturer manufacturer = manufacturerRepository.getManufacturerById(id);
@@ -59,7 +59,7 @@ public class ManufacturerController {
         manufacturerRepository.save(manufacturer);
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "info")
+    @RequestMapping(method = RequestMethod.POST, params = {"id", "info"})
     public void changeInfo(@RequestParam int id,
                            @RequestParam String info) {
         Manufacturer manufacturer = manufacturerRepository.getManufacturerById(id);

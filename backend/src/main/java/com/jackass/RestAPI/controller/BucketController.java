@@ -100,7 +100,7 @@ public class BucketController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, params = "productId")
+    @RequestMapping(method = RequestMethod.DELETE, params = {"userId", "productId"})
     public void deleteFromBucket(@RequestParam int userId,
                                  @RequestParam int productId) {
         User user = userRepository.getUserById(userId);
