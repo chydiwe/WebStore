@@ -2,40 +2,6 @@ import React, {Component} from 'react'
 import "./css/UserPage.css"
 import notFound from "./img/notFound_mini.png";
 
-const Data =
-    {
-        image: notFound,
-        surname: "Обосрись",
-        name: "Васян",
-        patronymic: "Улдарович",
-        email: "vasyyyan@mail.ru",
-        country: "Россия",
-        city: "Бутейко",
-        birthday: "01.01.2000",
-        contact: "+79995553434",
-        history: [
-            {
-                product: notFound,
-                description: "product",
-                quantity: "2",
-                price: "320",
-                receiving: "20.11.2005"
-            },
-            {
-                product: notFound,
-                description: "product",
-                quantity: "1",
-                price: "340",
-                receiving: "20.10.2005"
-            },
-            {
-                product: notFound,
-                description: "product",
-                quantity: "1",
-                price: "300",
-                receiving: "25.10.2005"
-            }]
-    }
 
 const UserItem = ({item}) =>
     <tr className="">
@@ -61,13 +27,36 @@ export default class UserPage extends Component {
         this.state = {
             user:{
                 id:"1",
+                image: notFound,
                 email: "vasyyyan@mail.ru",
                 country:"Россия",
                 city:"Баянск",
                 name: "Васян",
-                surname: "Обосрись",
+                surname: "Ублюдов",
                 patronymic: "Улдарович",
-                phoneNumber: "88005553535"
+                phoneNumber: "88005553535",
+                history: [
+                    {
+                        product: notFound,
+                        description: "product",
+                        quantity: "2",
+                        price: "320",
+                        receiving: "20.11.2005"
+                    },
+                    {
+                        product: notFound,
+                        description: "product",
+                        quantity: "1",
+                        price: "340",
+                        receiving: "20.10.2005"
+                    },
+                    {
+                        product: notFound,
+                        description: "product",
+                        quantity: "1",
+                        price: "300",
+                        receiving: "25.10.2005"
+                    }]
             },
             formDisabled:true,
             formDisabled_True:true
@@ -110,8 +99,8 @@ export default class UserPage extends Component {
                 <div>
                     <div className="panel-body">
                         <div className="text-center" id="author">
-                            <img src={Data.image} alt=""/>
-                            <h3> {Data.name} </h3>
+                            <img src={this.state.user.image} alt=""/>
+                            <h3> {this.state.user.name} </h3>
                             <button className="button">Загрузить фото</button>
                         </div>
                         <table className='infoUser'>
@@ -162,7 +151,7 @@ export default class UserPage extends Component {
                                 <td>Цена</td>
                                 <td>Дата получения</td>
                             </tr>
-                            {Data.history.map((item) => <UserItem item={item}/>)}
+                            {this.state.user.history.map((item) => <UserItem item={item}/>)}
 
                             </tbody>
                         </table>
