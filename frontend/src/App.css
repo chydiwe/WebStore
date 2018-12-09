@@ -5,6 +5,7 @@
 :root{
     --link-hover-color: #d63465;
     --font-color: #4a4a4a;
+    --drop-color: #e3d7e8; /* beige */
 }
 
 
@@ -163,7 +164,6 @@ li {
     width: 120px;
     height: 120px;
     animation: spin 1s linear infinite;
-
 }
 
 @keyframes spin {

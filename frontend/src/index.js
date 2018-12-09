@@ -14,6 +14,8 @@ import FooterSite from "./components/FooterSite";
 import OrderPage from "./components/OrderPage";
 import UserPage from "./components/UserPage";
 import SingleProductPage from "./components/SingleProductPage";
+import OrderDelivPayment from "./components/OrderDeliveryAndPayment";
+
 class Pages extends React.Component {
     render() {
         return(
@@ -26,6 +28,7 @@ class Pages extends React.Component {
                 <Route path='/adminpanel' component={adminPanel}/>
                 <Route path='/profile' component={UserPage}/>
                 <Route path='/item' component={SingleProductPage}/>
+                <Route path='/delivery-and-payment' component={OrderDelivPayment} />
                 <FooterSite/>
             </div>
         )

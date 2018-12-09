@@ -78,7 +78,7 @@
 table{
     width: 100%;
     text-align: center;
-    margin-bottom: 15px;
+    /*margin-bottom: 15px; я тебе переебу за такие стили в следуйщий раз Антон! :) */
     border-collapse: collapse;
     border-bottom: 1px solid #E1E8EE;
 }
