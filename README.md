@@ -2,3 +2,5 @@
 ./mvnw -pl backend spring-boot:run && ./mvnw -pl frontend clean install
 
 Перед запуском удостоверьтесь, что указали логин и пароль к бд в ресурсах backend.
+
+##Ссылки на доки используемого API##
