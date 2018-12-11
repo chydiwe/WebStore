@@ -13,17 +13,22 @@ import adminPanel from "./components/AdminPanel"
 import FooterSite from "./components/FooterSite";
 import OrderPage from "./components/OrderPage";
 import UserPage from "./components/UserPage";
+import Page404 from "./components/Page404";
+
 class Pages extends React.Component {
     render() {
-        return(
+        return (
             <div className="App-header">
                 <PanelSite/>
-                <Route exact path='/' component={Main}/>
-                <Route path='/order-page' component={OrderPage}/>
-                <Route path='/confirming' component={ConfirmMail}/>
-                <Route path='/register' component={Register}/>
-                <Route path='/adminpanel' component={adminPanel}/>
-                <Route path='/profile' component={UserPage}/>
+                <Switch>
+                    <Route exact path='/' component={Main}/>
+                    <Route path='/order-page' component={OrderPage}/>
+                    <Route path='/confirming' component={ConfirmMail}/>
+                    <Route path='/register' component={Register}/>
+                    <Route path='/adminpanel' component={adminPanel}/>
+                    <Route path='/profile' component={UserPage}/>
+                    <Route component={Page404}/>
+                </Switch>
                 <FooterSite/>
             </div>
         )
@@ -34,9 +39,7 @@ ReactDOM.render(
     <Provider store={store}>
         <div>
             <ConnectedRouter history={history}>
-                <Switch>
-                    <Pages/>
-                </Switch>
+                <Pages/>
             </ConnectedRouter>
         </div>
 
