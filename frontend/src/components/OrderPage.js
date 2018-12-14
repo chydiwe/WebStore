@@ -39,60 +39,13 @@ const ShoppingCartItem = ({item, change}) =>
 
 
 class OrderPage extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.quantityChange = this.quantityChange.bind(this);
         this.nextStepControl = this.nextStepControl.bind(this);
-
-        this.state = {
-            products: [
-                {
-                    "product": {
-                        "id": 2,
-                        "name": "A4",
-                        "category": {
-                            "id": 2,
-                            "name": "Paper"
-                        },
-                        "manufacturer": {
-                            "id": 2,
-                            "name": "EngTools",
-                            "logo": null,
-                            "info": null
-                        },
-                        "shortInfo": null,
-                        "cost": 100,
-                        "quantity": 5,
-                        "comments": [],
-                        "images": []
-                    },
-                    "amount": 5
-                },
-                {
-                    "product": {
-                        "id": 1,
-                        "name": "Pen",
-                        "category": {
-                            "id": 1,
-                            "name": "Writing tools"
-                        },
-                        "manufacturer": {
-                            "id": 1,
-                            "name": "RusTools",
-                            "logo": null,
-                            "info": null
-                        },
-                        "shortInfo": null,
-                        "cost": 50,
-                        "quantity": 10,
-                        "comments": [],
-                        "images": []
-                    },
-                    "amount": 10
-                }
-            ]
-        };
-
+      this.state={
+          products:[]
+      }
     }
 
     quantityChange(item, key, op) {
@@ -117,12 +70,11 @@ class OrderPage extends Component {
         this.props.user
             .then(response => fetch(`http://localhost:8080/api/users/bucket?userId=${response.id}`)
                 .then(response => response.json())
-                .then(response => this.setState({products: response})))
+                .then(response => this.setState({products:response})))
     }
 
     componentWillUpdate() {
-        const nProd = this.state.products.filter(item => item.amount > 0);
-        if (nProd.length !== this.state.products.length) this.setState({products: nProd})
+
     }
 
     nextStepControl(e) {
@@ -149,7 +101,7 @@ class OrderPage extends Component {
     render() {
         return (
             <div className="order-container">
-                <div>
+                 <div>
                     <h1>Ваша корзина</h1>
                     <table>
                         <tbody>
@@ -160,9 +112,9 @@ class OrderPage extends Component {
                             <td>Цена</td>
                             <td>{/**/}</td>
                         </tr>
-                        {this.state.products.map((item, key) =>
+                        {this.state.products.length!==0?this.state.products.map((item, key) =>
                             <ShoppingCartItem item={item} change={(op) => this.quantityChange(item, key, op)}/>)
-                        }
+                        :<p>В корзине пусто</p>}
                         </tbody>
                     </table>
 

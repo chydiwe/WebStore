@@ -6,6 +6,7 @@ export const GET_CATALOG_INFO_FAILED = 'GET_CATALOG_INFO_FAILED',
 
 export default function getCatalog(id) {
     return dispatch => {
+
         return fetch(`${id?`http://localhost:8080/api/products?categoryId=${id}`:'http://localhost:8080/api/products'}`, {method: 'GET'})
             .then((response) => {
                 if (response.status === 200) {

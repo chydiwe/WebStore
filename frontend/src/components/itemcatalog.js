@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import '../App.css'
 import connect from "react-redux/es/connect/connect";
-import getCatalog from '../action/catalog'
 
 import notFound from './img/notfound.png'
 import fetch from "cross-fetch";
@@ -33,13 +32,6 @@ class Catalog extends Component {
                 })
             .catch((error)=>console.log(error))
     }
-    componentWillReceiveProps(){
-
-    }
-    componentWillMount() {
-        this.props.getCatalogItems()
-    }
-
     render() {
         const catalog = this.props.catalog;
         return <div className='catalog'>
@@ -58,11 +50,6 @@ const mapStateToProps = (store) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getCatalogItems: () => dispatch(getCatalog()),
-    }
 
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
+export default connect(mapStateToProps, null)(Catalog)

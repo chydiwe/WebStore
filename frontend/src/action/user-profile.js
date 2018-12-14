@@ -2,18 +2,18 @@ import fetch from 'cross-fetch'
 import {sessionService} from 'redux-react-session';
 
 
-export function userLogIn(user, history) {
+export function userLogIn(user, pass) {
+    console.log(user, pass)
     return () => {
-        return fetch(`http://localhost:8080/api/users?email=${user.name}&password=${user.pass}`, {method: 'GET'})
-            .then(response => response.json())
+        return fetch(`http://localhost:8080/api/users?email=${user}&password=${pass}`, {method: 'GET'})
             .then((response) => {
-                const {id} = response;
-                sessionService.saveSession({id})
-                    .then(() => {
-                        response.isLogin = true;
+                if (response.status === 200)
+                    response.json().then(response => {
+                        sessionService.saveSession(response.id)
+                        response.isLogin=true;
                         sessionService.saveUser(response)
-                            .catch(err => console.error(err));
-                    }).catch(err => console.error(err));
+                    })
+                else alert(response.message)
             })
     }
 }

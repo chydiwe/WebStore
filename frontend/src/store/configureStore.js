@@ -9,10 +9,7 @@ export const history = createHistory();
 const middleware = routerMiddleware(history);
 export const store = createStore(rootReducer,applyMiddleware(middleware,logger,thunk));
 
-const validateSession = (session) => {
-    session.loadSession().then(response=>console.log(response+'id'))
-    return true
-}
+
 const options = { refreshOnCheckAuth: true, redirectPath: '/', driver: 'COOKIES'};
 
 sessionService.initSessionService(store, options)

@@ -15,9 +15,17 @@ import OrderPage from "./components/OrderPage";
 import UserPage from "./components/UserPage";
 import SingleProductPage from "./components/SingleProductPage";
 import OrderDelivPayment from "./components/OrderDeliveryAndPayment";
+import getCatalog from "./action/catalog";
+import connect from "react-redux/es/connect/connect";
+import getCategory from "./action/category";
 
 class Pages extends React.Component {
+componentDidMount(){
+    store.dispatch(getCategory())
+    store.dispatch(getCatalog())
+}
     render() {
+
         return(
             <div className="App-header">
                 <PanelSite/>
@@ -48,4 +56,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
-

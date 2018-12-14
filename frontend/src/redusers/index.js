@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux'
 import {catalog} from "./catalog";
+import {category} from "./category";
 import {routerReducer} from 'react-router-redux'
 import {confirmToken} from "./confirmMail";
 import {STATUS} from "./addItemonserver";
@@ -9,5 +10,6 @@ export const rootReducer = combineReducers({
     confirmToken: confirmToken,
     status: STATUS,
     routing: routerReducer,
+    category:category,
     session: sessionReducer
 });
