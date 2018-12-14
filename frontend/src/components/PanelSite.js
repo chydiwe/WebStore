@@ -75,7 +75,7 @@ class PanelSite extends React.Component {
                     <div ref={(node) => this._categoryMenu = node} className='category_menuOff'>
                         <div className='category'>
                             {category?category.map((item,index)=>
-                                <div onClick={()=>getCatalogItems(item.id)} key={index}>{item.name}</div>
+                                <div onClick={()=>getCatalogItems(item.id)} key={index}><Link to='/'>{item.name}</Link></div>
                             ):<div></div>}
                         </div>
 
