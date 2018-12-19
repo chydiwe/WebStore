@@ -92,7 +92,9 @@ export default class UserPage extends Component {
         document.getElementById("change").style.display="block";
         document.getElementById("save").style.display="none";
     }
-
+   componentDidMount(){
+        
+   }
     render() {
 
         return (

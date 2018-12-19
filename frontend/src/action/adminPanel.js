@@ -5,6 +5,7 @@ export const POST_STATUS = 'POST_STATUS',
     POST_STATUS_FAILED = 'POST_STATUS_FAILED';
 
 export function addItem(item) {
+    window.location.reload()
     return dispatch => {
         dispatch({
             type: POST_STATUS
@@ -28,6 +29,7 @@ export function addItem(item) {
 }
 
 export function delItem(id) {
+    window.location.reload()
     return dispatch => {
         dispatch({
             type: POST_STATUS
@@ -39,11 +41,49 @@ export function delItem(id) {
                     dispatch({
                         type: POST_STATUS_SUCCES
                     })
+                else alert(`error:${response.message}`)
+
             })
     }
 }
 
+export function addImg(id,url) {
+    window.location.reload()
+    return dispatch => {
+        dispatch({
+            type: POST_STATUS
+        })
+
+        return fetch(`http://localhost:8080/api/products/images?id=${id}&URI=${url}`, {method: 'POST'})
+            .then((response) => {
+                if (response.status === 200)
+                    dispatch({
+                        type: POST_STATUS_SUCCES
+                    })
+                else alert(`error:${response.message}`)
+
+            })
+    }
+}
+export function addInfo(id,shortInfo) {
+    return dispatch => {
+        dispatch({
+            type: POST_STATUS
+        })
+
+        return fetch(`http://localhost:8080/api/products?id=${id}&info=${shortInfo}`, {method: 'POST'})
+            .then((response) => {
+                if (response.status === 200)
+                    dispatch({
+                        type: POST_STATUS_SUCCES
+                    })
+                else alert(`error:${response.message}`)
+
+            })
+    }
+}
 export function addCategory(name) {
+    window.location.reload()
     return dispatch => {
         dispatch({
             type: POST_STATUS
@@ -54,7 +94,7 @@ export function addCategory(name) {
                     dispatch({
                         type: POST_STATUS_SUCCES
                     })
-                else dispatch({type: POST_STATUS_FAILED})
+                else alert(`error:${response.message}`)
             })
     }
 
@@ -62,6 +102,7 @@ export function addCategory(name) {
 
 
 export function delCategory(name) {
+    window.location.reload()
     return dispatch => {
         dispatch({
             type: POST_STATUS
@@ -72,7 +113,7 @@ export function delCategory(name) {
                     dispatch({
                         type: POST_STATUS_SUCCES
                     })
-                else dispatch({type: POST_STATUS_FAILED})
+                else alert(`error:${response.message}`)
             })
     }
 

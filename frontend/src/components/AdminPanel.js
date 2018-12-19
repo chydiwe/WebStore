@@ -1,6 +1,6 @@
 import React from 'react'
 import connect from "react-redux/es/connect/connect";
-import {addCategory, addItem, delCategory, delItem} from "../action/adminPanel";
+import {addCategory, addItem, delCategory, delItem,addImg,addInfo} from "../action/adminPanel";
 import "./css/AdminPanel.css"
 import fetch from "cross-fetch";
 
@@ -83,10 +83,12 @@ class AdminPanel extends React.Component {
             </div>
             <Item status={this.state.status[0]} delItem={this.props.delItem} addItem={this.props.addItem}
                   listCategory={this.state.listCategory}
-                  sendItem listManufacturer={this.state.listManufacturer} listProducts={this.state.listProducts}/>
+                  addInfo={this.props.addInfo}
+                  sendItem listManufacturer={this.state.listManufacturer} listProducts={this.state.listProducts} addImg={this.props.addImg}/>
             <Category status={this.state.status[1]} addCategory={this.props.addCategory}
                       delCategory={this.props.delCategory}
-                      listCategory={this.state.listCategory}/>
+                      listCategory={this.state.listCategory}
+           />
         </div>
     }
 
@@ -129,7 +131,7 @@ class Item extends React.Component {
     }
 
     render() {
-        const {listCategory, listManufacturer, listProducts, addItem, delItem, status} = this.props;
+        const {listCategory, listManufacturer, listProducts, addItem, delItem, status,addImg,addInfo} = this.props;
         return <div className={`adminPanel ${status}`}>
             <div className='Admin AddItem'>
                 <p>Добавление товара</p>
@@ -161,6 +163,26 @@ class Item extends React.Component {
                 </select>
                 <button onClick={() => delItem(this._products.value)} type="button">Удалить</button>
             </div>
+            <div className="Admin DelItem">
+                <p>Добавить картинку товару</p>
+                <select className='listProducts' ref={(node) => this._product = node}>
+                    {listProducts.map((item, index) =>
+                        <option key={index} value={item.id}>{item.name}</option>
+                    )}
+                </select>
+                <input placeholder='url' ref={(node)=>this._urlImg=node} type="text"/>
+                <button onClick={() => addImg(this._product.value,this._urlImg.value)} type="button">Добавить картинку</button>
+            </div>
+            <div className="Admin DelItem">
+                <p>Добавить информация о товаре</p>
+                <select className='listProducts' ref={(node) => this._productForInfo = node}>
+                    {listProducts.map((item, index) =>
+                        <option key={index} value={item.id}>{item.name}</option>
+                    )}
+                </select>
+                <input placeholder='info' ref={(node)=>this._info=node} type="text"/>
+                <button onClick={() => addInfo(this._productForInfo.value,this._info.value)} type="button">Добавить описание</button>
+            </div>
         </div>
     }
 }
@@ -176,7 +198,9 @@ const mapDispatchToProps = (dispatch) => {
         addItem: (item) => dispatch(addItem(item)),
         delItem: (id) => dispatch(delItem(id)),
         addCategory: (str) => dispatch(addCategory(str)),
-        delCategory: (id) => dispatch(delCategory(id))
+        delCategory: (id) => dispatch(delCategory(id)),
+        addImg:(id,url)=>dispatch(addImg(id,url)),
+        addInfo:(id,info)=>dispatch(addInfo(id,info))
     }
 
 }

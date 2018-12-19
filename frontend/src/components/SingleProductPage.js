@@ -50,7 +50,7 @@ class SingleProductPage extends Component {
                         <td>
                             <h2 id="product-title"> {this.state.data.name} </h2>
 
-                            <img src={this.state.data.url} alt="Product image" id="product-image"/>
+                            <img src={this.state.data.images[0].image} alt="Product image" id="product-image"/>
                         </td>
                         <td>
                             <div>

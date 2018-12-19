@@ -10,7 +10,7 @@ import {Cross, Minus, Plus} from "./svg/icons"
 const ShoppingCartItem = ({item, change}) =>
     <tr className="shopping-cart-item">
         <td>
-            <img src={item.product.images[0] || notFound} alt=""/>
+            <img src={item.product.images[0].image || notFound} alt=""/>
         </td>
         <td className="description">
             <p>
@@ -68,28 +68,34 @@ class OrderPage extends Component {
 
     componentDidMount() {
         this.props.user
-            .then(response => fetch(`http://localhost:8080/api/users/bucket?userId=${response.id}`)
+            .then(response => {this.setState({userid:response.id});
+                fetch(`http://localhost:8080/api/users/bucket?userId=${response.id}`)
                 .then(response => response.json())
-                .then(response => this.setState({products:response})))
+                .then(response => this.setState({products:response}))})
     }
 
     componentWillUpdate() {
 
     }
-
+    delBucket(){
+        fetch(`http://localhost:8080/api/users/bucket?userId=${this.state.userid}`, {method: 'DELETE'})
+            .then((response) => {
+               if(response.status!=200)
+                   alert('Ошибка соединения с сервером')
+            })
+    }
     nextStepControl(e) {
         if (Array.isArray(this.state.products) && this.state.products.length !== 0) {
             let result = window.confirm("Это окончательный вариант корзины?");
             if (result) {
-                /* отправка новой корзины на сервер */
+            this.delBucket();
                 this.state.products.forEach((item) => {
-                    this.props.user.then(response => fetch(`http://localhost:8080/api/users/bucket?userId=${response.id}&productId=${item.product.id}&amount=${item.amount}`, {method: 'POST'})
+                   fetch(`http://localhost:8080/api/users/bucket?userId=${this.state.userid}&productId=${item.product.id}&amount=${item.amount}`, {method: 'POST'})
                         .then((response) => {
                             if (response.status === 200) {
                                 console.log(`Product: ${item.product.name}  id: ${item.product.id}  amount:${item.amount} added to Bucket`)
                             }
                         })
-                        .catch((error) => console.log(error)))
                 })
             } else { e.preventDefault() }
         } else {

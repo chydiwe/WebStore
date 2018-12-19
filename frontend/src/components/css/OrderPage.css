@@ -49,7 +49,8 @@ table tr:nth-child(odd) {
 }
 
 .shopping-cart-item img{
-    width: 120px;
+    width:8vw;
+    height: 8vw;
     vertical-align: middle;
     /*background: #fffcfc;*/
 }

@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 const Item_catalog = ({item, i, addInBucket = f => f}) =>
 
     <div key={i} className='item_catalog card_catalog'>
-        <Link to={`/item?id=${item.id}`}><img src={notFound} className='item_img'/></Link>
+        <Link to={`/item?id=${item.id}`}><img src={item.images[0]?item.images[0].image:notFound} className='item_img'/></Link>
         <h2 className='item_name'>{item.name}</h2>
         <li className='item_price'>Цена:{item.cost}</li>
         <button className='item_add' onClick={() => addInBucket(item)}>Добавить</button>
@@ -35,7 +35,7 @@ class Catalog extends Component {
     render() {
         const catalog = this.props.catalog;
         return <div className='catalog'>
-            {catalog?catalog.map((item, i) => <Item_catalog item={item} key={i} addInBucket={this.addInBucket}/>):<div className='loader'></div>}
+            {Array.isArray(catalog)?catalog.map((item, i) => <Item_catalog item={item} key={i} addInBucket={this.addInBucket}/>):<div className='loader'></div>}
 
         </div>
 

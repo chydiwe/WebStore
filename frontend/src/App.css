@@ -70,6 +70,7 @@ body {
 .item_img {
     width: 8vw;
     height: 8vw;
+    border-radius: 20%;
 }
 
 .item_price {

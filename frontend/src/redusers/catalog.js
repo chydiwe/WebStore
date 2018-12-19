@@ -1,6 +1,6 @@
 import {GET_CATALOG_INFO, GET_CATALOG_INFO_FAILED, GET_CATALOG_INFO_SUCCES} from '../action/catalog'
 
-const initialState = [{}]
+const initialState = {}
 
 export function catalog(state = initialState, action) {
     switch (action.type) {
