@@ -3,7 +3,7 @@ import connect from "react-redux/es/connect/connect";
 import {addCategory, addItem, delCategory, delItem,addImg,addInfo} from "../action/adminPanel";
 import "./css/AdminPanel.css"
 import fetch from "cross-fetch";
-
+import Order from './ControlOrder'
 class AdminPanel extends React.Component {
     constructor(props) {
         super(props)
@@ -13,7 +13,7 @@ class AdminPanel extends React.Component {
             listProducts: [],
             category: '',
             manufacturer: '',
-            status: ['active', 'hidden']
+            status: ['active', 'hidden','hidden']
         }
         this.getManufacturer = this.getManufacturer.bind(this);
         this.getCategory = this.getCategory.bind(this);
@@ -73,12 +73,16 @@ class AdminPanel extends React.Component {
         return <div className='adminMenu'>
             <div className='MenuChanger'>
                 <button onClick={() => {
-                    this.setState({status: ['active', 'hidden']})
+                    this.setState({status: ['active', 'hidden','hidden']})
                 }}>Работа с продуктами
                 </button>
                 <button onClick={() => {
-                    this.setState({status: ['hidden', 'active']})
+                    this.setState({status: ['hidden', 'active','hidden']})
                 }}>Работа с категориями
+                </button>
+                <button onClick={() => {
+                    this.setState({status: ['hidden','hidden' ,'active']})
+                }}>Работа с заказами
                 </button>
             </div>
             <Item status={this.state.status[0]} delItem={this.props.delItem} addItem={this.props.addItem}
@@ -89,6 +93,7 @@ class AdminPanel extends React.Component {
                       delCategory={this.props.delCategory}
                       listCategory={this.state.listCategory}
            />
+            <Order status={this.state.status[2]}/>
         </div>
     }
 

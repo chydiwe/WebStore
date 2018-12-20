@@ -15,9 +15,10 @@ import OrderPage from "./components/OrderPage";
 import UserPage from "./components/UserPage";
 import SingleProductPage from "./components/SingleProductPage";
 import OrderDelivPayment from "./components/OrderDeliveryAndPayment";
-import getCatalog from "./action/catalog";
+import {getCatalog} from "./action/catalog";
 import connect from "react-redux/es/connect/connect";
 import getCategory from "./action/category";
+import Page404 from "./components/Page404";
 
 class Pages extends React.Component {
 componentDidMount(){
@@ -29,6 +30,7 @@ componentDidMount(){
         return(
             <div className="App-header">
                 <PanelSite/>
+                <Switch>
                 <Route exact path='/' component={Main}/>
                 <Route path='/order-page' component={OrderPage}/>
                 <Route path='/confirming' component={ConfirmMail}/>
@@ -37,7 +39,11 @@ componentDidMount(){
                 <Route path='/profile' component={UserPage}/>
                 <Route path='/item' component={SingleProductPage}/>
                 <Route path='/delivery-and-payment' component={OrderDelivPayment} />
+                    <Route component={Page404}/>
+                </Switch>
                 <FooterSite/>
+
+
             </div>
         )
     }
@@ -47,9 +53,10 @@ ReactDOM.render(
     <Provider store={store}>
         <div>
             <ConnectedRouter history={history}>
-                <Switch>
+
                     <Pages/>
-                </Switch>
+
+
             </ConnectedRouter>
         </div>
 

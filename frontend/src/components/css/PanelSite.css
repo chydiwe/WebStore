@@ -222,7 +222,7 @@ li {
 
 .searchMenu input {
     width: 65%;
-    height: 2em;
+    height: 2.4em;
     outline: none;
     border-radius: 20px 0 0 20px;
     border: none;
@@ -239,7 +239,12 @@ li {
 button img {
     width: 25px;
 }
-
+.searchIcon{
+    height: 2em;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    background: white;
+}
 .trash {
     display: flex;
     flex-direction: row;

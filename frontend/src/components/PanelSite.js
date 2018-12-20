@@ -10,14 +10,10 @@ import "./css/PanelSite.css"
 import logo from './img/logo.png'
 import * as sessionActions from '../action/user-profile';
 import fetch from "cross-fetch";
-import getCatalog from '../action/catalog'
+import {getCatalog, searchItem} from '../action/catalog'
 
 
-function blurMain() {
-    let app = document.querySelector('.panelSite + div')
-    if (app.classList.contains('AppBlur')) app.classList.remove('AppBlur')
-    else app.classList.add('AppBlur')
-}
+
 
 class PanelSite extends React.Component {
     constructor(props) {
@@ -39,11 +35,13 @@ class PanelSite extends React.Component {
             side.classList.remove(classOff);
             side.classList.add(classOn)
         }
-        if (isBlur) {
-            blurMain()
+        if (isBlur) {this.blurMain()
         }
     }
 
+    blurMain(){
+
+    }
     mouseEnter() {
         console.log(" mouse enter ");
         this.sideMenu(this._categoryMenu, 'category_menuOn', 'category_menuOff', true)
@@ -64,13 +62,17 @@ class PanelSite extends React.Component {
 
     }
     render() {
-        const {user,getCatalogItems,category} = this.props,{logOut}=this.props.actions, Submitbutton = withRouter(({history}) => (
+        const {user,getCatalogItems,category,searchItem} = this.props,{logOut}=this.props.actions, Submitbutton = withRouter(({history}) => (
             <button type="button" onClick={() => this.handelClick(history)}>Вход</button>));
         return (
             <div className='panelSite'>
-                <div onClick={()=>this.props.getCatalogItems()} className='nameFirm'>
+                {/*logo*/}
+                < div onClick={()=>this.props.getCatalogItems()} className='nameFirm'>
                     <Link to='/'><img className='logo' src={logo} alt="logo"/>MAGIC STATIONARY</Link>
                 </div>
+                {/*end logo*/}
+
+                {/*category*/}
                 <div className='category' onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>Категории
                     <div ref={(node) => this._categoryMenu = node} className='category_menuOff'>
                         <div className='category'>
@@ -81,11 +83,14 @@ class PanelSite extends React.Component {
 
                     </div>
                 </div>
+                {/*end category*/}
 
-
-                <div className='searchMenu'><input type="text" placeholder='Найти'/>
-                    <button><img src={iconFind} alt=""/></button>
+                {/*search input*/}
+                <div className='searchMenu'><input ref={node=>this._search=node} type="text" placeholder='Найти'/>
+                    <Link className='searchIcon' to='/'><button type='button' onClick={()=>searchItem(this._search.value)}><img src={iconFind} alt=""/></button></Link>
                 </div>
+                {/*end search*/}
+
                 <div className="RightMenu">
                     <div className='dropdown'>
                         <img src={profileIcon} className='dropbtn'
@@ -96,7 +101,7 @@ class PanelSite extends React.Component {
                         }} className='dropMenuOff'>
                             {user.isLogin === true ?
                             <ul className='profile'>
-                                <li>Имя:{user.name}</li>
+                                <Link to='/profile'> <li>Имя:{user.name}</li></Link>
                                 <li>
                                     <button onClick={logOut}>Выйти</button>
                                 </li>
@@ -144,6 +149,7 @@ const mapDispatchToProps = dispatch => {
     return {
         actions: bindActionCreators(sessionActions, dispatch),
         getCatalogItems: (id) => dispatch(getCatalog(id)),
+        searchItem:(name)=>dispatch(searchItem(name))
     }
 };
 

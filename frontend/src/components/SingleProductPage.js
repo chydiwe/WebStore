@@ -4,6 +4,7 @@ import "./css/SingleProductPage.css"
 import getItem from '../action/getItem'
 import fetch from "cross-fetch";
 import {sessionService} from "redux-react-session";
+import notFound from "./img/notfound.png";
 
 class SingleProductPage extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class SingleProductPage extends Component {
 
     componentDidMount() {
         this.props.getItem(this.props.location.search).then((response) => this.setState({
-            data: response
+            data: response[0]
         }))
 
     }
@@ -46,11 +47,10 @@ class SingleProductPage extends Component {
                 {this.state.data.name!==''?<div><table>
                     <tbody>
                     <tr>
-                        {console.log(this.props.location.search)}
                         <td>
                             <h2 id="product-title"> {this.state.data.name} </h2>
 
-                            <img src={this.state.data.images[0].image} alt="Product image" id="product-image"/>
+                            <img src={this.state.data.images!==undefined && this.state.data.images[0]!==undefined?this.state.data.images[0].image:notFound} alt="Product image" id="product-image"/>
                         </td>
                         <td>
                             <div>

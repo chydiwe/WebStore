@@ -10,7 +10,7 @@ import {Cross, Minus, Plus} from "./svg/icons"
 const ShoppingCartItem = ({item, change}) =>
     <tr className="shopping-cart-item">
         <td>
-            <img src={item.product.images[0].image || notFound} alt=""/>
+            <img src={item.images!==undefined &&item.images[0]!==undefined?item.images[0].image:notFound} alt=""/>
         </td>
         <td className="description">
             <p>
@@ -47,18 +47,27 @@ class OrderPage extends Component {
           products:[]
       }
     }
-
+   changeBucket(item){
+        console.log(`http://localhost:8080/api/users/bucket?userId=${this.state.userId}&productId=${item.product.id}&amount=${item.amount} Q`)
+       fetch(`http://localhost:8080/api/users/bucket?userId=${this.state.userId}&productId=${item.product.id}&amount=${item.amount}`,{method:"POST"})
+           .then(resp=>resp.status!==200?alert(resp.message):console.log('succes'))
+   }
     quantityChange(item, key, op) {
         const nProd = this.state.products;
         if (op === '+') {
             item.amount++;
+            this.changeBucket(item);
             nProd[key] = item;
+
         }
         if (op === '-') {
             item.amount--;
+            this.changeBucket(item);
             nProd[key] = item;
         }
         if (op === 'del') {
+            fetch(`http://localhost:8080/api/users/bucket?userId=${this.state.userId}&productId=${item.product.id}`,{method:"DELETE"})
+                .then(resp=>resp.status!==200?alert(resp.message):console.log('succes'))
             nProd.splice(key, 1)
         }
         this.setState({
@@ -68,36 +77,16 @@ class OrderPage extends Component {
 
     componentDidMount() {
         this.props.user
-            .then(response => {this.setState({userid:response.id});
+            .then(response => {this.setState({userId:response.id});
                 fetch(`http://localhost:8080/api/users/bucket?userId=${response.id}`)
                 .then(response => response.json())
                 .then(response => this.setState({products:response}))})
     }
 
-    componentWillUpdate() {
 
-    }
-    delBucket(){
-        fetch(`http://localhost:8080/api/users/bucket?userId=${this.state.userid}`, {method: 'DELETE'})
-            .then((response) => {
-               if(response.status!=200)
-                   alert('Ошибка соединения с сервером')
-            })
-    }
     nextStepControl(e) {
         if (Array.isArray(this.state.products) && this.state.products.length !== 0) {
             let result = window.confirm("Это окончательный вариант корзины?");
-            if (result) {
-            this.delBucket();
-                this.state.products.forEach((item) => {
-                   fetch(`http://localhost:8080/api/users/bucket?userId=${this.state.userid}&productId=${item.product.id}&amount=${item.amount}`, {method: 'POST'})
-                        .then((response) => {
-                            if (response.status === 200) {
-                                console.log(`Product: ${item.product.name}  id: ${item.product.id}  amount:${item.amount} added to Bucket`)
-                            }
-                        })
-                })
-            } else { e.preventDefault() }
         } else {
             e.preventDefault()
             alert("Ваша корзина пуста!")

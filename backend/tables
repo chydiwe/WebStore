@@ -163,3 +163,7 @@ INSERT INTO user VALUES(NULL, 'admin2@mail.ru', 'qwerty', 1, 'admin', 'admin', N
 INSERT INTO product VALUES(NULL, 'Pen', 1, 1, NULL, 50, 10), (NULL, 'A4', 2, 2, NULL, 100, 5);
 INSERT INTO bucket VALUES(1, 1, 10), (1, 2, 5);
 INSERT INTO bucket VALUES(2, 1, 20), (2, 2, 100);
+INSERT INTO order_status VALUES(1,'Complete'), (2,'Process'),(3,'Cancelled');
+INSERT INTO payment VALUES(1,'CARD'),(2,'cash');
+INSERT INTO payment_status VALUES(1,'Complete'),(2,'Process'),(3,'Failed');
+INSERT INTO delivery VALUES(1,'by own'),(2,'Delivery');
