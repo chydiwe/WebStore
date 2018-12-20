@@ -18,6 +18,8 @@ public interface ProductRepository {
 
     Set<Product> findAllByManufacturer(Manufacturer manufacturer/*, Pageable pageable*/);
 
+    Set<Product> findAllByName(String name);
+
     Set<Product> findAll(/*Pageable pageable*/);
 
     Product save(Product product);

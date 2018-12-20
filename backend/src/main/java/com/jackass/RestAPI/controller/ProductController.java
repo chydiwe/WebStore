@@ -3,13 +3,13 @@ package com.jackass.RestAPI.controller;
 import com.jackass.RestAPI.entity.Category;
 import com.jackass.RestAPI.entity.Manufacturer;
 import com.jackass.RestAPI.entity.Product;
-import com.jackass.RestAPI.exception.AlreadyExistsException;
 import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -27,31 +27,32 @@ public class ProductController {
     @Autowired
     private ProductCommentRepository productCommentRepository;
 
-    private static final int PAGE_SIZE = 20;
+    //private static final int PAGE_SIZE = 20;
 
     //
     // GET
     //
     @RequestMapping(method = RequestMethod.GET, params = "id")
-    public ResponseEntity<Product> getProductById(@RequestParam int id) {
+    public ResponseEntity<Set<Product>> getProductById(@RequestParam int id) {
         Product product = productRepository.getProductById(id);
 
         if (product == null) {
             throw new NotFoundException("Wrong product ID.");
         }
-
-        return ResponseEntity.ok().body(product);
+        Set<Product> returnObj = new HashSet<>();
+        returnObj.add(product);
+        return ResponseEntity.ok().body(returnObj);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "name")
-    public ResponseEntity<Product> getProductByName(@RequestParam String name) {
-        Product product = productRepository.getProductByName(name);
+    public ResponseEntity<Set<Product>> getProductByName(@RequestParam String name) {
+        Set<Product> products = productRepository.findAllByName(name);
 
-        if (product == null) {
-            throw new NotFoundException("Wrong product name.");
+        if (products == null) {
+            throw new NotFoundException("Wrong products name.");
         }
 
-        return ResponseEntity.ok().body(product);
+        return ResponseEntity.ok().body(products);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "categoryId")
@@ -99,10 +100,10 @@ public class ProductController {
                             @RequestParam int cost,
                             @RequestParam int quantity) {
 
-        Product product = productRepository.getProductByName(name);
+        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturerId);
 
-        if (product != null ) {
-            throw new AlreadyExistsException("Product with such name already exists.");
+        if (manufacturerObj == null) {
+            throw new NotFoundException("Manufacturer with such id does not exists.");
         }
 
         Category categoryObj = categoryRepository.getCategoryById(categoryId);
@@ -111,13 +112,7 @@ public class ProductController {
             throw new NotFoundException("Category with such id does not exists.");
         }
 
-        Manufacturer manufacturerObj = manufacturerRepository.getManufacturerById(manufacturerId);
-
-        if (manufacturerObj == null) {
-            throw new NotFoundException("Manufacturer with such id does not exists.");
-        }
-
-        product = new Product();
+        Product product = new Product();
 
         product.setName(name);
         product.setCategory(categoryObj);
