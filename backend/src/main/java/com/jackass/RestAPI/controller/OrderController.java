@@ -32,14 +32,18 @@ public class OrderController {
     private BucketRepository bucketRepository;
 
     private void bucketToOrder(Order order, Set<BucketItem> bucket){
+        int cost = 0;
         for (BucketItem bi : bucket) {
             OrderInfo tmp = new OrderInfo();
             tmp.setOrderId(order.getId());
             tmp.setProduct(bi.getProduct());
             tmp.setAmount(bi.getAmount());
+            cost += bi.getProduct().getCost() * bi.getAmount();
             orderInfoRepository.save(tmp);
             bucketRepository.delete(bi);
         }
+        order.setTotalCost(cost);
+        orderRepository.save(order);
     }
 
     //
