@@ -5,7 +5,10 @@ import com.jackass.RestAPI.exception.NotFoundException;
 import com.jackass.RestAPI.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -13,12 +16,14 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/orders")
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
     private OrderStatusRepository orderStatusRepository;
+    @Autowired
+    private OrderInfoRepository orderInfoRepository;
     @Autowired
     private PaymentRepository paymentRepository;
     @Autowired
@@ -91,6 +96,7 @@ public class OrderController {
             tmp.setProduct(bi.getProduct());
             tmp.setAmount(bi.getAmount());
             products.add(tmp);
+            orderInfoRepository.save(tmp);
             bucketRepository.delete(bi);
         }
         order.setProducts(products);
