@@ -48,8 +48,7 @@ class OrderPage extends Component {
       }
     }
    changeBucket(item){
-        console.log(`http://localhost:8080/api/users/bucket?userId=${this.state.userId}&productId=${item.product.id}&amount=${item.amount} Q`)
-       fetch(`http://localhost:8080/api/users/bucket?userId=${this.state.userId}&productId=${item.product.id}&amount=${item.amount}`,{method:"POST"})
+       fetch(`http://localhost:8080/api/users/bucket?userId=${this.state.userId}&productId=${item.product.id}&amount=1`,{method:"POST"})
            .then(resp=>resp.status!==200?alert(resp.message):console.log('succes'))
    }
     quantityChange(item, key, op) {

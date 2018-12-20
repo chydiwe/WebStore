@@ -74,7 +74,7 @@ class OrderDeliveryAndPayment extends Component {
 
     sendOrder() {
 
-        fetch(`http://localhost:8080/api/orders?customer=${this.state.userId}&delivery=${this.state.delivery ? 1 : 2}&payment=1&comment=1${this.state.address}`, {method: 'POST'})
+        fetch(`http://localhost:8080/api/orders?customer=${this.state.userId}&delivery=${this.state.delivery ? 2 : 1}&payment=1&comment=1${this.state.address}`, {method: 'POST'})
             .then(response => response.status !== 200 ? console.log(response) : console.log('succes'))
 
     }
