@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
+import React from 'react';
+import {Map, Placemark, YMaps} from 'react-yandex-maps';
 
 const mapState = {
     center: [55.754699, 37.621472],

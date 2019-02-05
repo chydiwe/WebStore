@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import fetch from "cross-fetch";
 
-export default class Order extends Component {
+export class OrderControl extends Component {
     constructor(props) {
         super(props)
         this.state = {

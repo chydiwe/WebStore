@@ -1,16 +1,18 @@
 import React, {Component} from 'react'
-import notFound from "./img/notfound.png";
-import "./css/OrderPage.css"
-import fetch from "cross-fetch";
+import notFound from "../../img/notfound.png";
+import "./style.css"
+import fetch from "cross-fetch"
 import {sessionService} from "redux-react-session";
-import {ArrowDown} from "./svg/icons"
-import {MyPlacemark} from "./Map"
+import {ArrowDown} from "../../svg/icons"
+import {MyPlacemark} from "../../components/YandexMap/Map"
 import connect from "react-redux/es/connect/connect";
 import {Link} from 'react-router-dom'
+
 const ShoppingCartItem = ({item}) =>
     <tr className="shopping-cart-item">
         <td>
-            <img src={item.images!==undefined &&item.images[0]!==undefined?item.images[0].image:notFound} alt=""/>
+            <img src={item.images !== undefined && item.images[0] !== undefined ? item.images[0].image : notFound}
+                 alt=""/>
         </td>
         <td className="description">
             <p>
@@ -29,19 +31,6 @@ const DELIVERY_PRICE = 400;
 
 
 class OrderDeliveryAndPayment extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            displayBucket: false,
-            delivery: false,
-            address: "",
-        }
-        this.changeBucketDisplay = this.changeBucketDisplay.bind(this);
-        this.handleOptionChange = this.handleOptionChange.bind(this);
-        this.updateAddress = this.updateAddress.bind(this);
-        this.sendOrder = this.sendOrder.bind(this);
-    }
-
     changeBucketDisplay = () => {
         document.querySelector(".drop-trigger svg").classList.toggle("arrow-spin")
         this.setState({
@@ -59,6 +48,18 @@ class OrderDeliveryAndPayment extends Component {
         })
     }
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            displayBucket: false,
+            delivery: false,
+            address: "",
+        }
+        this.changeBucketDisplay = this.changeBucketDisplay.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
+        this.updateAddress = this.updateAddress.bind(this);
+        this.sendOrder = this.sendOrder.bind(this);
+    }
 
     componentDidMount() {
         this.props.user
@@ -178,7 +179,9 @@ class OrderDeliveryAndPayment extends Component {
                             }, 0) + (this.state.delivery ? DELIVERY_PRICE : 0)}
                         </span> руб.</h2>
                     <p><i>(Оплата заказа осуществляется картой)</i></p>
-                    <Link to='/'><button type='button' onClick={() => this.sendOrder()} className="button">Оплатить</button></Link>
+                    <Link to='/'>
+                        <button type='button' onClick={() => this.sendOrder()} className="button">Оплатить</button>
+                    </Link>
                 </div>
 
 

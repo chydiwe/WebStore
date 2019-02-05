@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import "./css/OrderPage.css"
-import notFound from "./img/notfound.png";
+import "./style.css"
+import notFound from "../../img/notfound.png";
 import connect from "react-redux/es/connect/connect";
 import fetch from "cross-fetch";
 import {sessionService} from 'redux-react-session';
 import {Link} from "react-router-dom";
-import {Cross, Minus, Plus} from "./svg/icons"
+import {Cross, Minus, Plus} from "../../svg/icons"
 
 const ShoppingCartItem = ({item, change}) =>
     <tr className="shopping-cart-item">

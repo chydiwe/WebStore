@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import "./css/Page404.css"
-import notFoundSVG from "./img/404.svg";
+import "./style.css"
+import notFoundSVG from "../../img/404.svg";
 
 export default class Page404 extends Component {
     constructor(props) {

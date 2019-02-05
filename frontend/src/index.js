@@ -2,23 +2,22 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import {Provider} from 'react-redux';
 import './index.css';
-import Main from './containers/Main'
+import Main from './containers/Main/Main'
 import {history, store} from './store/configureStore'
 import {Route, Switch} from 'react-router-dom'
 import {ConnectedRouter,} from 'react-router-redux'
-import ConfirmMail from "./containers/confirmMail";
-import Register from "./components/RegisterPage";
-import PanelSite from "./components/PanelSite";
-import adminPanel from "./components/AdminPanel"
-import FooterSite from "./components/FooterSite";
-import OrderPage from "./components/OrderPage";
-import UserPage from "./components/UserPage";
-import SingleProductPage from "./components/SingleProductPage";
-import OrderDelivPayment from "./components/OrderDeliveryAndPayment";
+import ConfirmMail from "./components/confirmMail/confirmMail";
+import Register from "./components/RegisterPage/RegisterPage";
+import PanelSite from "./components/PanelSite/PanelSite";
+import adminPanel from "./containers/AdminPanel/AdminPanel"
+import FooterSite from "./components/FooterSite/FooterSite";
+import OrderPage from "./components/Order/OrderPage";
+import UserPage from "./components/UserPage/UserPage";
+import SingleProductPage from "./components/ProductPage/SingleProductPage";
+import OrderDeliveryPayment from "./containers/Order/OrderDeliveryAndPayment";
 import {getCatalog} from "./action/catalog";
-import connect from "react-redux/es/connect/connect";
 import getCategory from "./action/category";
-import Page404 from "./components/Page404";
+import Page404 from "./components/404Page/Page404";
 
 class Pages extends React.Component {
 componentDidMount(){
@@ -38,7 +37,7 @@ componentDidMount(){
                 <Route path='/adminpanel' component={adminPanel}/>
                 <Route path='/profile' component={UserPage}/>
                 <Route path='/item' component={SingleProductPage}/>
-                <Route path='/delivery-and-payment' component={OrderDelivPayment} />
+                <Route path='/delivery-and-payment' component={OrderDeliveryPayment} />
                     <Route component={Page404}/>
                 </Switch>
                 <FooterSite/>

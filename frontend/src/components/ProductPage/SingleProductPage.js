@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import connect from "react-redux/es/connect/connect";
-import "./css/SingleProductPage.css"
-import getItem from '../action/getItem'
+import "./style.css"
+import getItem from '../../action/getItem'
 import fetch from "cross-fetch";
 import {sessionService} from "redux-react-session";
-import notFound from "./img/notfound.png";
+import notFound from "../../img/notfound.png";
 
 class SingleProductPage extends Component {
     constructor(props) {

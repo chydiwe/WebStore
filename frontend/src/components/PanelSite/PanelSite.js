@@ -1,18 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {bindActionCreators} from 'redux';
-import profileIcon from './img/logo_side.png'
-import iconFind from './img/search.png'
-import trashIcon from './img/trash.png'
+import profileIcon from '../../img/logo_side.png'
+import iconFind from '../../img/search.png'
+import trashIcon from '../../img/trash.png'
 import {Link, withRouter} from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
-import "./css/PanelSite.css"
-import logo from './img/logo.png'
-import * as sessionActions from '../action/user-profile';
-import fetch from "cross-fetch";
-import {getCatalog, searchItem} from '../action/catalog'
-
-
+import "./style.css"
+import logo from '../../img/logo.png'
+import * as sessionActions from '../../action/user-profile';
+import {getCatalog, searchItem} from '../../action/catalog'
 
 
 class PanelSite extends React.Component {
@@ -51,8 +48,7 @@ class PanelSite extends React.Component {
         console.log(" mouse leave ");
         this.sideMenu(this._categoryMenu, 'category_menuOn', 'category_menuOff', true)
 
-        // Старый метод Макса
-        // onClick={ (node, classOn, classOff, isBlur) => this.sideMenu(this._categoryMenu, 'category_menuOn', 'category_menuOff', true)}
+
 
     }
 

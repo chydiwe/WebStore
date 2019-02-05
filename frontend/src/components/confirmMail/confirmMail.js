@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {confirmToken} from "../action/confirmMailToken";
+import {confirmToken} from "../../action/confirmMailToken";
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
@@ -13,8 +13,8 @@ class ConfirmMail extends Component {
     }
 
     render() {
-        return <div className="App">
-            <header className="App-header">
+        return <div className="confirming-page">
+            <header className="confirming-page_header">
                 {this.props.isConfirm ? <p>MAIL CONFIRMED <Redirect to='/'/></p> : <p>IS WRONG TOKEN </p>}
             </header>
 
@@ -22,14 +22,9 @@ class ConfirmMail extends Component {
     }
 }
 
-const mapStateToProps = store => {
-    return {
-        isConfirm: store.confirmToken.isConfirm
-    }
-};
 const mapDispatchToProps = dispatch => {
     return {
         confirmToken: (token) => dispatch(confirmToken(token)),
     }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmMail)
+export default connect(null, mapDispatchToProps)(ConfirmMail)

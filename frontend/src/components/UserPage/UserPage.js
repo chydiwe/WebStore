@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import "./css/UserPage.css"
-import notFound from "./img/notFound_mini.png";
+import "./style.css"
+import notFound from "../../img/notFound_mini.png";
 import connect from "react-redux/es/connect/connect";
 import {sessionService} from "redux-react-session";
 

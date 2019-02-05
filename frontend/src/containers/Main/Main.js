@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import '../App.css';
-import Catalog from "../components/itemcatalog";
+import './style.css';
+import Catalog from "../../components/Catalog/ItemsCatalog";
 
 export default class Main extends Component {
     render() {

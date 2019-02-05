@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {registration} from "../action/registerUser";
+import {registration} from "../../action/registerUser";
 import connect from "react-redux/es/connect/connect";
 import {withRouter} from "react-router-dom";
 
